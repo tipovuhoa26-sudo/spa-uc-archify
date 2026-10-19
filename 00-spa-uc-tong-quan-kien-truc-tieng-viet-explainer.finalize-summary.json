@@ -7,13 +7,13 @@
   "quality": "showcase",
   "specification": {
     "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/00-spa-uc-tong-quan-kien-truc-tieng-viet.archify.md",
-    "sha256": "a063874ee72c882e64dbc94c81781c26e9a2d45daa48557e7cf1d9b133201af8",
-    "bytes": 13952
+    "sha256": "cae97b8eff5d3d599c960b3dfdb68b2fe943385c53b5833aac4e2455fc242062",
+    "bytes": 14540
   },
   "artifact": {
     "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html",
-    "sha256": "793a7ae51bf1fde943522792b79fa62ece0f98122dd7253151cdde43101142af",
-    "bytes": 942660
+    "sha256": "a2f3e5b2c69c4f8d596d47fac818794190c7c70b9e6e04901e0cc1e3ca41c9f8",
+    "bytes": 944452
   },
   "gates": {
     "validate": "pass",
@@ -32,7 +32,7 @@
     "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.finalize-summary.json"
   },
   "visualReview": "not-requested",
-  "durationMs": 790,
+  "durationMs": 780,
   "browserCheck": {
     "requested": false,
     "ran": false

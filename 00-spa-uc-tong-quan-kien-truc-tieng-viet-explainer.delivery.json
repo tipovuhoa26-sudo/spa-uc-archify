@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "receiptId": "9b997ba7-33e6-4993-9bc0-421f02662b70",
+  "receiptId": "e79077c9-9482-4f1a-a083-9b9b3c67ece5",
   "status": "current",
   "command": "deliver",
   "type": "explainer",
   "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/00-spa-uc-tong-quan-kien-truc-tieng-viet.archify.md",
   "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html",
   "specification": {
-    "sha256": "a063874ee72c882e64dbc94c81781c26e9a2d45daa48557e7cf1d9b133201af8",
-    "bytes": 13952
+    "sha256": "cae97b8eff5d3d599c960b3dfdb68b2fe943385c53b5833aac4e2455fc242062",
+    "bytes": 14540
   },
   "artifact": {
-    "sha256": "793a7ae51bf1fde943522792b79fa62ece0f98122dd7253151cdde43101142af",
-    "bytes": 942660
+    "sha256": "a2f3e5b2c69c4f8d596d47fac818794190c7c70b9e6e04901e0cc1e3ca41c9f8",
+    "bytes": 944452
   },
   "explainer": {
-    "preparedSha256": "304a595950e2fc501b3e5b21fd4a5f2d1d6d53b1dd289e71749ddea7f25994f6",
+    "preparedSha256": "7c8d3ac2876eef3ddc5b9a0880d01970a37f0a242a89e2b742662cfd8dc8a738",
     "dependencies": [
       {
         "kind": "diagram-spec",
