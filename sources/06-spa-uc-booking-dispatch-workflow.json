@@ -1,0 +1,268 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "The Heaven Lounge — Luồng Đặt lịch Đa kênh, Chèn Giờ Tàu điện & Xử lý Nghỉ Đột xuất",
+    "output": "spa-uc-archify/06-spa-uc-booking-dispatch-workflow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "happy-booking-path",
+        "label": "1. Luồng Đặt lịch Chính & Khóa Giờ Tàu điện",
+        "focus": [
+          "select-branch",
+          "pick-mode",
+          "check-elig",
+          "travel-block",
+          "lock-slot",
+          "consent-checkin"
+        ],
+        "note": "Luồng chuẩn từ bước chọn chi nhánh, kiểm tra 5 điều kiện, tự chèn 30-45p tàu điện đến ký Consent khi check-in."
+      },
+      {
+        "id": "sudden-leave-triage",
+        "label": "2. KTV Nghỉ Đột xuất & Khóa Khách Chọn Đích danh",
+        "focus": [
+          "check-elig",
+          "leave-alert",
+          "check-selected",
+          "reassign-ktv",
+          "lock-slot"
+        ],
+        "note": "Khi KTV báo nghỉ đột xuất, lịch hẹn chuyển vào Need Attention (B2) và bắt buộc hỏi ý kiến khách nếu đã chọn đích danh KTV."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "lane-guest",
+      "label": "Khách & Cổng Đặt lịch (A1-A2)",
+      "variant": "normal"
+    },
+    {
+      "id": "lane-engine",
+      "label": "Động cơ Kiểm tra & Khóa Slot",
+      "variant": "normal"
+    },
+    {
+      "id": "lane-triage",
+      "label": "Hàng đợi Nghỉ đột xuất (B2)",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-intake",
+      "label": "1. Chọn Chi nhánh & Chế độ KTV",
+      "fromCol": 0,
+      "toCol": 1,
+      "variant": "default"
+    },
+    {
+      "id": "phase-elig",
+      "label": "2. Kiểm tra 5 Điều kiện & Giờ Tàu",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "phase-confirm",
+      "label": "3. Khóa Slot & Cổng Check-in",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "security"
+    }
+  ],
+  "mainPath": [
+    "select-branch",
+    "pick-mode",
+    "check-elig",
+    "travel-block",
+    "lock-slot",
+    "consent-checkin"
+  ],
+  "nodes": [
+    {
+      "id": "select-branch",
+      "lane": "lane-guest",
+      "col": 0,
+      "type": "frontend",
+      "label": "Chọn Chi nhánh",
+      "sublabel": "Brunswick / N. Melb",
+      "tag": "BKG-001"
+    },
+    {
+      "id": "pick-mode",
+      "lane": "lane-guest",
+      "col": 1,
+      "type": "frontend",
+      "label": "Chế độ Chọn KTV",
+      "sublabel": "Đích danh / Tự động",
+      "tag": "BKG-006"
+    },
+    {
+      "id": "check-elig",
+      "lane": "lane-engine",
+      "col": 2,
+      "type": "backend",
+      "label": "Kiểm tra 5 Điều kiện",
+      "sublabel": "Kỹ năng + Cert + Ca",
+      "tag": "SKL-003"
+    },
+    {
+      "id": "travel-block",
+      "lane": "lane-engine",
+      "col": 3,
+      "type": "backend",
+      "label": "Chèn 30-45p Tàu điện",
+      "sublabel": "Giờ Đi lại Có lương",
+      "tag": "NT2"
+    },
+    {
+      "id": "lock-slot",
+      "lane": "lane-engine",
+      "col": 4,
+      "type": "database",
+      "label": "Xác nhận Lịch hẹn",
+      "sublabel": "Khóa TSTZRANGE",
+      "tag": "BKG-004"
+    },
+    {
+      "id": "consent-checkin",
+      "lane": "lane-guest",
+      "col": 5,
+      "type": "security",
+      "label": "Check-in & Consent",
+      "sublabel": "Ký Cam kết TRT-002",
+      "tag": "TRT-002"
+    },
+    {
+      "id": "leave-alert",
+      "lane": "lane-triage",
+      "col": 2,
+      "type": "security",
+      "label": "Báo Nghỉ Đột xuất",
+      "sublabel": "Hàng đợi Need Attention",
+      "tag": "BKG-008"
+    },
+    {
+      "id": "check-selected",
+      "lane": "lane-triage",
+      "col": 3,
+      "type": "external",
+      "label": "Cổng Khóa Đích danh",
+      "sublabel": "Hỏi Ý kiến Khách",
+      "tag": "BKG-007"
+    },
+    {
+      "id": "reassign-ktv",
+      "lane": "lane-triage",
+      "col": 4,
+      "type": "backend",
+      "label": "Gán KTV Thay thế",
+      "sublabel": "Ghi Audit + SMS",
+      "tag": "SEC-004"
+    }
+  ],
+  "edges": [
+    {
+      "id": "w-1",
+      "from": "select-branch",
+      "to": "pick-mode",
+      "label": "Chọn Dịch vụ",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "w-2",
+      "from": "pick-mode",
+      "to": "check-elig",
+      "label": "Tìm Khung giờ",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "w-3",
+      "from": "check-elig",
+      "to": "travel-block",
+      "label": "Đủ Điều kiện",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "w-4",
+      "from": "travel-block",
+      "to": "lock-slot",
+      "label": "Đã Chèn Đệm",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "w-5",
+      "from": "lock-slot",
+      "to": "consent-checkin",
+      "label": "Gửi SMS Xác nhận",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "w-ex1",
+      "from": "check-elig",
+      "to": "leave-alert",
+      "label": "KTV Báo Ốm",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "w-ex2",
+      "from": "leave-alert",
+      "to": "check-selected",
+      "label": "Lọc Người Thay",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "w-ex3",
+      "from": "check-selected",
+      "to": "reassign-ktv",
+      "label": "Khách Đồng ý",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "w-ex4",
+      "from": "reassign-ktv",
+      "to": "lock-slot",
+      "label": "Cập nhật Lịch",
+      "variant": "emphasis",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Công thức Kiểm tra 5 Điều kiện (SKL-003)",
+      "items": [
+        "1. Có gắn kỹ năng dịch vụ + 2. Đã hoàn thành đào tạo nội bộ.",
+        "3. Chứng chỉ hành nghề bắt buộc còn hiệu lực (HLTINF005, An toàn Laser, Phun xăm).",
+        "4. Có ca làm việc tại chi nhánh + 5. Không trùng lịch hẹn hoặc khối đi tàu điện."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Khối Đệm Tàu điện Liên chi nhánh 30-45 Phút (NT2 / BKG-003)",
+      "items": [
+        "Tự động chèn khối đi lại 30-45 phút khi KTV di chuyển giữa Brunswick (550 Sydney Rd) và North Melbourne (342 Victoria St).",
+        "Khóa khung giờ trên cả web và quầy lễ tân, đồng thời xuất sang bảng lương là Giờ công đi lại theo Award MA000005 khoản 20.9."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Xử lý Nghỉ Đột xuất & Khóa Khách Chọn Đích danh (BKG-007 / BKG-008)",
+      "items": [
+        "Đơn nghỉ phép được duyệt hoặc báo ốm đột xuất tuyệt đối không bao giờ tự xóa lịch hẹn của khách.",
+        "Nếu khách đã chọn đích danh KTV (Selected Therapist), hệ thống cấm tự ý đổi ngầm mà phải chờ khách xác nhận."
+      ]
+    }
+  ]
+}

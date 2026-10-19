@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "sequence",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/08-spa-uc-service-checkout-sequence.json",
+    "sha256": "9bf7ec1d9ef55173af5c3ffae55e7b76745e6090e7a66400f74ae0995a679df0",
+    "bytes": 5947
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/08-spa-uc-service-checkout-sequence.html",
+    "sha256": "02ae38419be3f59a6f31c71443d887ab0a931f9d2feab8ca13fcd4634458c3dc",
+    "bytes": 816246
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/08-spa-uc-service-checkout-sequence.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/08-spa-uc-service-checkout-sequence.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/08-spa-uc-service-checkout-sequence.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1799,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

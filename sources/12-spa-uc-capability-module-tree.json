@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "diagram_type": "tree",
+  "meta": {
+    "title": "The Heaven Lounge — Cây Phân Rã Năng Lực Sản Phẩm & 17 Màn Hình MVP",
+    "output": "spa-uc-archify/12-spa-uc-capability-module-tree.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "front-office-portals",
+        "label": "1. Cổng Khách Hàng & Lễ Tân (A & B)",
+        "focus": [
+          "root-erp",
+          "p-guest",
+          "p-reception",
+          "m-a1-a2",
+          "m-b1-b2",
+          "m-b3-b4",
+          "m-b5"
+        ],
+        "note": "Đặt lịch online theo chi nhánh (A1-A2) cùng lịch điều phối lễ tân, hàng đợi Need Attention, ký cam kết và thu ngân tách bill (B1-B5)."
+      },
+      {
+        "id": "therapist-and-owner-portals",
+        "label": "2. Cổng KTV & Chủ Chuỗi (C & D)",
+        "focus": [
+          "root-erp",
+          "p-therapist",
+          "p-owner",
+          "m-c1-c2",
+          "m-c3-c4",
+          "m-d1-d2",
+          "m-d3-d4",
+          "m-d5-d6"
+        ],
+        "note": "Chăm sóc tại giường VI/EN/TH và ví hoa hồng (C1-C4) cùng quản trị danh mục, ước tính GST, khóa sổ Payroll Snapshot và SLA (D1-D6)."
+      }
+    ]
+  },
+  "layout": {
+    "direction": "down",
+    "gapX": 22,
+    "gapY": 54,
+    "nodeW": 116,
+    "nodeMaxW": 132
+  },
+  "nodes": [
+    {
+      "id": "root-erp",
+      "label": "Spa Úc Mini-ERP",
+      "sublabel": "17 Màn Hình · R0-R6"
+    },
+    {
+      "id": "p-guest",
+      "parent": "root-erp",
+      "label": "Cổng A: Khách",
+      "sublabel": "Web Công Khai · R2"
+    },
+    {
+      "id": "p-reception",
+      "parent": "root-erp",
+      "label": "Cổng B: Lễ Tân",
+      "sublabel": "Vận Hành Quầy · R2-R4"
+    },
+    {
+      "id": "p-therapist",
+      "parent": "root-erp",
+      "label": "Cổng C: KTV",
+      "sublabel": "PWA VI/EN/TH · R2-R4"
+    },
+    {
+      "id": "p-owner",
+      "parent": "root-erp",
+      "label": "Cổng D: Chủ Spa",
+      "sublabel": "Quản Trị Chuỗi · R1-R5"
+    },
+    {
+      "id": "m-a1-a2",
+      "parent": "p-guest",
+      "label": "A1-A2: Đặt Lịch",
+      "sublabel": "Chi Nhánh & Consent"
+    },
+    {
+      "id": "m-b1-b2",
+      "parent": "p-reception",
+      "label": "B1-B2: Điều Phối",
+      "sublabel": "Need Attention B2"
+    },
+    {
+      "id": "m-b3-b4",
+      "parent": "p-reception",
+      "label": "B3-B4: Hồ Sơ & Ký",
+      "sublabel": "Ẩn Bệnh Án SEC-008"
+    },
+    {
+      "id": "m-b5",
+      "parent": "p-reception",
+      "label": "B5: Thu Ngân POS",
+      "sublabel": "Cash/Card & Kết Ca"
+    },
+    {
+      "id": "m-c1-c2",
+      "parent": "p-therapist",
+      "label": "C1-C2: Tại Giường",
+      "sublabel": "Đếm Giờ & Thẻ SOAP"
+    },
+    {
+      "id": "m-c3-c4",
+      "parent": "p-therapist",
+      "label": "C3-C4: Ví & Phép",
+      "sublabel": "Hoa Hồng, Tip & Nghỉ"
+    },
+    {
+      "id": "m-d1-d2",
+      "parent": "p-owner",
+      "label": "D1-D2: Danh Mục",
+      "sublabel": "Chứng Chỉ & Giá Kép"
+    },
+    {
+      "id": "m-d3-d4",
+      "parent": "p-owner",
+      "label": "D3-D4: Tài Chính",
+      "sublabel": "GST & Chốt Lương"
+    },
+    {
+      "id": "m-d5-d6",
+      "parent": "p-owner",
+      "label": "D5-D6: Kho & SLA",
+      "sublabel": "Tồn Kho & Sự Cố 1h"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Cổng A & B — Đặt Lịch Khách Hàng & Điều Phối Quầy Lễ Tân (A1-A2, B1-B5)",
+      "items": [
+        "A1-A2: Chọn chi nhánh trước (Brunswick hoặc North Melbourne), chọn KTV đích danh hoặc tự động gán, và ký cam kết y khoa điện tử trước khi đến.",
+        "B1-B2: Lịch hợp nhất đa chi nhánh tự động chèn 30–45 phút đi tram và hàng đợi Need Attention xử lý ca nghỉ đột xuất.",
+        "B3-B5: Hồ sơ khách hàng 360 ẩn chi tiết bệnh án (SEC-008), kiểm tra cam kết trước điều trị, thu ngân tách bill giá kép và đối soát két tiền cuối ca."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Cổng C — Ứng Dụng PWA Đa Ngôn Ngữ Cho Kỹ Thuật Viên (C1-C4)",
+      "items": [
+        "C1-C2: Lịch ca làm kèm cảnh báo đỏ chống chỉ định, màn hình đếm giờ nền tối 3 chạm, thẻ chọn nhanh SOAP theo vùng cơ thể và trừ định mức vật tư BOM.",
+        "C3-C4: Ví cá nhân tra cứu minh bạch hoa hồng và tiền tip giữ hộ cùng luồng xin nghỉ phép báo trước số ca bị ảnh hưởng."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Cổng D — Quản Trị Chuỗi, Tài Chính & Tuân Thủ Cho Chủ Spa (D1-D6)",
+      "items": [
+        "D1-D2: Danh bạ nhân sự một hồ sơ duy nhất, ma trận hạn chứng chỉ (HLTINF005/Laser) và bảng giá dịch vụ kép Cash/Card.",
+        "D3-D4: Báo cáo P&L vận hành, ước tính thuế BAS/GST (G1, 1A, 1B) và khóa sổ xuất Payroll Input Snapshot chu kỳ 2 tuần.",
+        "D5-D6: Cảnh báo tồn kho tối thiểu theo chi nhánh và quy trình xử lý sự cố 1–2 sao (SLA điều tra nội bộ 1 giờ, liên hệ khách trong ngày)."
+      ]
+    }
+  ]
+}

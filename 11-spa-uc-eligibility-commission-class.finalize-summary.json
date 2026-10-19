@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "class",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/11-spa-uc-eligibility-commission-class.json",
+    "sha256": "d4503e27147dafa8685ace027254dbd5a9a0ec21d3b9eca120cac81da314c8d2",
+    "bytes": 7018
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/11-spa-uc-eligibility-commission-class.html",
+    "sha256": "40e16259709bcb42b03824a5ec841bf1808dc607af4150a73c0f45699a7a877e",
+    "bytes": 838384
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/11-spa-uc-eligibility-commission-class.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/11-spa-uc-eligibility-commission-class.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/11-spa-uc-eligibility-commission-class.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1642,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "9b997ba7-33e6-4993-9bc0-421f02662b70",
+  "status": "current",
+  "command": "deliver",
+  "type": "explainer",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/00-spa-uc-tong-quan-kien-truc-tieng-viet.archify.md",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html",
+  "specification": {
+    "sha256": "a063874ee72c882e64dbc94c81781c26e9a2d45daa48557e7cf1d9b133201af8",
+    "bytes": 13952
+  },
+  "artifact": {
+    "sha256": "793a7ae51bf1fde943522792b79fa62ece0f98122dd7253151cdde43101142af",
+    "bytes": 942660
+  },
+  "explainer": {
+    "preparedSha256": "304a595950e2fc501b3e5b21fd4a5f2d1d6d53b1dd289e71749ddea7f25994f6",
+    "dependencies": [
+      {
+        "kind": "diagram-spec",
+        "id": "luong-dieu-phoi-vn",
+        "inline": true,
+        "sha256": "5063e4332f815ab2f0717b67c31b3eb9b2a488e30cfbeccf3f23603578af4e85",
+        "bytes": 1093
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "seq-thu-ngan-vn",
+        "inline": true,
+        "sha256": "3847ef0fc504e7d6bcbec6b4dad5d96c84df3a204052dd2078a75de644c0fd7c",
+        "bytes": 1452
+      }
+    ]
+  }
+}

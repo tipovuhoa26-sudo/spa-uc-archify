@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "erd",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/10-spa-uc-core-domain-erd.json",
+    "sha256": "edc49d93aa17ad6e03f070999ac356ab07a5e88674205dc3ff52a5249f2c32e7",
+    "bytes": 8595
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/10-spa-uc-core-domain-erd.html",
+    "sha256": "5cee5a6b9740c6fb6f4b1ae2fc4a9fd8fb3fc2d6273b3c4690bc7e5a9c20093a",
+    "bytes": 853877
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/10-spa-uc-core-domain-erd.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/10-spa-uc-core-domain-erd.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/10-spa-uc-core-domain-erd.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1633,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

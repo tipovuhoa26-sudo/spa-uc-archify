@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "01e2fcd2-5d40-44d6-9d9c-78fdcb3e21af",
+  "status": "current",
+  "command": "deliver",
+  "type": "explainer",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/01-spa-uc-executive-whitepaper.archify.md",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/01-spa-uc-executive-whitepaper-explainer.html",
+  "specification": {
+    "sha256": "f09f3f0bd03ecc969f907442786168b81839d912ac062669250b4f2fefe2d577",
+    "bytes": 16926
+  },
+  "artifact": {
+    "sha256": "49ba15ad232cedd8d4f0eff3e556ce65a54ef612dc44491e60bf1c246203c0ac",
+    "bytes": 965732
+  },
+  "explainer": {
+    "preparedSha256": "a845be4a20517c58c25bbcbfdd161b81995133dda6558bd3cddeb0e2b54736c8",
+    "dependencies": [
+      {
+        "kind": "diagram-spec",
+        "id": "decision-gate-flow",
+        "inline": true,
+        "sha256": "376bf6dc6b7cd4fd9fa5df64d57139862c600c624403c2599b849949c385cfdb",
+        "bytes": 1043
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "sor-boundary-arch",
+        "inline": true,
+        "sha256": "9f505ad552888e8a27a70cc22f0dafe46fc0a98d1018723a2bd5d244f1275a88",
+        "bytes": 1419
+      }
+    ]
+  }
+}

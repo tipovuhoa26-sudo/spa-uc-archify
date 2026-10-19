@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "meta": {
+    "title": "The Heaven Lounge — Sơ Đồ Thực Thể (ERD) Giao Dịch Đa Chi Nhánh & Tuân Thủ",
+    "output": "spa-uc-archify/10-spa-uc-core-domain-erd.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "workforce-booking-schema",
+        "label": "1. Nhân Sự, Danh Mục & Đặt Lịch",
+        "focus": [
+          "branches",
+          "services",
+          "staff_profiles",
+          "appointments",
+          "customers"
+        ],
+        "note": "Liên kết chi nhánh, dịch vụ 2 mức giá, hồ sơ KTV duy nhất, khách hàng định danh bằng khóa nội bộ (NT4) và lịch hẹn khóa TSTZRANGE."
+      },
+      {
+        "id": "finance-payroll-clinical",
+        "label": "2. Sổ Cái, Payroll Snapshot & Hồ Sơ Y Khoa",
+        "focus": [
+          "staff_profiles",
+          "appointments",
+          "customers",
+          "payroll_snapshots",
+          "ledger_entries",
+          "clinical_records"
+        ],
+        "note": "Cô lập hồ sơ lâm sàng nhạy cảm (SEC-008), sổ cái giao dịch/trả trước chỉ ghi thêm (NT7/NT8) và bản chụp bảng lương 2 tuần/lần."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [48, 118],
+    "gapX": 78,
+    "gapY": 76,
+    "entityW": 218,
+    "headerH": 28,
+    "rowH": 19
+  },
+  "entities": [
+    {
+      "id": "branches",
+      "label": "branches",
+      "sublabel": "Brunswick & N. Melbourne",
+      "tag": "ORG-001",
+      "col": 0,
+      "row": 0,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "org_id", "type": "uuid", "key": "uk" },
+        { "name": "code", "type": "text", "key": "uk" },
+        { "name": "permit_no", "type": "text" },
+        { "name": "travel_mins", "type": "int4" }
+      ]
+    },
+    {
+      "id": "staff_profiles",
+      "label": "staff_profiles",
+      "sublabel": "1 Hồ Sơ + Chứng Chỉ",
+      "tag": "STF-001",
+      "col": 1,
+      "row": 0,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "branch_id", "type": "uuid", "key": "fk", "references": "branches.id" },
+        { "name": "award_level", "type": "text" },
+        { "name": "certs_json", "type": "jsonb" },
+        { "name": "visa_cap_hrs", "type": "numeric" }
+      ]
+    },
+    {
+      "id": "appointments",
+      "label": "appointments",
+      "sublabel": "Khung Giờ + Tram + Chế Độ",
+      "tag": "BKG-001",
+      "col": 2,
+      "row": 0,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "staff_id", "type": "uuid", "key": "fk", "references": "staff_profiles.id" },
+        { "name": "customer_id", "type": "uuid", "key": "fk", "references": "customers.id" },
+        { "name": "slot_range", "type": "tstzrange" },
+        { "name": "assign_mode", "type": "text" },
+        { "name": "status", "type": "text" }
+      ]
+    },
+    {
+      "id": "customers",
+      "label": "customers",
+      "sublabel": "Khóa Nội Bộ + Consent",
+      "tag": "NT4",
+      "col": 3,
+      "row": 0,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "mobile_e164", "type": "text", "key": "uk" },
+        { "name": "safety_flags", "type": "text[]" },
+        { "name": "sms_consent", "type": "text" },
+        { "name": "merged_into", "type": "uuid" }
+      ]
+    },
+    {
+      "id": "services",
+      "label": "services",
+      "sublabel": "Bảng Giá Kép Cash/Card",
+      "tag": "PAY-001",
+      "col": 0,
+      "row": 1,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "branch_id", "type": "uuid", "key": "fk", "references": "branches.id" },
+        { "name": "cash_price", "type": "numeric" },
+        { "name": "card_price", "type": "numeric" },
+        { "name": "gst_mode", "type": "text" },
+        { "name": "need_consent", "type": "bool" }
+      ]
+    },
+    {
+      "id": "payroll_snapshots",
+      "label": "payroll_snapshots",
+      "sublabel": "Chốt Dữ Liệu Lương 2 Tuần",
+      "tag": "COM-006",
+      "col": 1,
+      "row": 1,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "staff_id", "type": "uuid", "key": "fk", "references": "staff_profiles.id" },
+        { "name": "work_hrs", "type": "numeric" },
+        { "name": "comm_aud", "type": "numeric" },
+        { "name": "tips_aud", "type": "numeric" },
+        { "name": "lock_state", "type": "text" }
+      ]
+    },
+    {
+      "id": "ledger_entries",
+      "label": "ledger_entries",
+      "sublabel": "Sổ Cái & Trả Trước Bất Biến",
+      "tag": "NT6-NT8",
+      "col": 2,
+      "row": 1,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "appt_id", "type": "uuid", "key": "fk", "references": "appointments.id" },
+        { "name": "entry_kind", "type": "text" },
+        { "name": "amount_aud", "type": "numeric" },
+        { "name": "gst_aud", "type": "numeric" },
+        { "name": "branch_pair", "type": "text" }
+      ]
+    },
+    {
+      "id": "clinical_records",
+      "label": "clinical_records",
+      "sublabel": "Mã Hóa SOAP & Chữ Ký Số",
+      "tag": "SEC-008",
+      "col": 3,
+      "row": 1,
+      "attributes": [
+        { "name": "id", "type": "uuid", "key": "pk" },
+        { "name": "customer_id", "type": "uuid", "key": "fk", "references": "customers.id" },
+        { "name": "consent_hash", "type": "text" },
+        { "name": "soap_cipher", "type": "bytea" },
+        { "name": "retain_until", "type": "date" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel-staff-branch",
+      "from": "staff_profiles",
+      "to": "branches",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "thuộc chi nhánh"
+    },
+    {
+      "id": "rel-svc-branch",
+      "from": "services",
+      "to": "branches",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "niêm yết tại"
+    },
+    {
+      "id": "rel-appt-staff",
+      "from": "appointments",
+      "to": "staff_profiles",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "phục vụ bởi"
+    },
+    {
+      "id": "rel-appt-customer",
+      "from": "appointments",
+      "to": "customers",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "đặt cho khách"
+    },
+    {
+      "id": "rel-payroll-staff",
+      "from": "payroll_snapshots",
+      "to": "staff_profiles",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "tổng hợp công"
+    },
+    {
+      "id": "rel-ledger-appt",
+      "from": "ledger_entries",
+      "to": "appointments",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "hạch toán ca"
+    },
+    {
+      "id": "rel-clin-customer",
+      "from": "clinical_records",
+      "to": "customers",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "label": "bảo mật y khoa"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Khóa Nội Bộ Khách Hàng & Tách Biệt Dữ Liệu Y Khoa (NT4 / SEC-008)",
+      "items": [
+        "customers.id là UUID nội bộ; số điện thoại mobile_e164 chỉ dùng để tìm kiếm khử trùng lặp và gộp hồ sơ có nhật ký (merged_into).",
+        "customers.safety_flags hiển thị cho Lễ tân khi check-in, còn clinical_records.soap_cipher chỉ mở cho KTV phụ trách ca và Quản lý."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Bảng Giá Kép Cash/Card & Hai Thời Điểm Ghi Nhận GST (PAY-001 / NT6)",
+      "items": [
+        "Bảng services lưu song song cash_price và card_price để tuân thủ lệnh cấm phụ phí thẻ của RBA từ 01/10/2026.",
+        "Trường gst_mode phân biệt rõ Monetary Voucher (tính GST khi sử dụng) với Specific-Service Package (tính GST khi phát hành)."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Chống Trùng Lịch TSTZRANGE & Khóa Sổ Lương Bất Biến (NT18 / COM-006)",
+      "items": [
+        "appointments.slot_range dùng ràng buộc loại trừ TSTZRANGE của PostgreSQL trên từng staff_id để chặn tuyệt đối việc đặt trùng giờ liên chi nhánh.",
+        "payroll_snapshots đóng băng giờ công 2 tuần, giờ di chuyển có lương, hoa hồng và tiền tip ngay khi lock_state = LOCKED."
+      ]
+    }
+  ]
+}

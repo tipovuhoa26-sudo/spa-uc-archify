@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "The Heaven Lounge — Trình tự Thu ngân Nguyên tử 6 Bước, Tách dòng & Hoàn tiền",
+    "output": "spa-uc-archify/08-spa-uc-service-checkout-sequence.html",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [1040, 660],
+    "views": [
+      {
+        "id": "consent-and-checkout",
+        "label": "1. Cổng Consent & Thu ngân 6 Bước",
+        "focus": [
+          "guest",
+          "pos",
+          "core",
+          "eftpos",
+          "ledger"
+        ],
+        "note": "Kiểm tra hồ sơ Consent (TRT-002), quẹt thẻ EFTPOS lũy đẳng và ghi sổ nguyên tử 6 bước trong 1 giao dịch CSDL."
+      },
+      {
+        "id": "post-close-refund",
+        "label": "2. Hoàn tiền Sau Chốt ca & Điều chỉnh Hoa hồng",
+        "focus": [
+          "pos",
+          "core",
+          "ledger"
+        ],
+        "note": "Quản lý duyệt mã PIN để ghi bút toán hoàn tiền vào ngày hoàn và bù trừ hoa hồng vào kỳ lương đang mở (NT8/NT9)."
+      }
+    ]
+  },
+  "participants": [
+    {
+      "id": "guest",
+      "type": "frontend",
+      "label": "Khách hàng",
+      "sublabel": "Consent & Thanh toán"
+    },
+    {
+      "id": "pos",
+      "type": "frontend",
+      "label": "Lễ tân POS",
+      "sublabel": "Màn B5 & PIN Quản lý"
+    },
+    {
+      "id": "core",
+      "type": "backend",
+      "label": "Lõi Mini-ERP",
+      "sublabel": "Thu ngân & Lương"
+    },
+    {
+      "id": "eftpos",
+      "type": "external",
+      "label": "Máy Thẻ EFTPOS",
+      "sublabel": "Quẹt Thẻ Lũy đẳng"
+    },
+    {
+      "id": "ledger",
+      "type": "database",
+      "label": "Sổ Cái & Lương DB",
+      "sublabel": "CSDL Chỉ Ghi thêm"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 415,
+      "label": "GIAI ĐOẠN 1 · CỔNG CONSENT, QUẸT THẺ LŨY ĐẲNG & GIAO DỊCH NGUYÊN TỬ 6 BƯỚC"
+    },
+    {
+      "from": 430,
+      "to": 545,
+      "label": "GIAI ĐOẠN 2 · HOÀN TIỀN SAU CHỐT CA & ĐIỀU CHỈNH HOA HỒNG KỲ LƯƠNG ĐANG MỞ"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "from": "guest",
+      "to": "pos",
+      "y": 175,
+      "label": "Ký Consent & Thanh toán Gộp",
+      "variant": "security"
+    },
+    {
+      "id": "m2",
+      "from": "pos",
+      "to": "core",
+      "y": 220,
+      "label": "Kiểm tra TRT-002 & Gửi Yêu cầu Thu ngân",
+      "variant": "emphasis"
+    },
+    {
+      "id": "m3",
+      "from": "core",
+      "to": "eftpos",
+      "y": 265,
+      "label": "Quẹt Thẻ (Khóa Lũy đẳng Idempotency)",
+      "variant": "emphasis"
+    },
+    {
+      "id": "m4",
+      "from": "eftpos",
+      "to": "core",
+      "y": 310,
+      "label": "200 Thành công (Mã Tham chiếu Auth)",
+      "variant": "return"
+    },
+    {
+      "id": "m5",
+      "from": "core",
+      "to": "ledger",
+      "y": 355,
+      "label": "Ghi Nguyên tử 6 Bước (Doanh thu + GST + Hoa hồng 100%)",
+      "variant": "emphasis"
+    },
+    {
+      "id": "m6",
+      "from": "ledger",
+      "to": "pos",
+      "y": 400,
+      "label": "Xuất Hóa đơn & Cập nhật Số dư Gói",
+      "variant": "return"
+    },
+    {
+      "id": "m7",
+      "from": "pos",
+      "to": "core",
+      "y": 455,
+      "label": "Quản lý Nhập PIN Duyệt Hoàn tiền Sau Chốt ca",
+      "variant": "security"
+    },
+    {
+      "id": "m8",
+      "from": "core",
+      "to": "ledger",
+      "y": 500,
+      "label": "Ghi Bút toán Hoàn tiền + Điều chỉnh Kỳ Lương Mở",
+      "variant": "security"
+    },
+    {
+      "id": "m9",
+      "from": "ledger",
+      "to": "pos",
+      "y": 535,
+      "label": "Đưa Bút toán Hoàn tiền Xero vào Hàng đợi",
+      "variant": "return"
+    }
+  ],
+  "activations": [
+    {
+      "participant": "pos",
+      "from": 168,
+      "to": 540,
+      "type": "frontend"
+    },
+    {
+      "participant": "core",
+      "from": 212,
+      "to": 540,
+      "type": "backend"
+    },
+    {
+      "participant": "eftpos",
+      "from": 258,
+      "to": 318,
+      "type": "external"
+    },
+    {
+      "participant": "ledger",
+      "from": 348,
+      "to": 540,
+      "type": "database"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Giao dịch Cơ sở Dữ liệu Nguyên tử 6 Bước (Whitepaper Mục 10.2)",
+      "items": [
+        "1. Khóa trạng thái lịch hẹn Completed. 2. Ghi nhận dòng dịch vụ và các KTV thực tế thực hiện.",
+        "3. Ghi nhận doanh thu tiền mặt/thẻ hoặc sự kiện trừ gói trả trước (Chi nhánh bán vs Chi nhánh làm).",
+        "4. Tính dòng thuế GST theo chế độ (Voucher mệnh giá tiền tính khi dùng vs Gói dịch vụ tính khi bán).",
+        "5. Chia hoa hồng theo phiên bản (tổng = 100%) & 6. Ghi nhận phương thức thanh toán cùng tiền tip giữ hộ."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Tính Lũy đẳng khi Quẹt thẻ EFTPOS Ngoại vi (Phụ lục B2.2)",
+      "items": [
+        "Lệnh quẹt thẻ chạy bên ngoài giao dịch CSDL kèm mã khóa lũy đẳng (Idempotency Key) duy nhất.",
+        "Nếu rớt mạng khi đang chờ máy thẻ phản hồi, trạng thái chuyển thành Chờ Đối soát và chặn quẹt trùng lần 2."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Sổ Cái Bất biến & Quy tắc Hoàn tiền Sau Chốt ca (NT8 / NT9)",
+      "items": [
+        "Hủy giao dịch trong cùng ca làm việc sẽ đảo bút toán trước khi chốt ca; hoàn tiền sau chốt ca tạo bút toán mới vào ngày hoàn.",
+        "Tuyệt đối không sửa kỳ lương đã khóa; giao dịch hoàn tiền tạo dòng điều chỉnh âm/dương vào kỳ lương 2 tuần đang mở."
+      ]
+    }
+  ]
+}

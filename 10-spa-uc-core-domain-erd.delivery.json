@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "4aef4e8d-ec1c-4587-9fd2-e0d705222c6c",
+  "status": "current",
+  "command": "deliver",
+  "type": "erd",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/10-spa-uc-core-domain-erd.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/10-spa-uc-core-domain-erd.html",
+  "specification": {
+    "sha256": "edc49d93aa17ad6e03f070999ac356ab07a5e88674205dc3ff52a5249f2c32e7",
+    "bytes": 8595
+  },
+  "artifact": {
+    "sha256": "5cee5a6b9740c6fb6f4b1ae2fc4a9fd8fb3fc2d6273b3c4690bc7e5a9c20093a",
+    "bytes": 853877
+  }
+}

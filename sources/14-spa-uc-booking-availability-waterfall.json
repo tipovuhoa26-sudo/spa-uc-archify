@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "diagram_type": "waterfall",
+  "meta": {
+    "title": "The Heaven Lounge — Thác Độ Trễ (Waterfall) Đặt Lịch Chống Trùng & Khóa Giờ Di Chuyển",
+    "output": "spa-uc-archify/14-spa-uc-booking-availability-waterfall.html",
+    "quality_profile": "showcase",
+    "evidence": "illustrative",
+    "unit": "ms",
+    "views": [
+      {
+        "id": "eligibility-and-travel-calc",
+        "label": "1. Kiểm Tra 5 Quy Tắc & Đệm Di Chuyển",
+        "focus": [
+          "span-root",
+          "span-rbac",
+          "span-elig",
+          "span-travel"
+        ],
+        "note": "Kiểm tra phân quyền RBAC theo chi nhánh, kỹ năng, chứng chỉ HLTINF005/Laser và tính khung đệm tram liên chi nhánh trong 124ms."
+      },
+      {
+        "id": "database-slot-lock-and-outbox",
+        "label": "2. Khóa TSTZRANGE & Hàng Đợi Outbox",
+        "focus": [
+          "span-root",
+          "span-dblock",
+          "span-audit",
+          "span-resp"
+        ],
+        "note": "Đảm bảo 0% đặt trùng lịch qua ràng buộc loại trừ PostgreSQL TSTZRANGE (NT18) và đẩy tin nhắn SMS vào hàng đợi bất đồng bộ."
+      }
+    ]
+  },
+  "layout": {
+    "width": 680
+  },
+  "spans": [
+    {
+      "id": "span-root",
+      "name": "POST /api/v1/bookings/confirm",
+      "start": 0,
+      "duration": 285,
+      "status": "ok",
+      "service": "API Gateway",
+      "detail": "Xác nhận đặt lịch toàn trình và giữ chỗ di chuyển liên chi nhánh hoàn tất trong ngưỡng mục tiêu NFR < 300ms."
+    },
+    {
+      "id": "span-rbac",
+      "parent": "span-root",
+      "name": "Kiểm Tra JWT & Phạm Vi Chi Nhánh (SEC-002)",
+      "start": 6,
+      "duration": 18,
+      "status": "ok",
+      "service": "RBAC Gateway",
+      "detail": "Xác thực Role + Scope (Organisation / Branch / Guest) và kiểm tra trạng thái đồng thuận của khách hàng."
+    },
+    {
+      "id": "span-elig",
+      "parent": "span-root",
+      "name": "Kiểm Tra 5 Quy Tắc Điều Kiện (SKL-003)",
+      "start": 26,
+      "duration": 54,
+      "status": "ok",
+      "service": "Eligibility Engine",
+      "detail": "Xác minh kỹ năng hoạt động, hoàn thành đào tạo, chứng chỉ còn hạn và tuổi khách hàng (>= 18 nếu phun xăm)."
+    },
+    {
+      "id": "span-travel",
+      "parent": "span-root",
+      "name": "Chèn Khung 30–45 Phút Đi Tram (NT2)",
+      "start": 82,
+      "duration": 42,
+      "status": "ok",
+      "service": "Availability Engine",
+      "detail": "Phát hiện ca liền trước tại Brunswick và tự động giữ chỗ 45 phút đi tram có lương trước ca North Melbourne."
+    },
+    {
+      "id": "span-dblock",
+      "parent": "span-root",
+      "name": "Khóa Khung Giờ TSTZRANGE (NT18)",
+      "start": 126,
+      "duration": 88,
+      "status": "ok",
+      "service": "PostgreSQL Core",
+      "detail": "Ghi lịch hẹn và khung di chuyển trong cùng một giao dịch bằng ràng buộc loại trừ TSTZRANGE của PostgreSQL."
+    },
+    {
+      "id": "span-audit",
+      "parent": "span-root",
+      "name": "Ghi AuditLog & Hàng Đợi SMS (SEC-004)",
+      "start": 216,
+      "duration": 48,
+      "status": "ok",
+      "service": "Sync Outbox",
+      "detail": "Ghi nhật ký kiểm toán bất biến và xếp hàng tin nhắn SMS xác nhận chuẩn ACMA vào bảng Outbox."
+    },
+    {
+      "id": "span-resp",
+      "parent": "span-root",
+      "name": "Trả Về Xác Nhận & Link Ký Cam Kết",
+      "start": 266,
+      "duration": 19,
+      "status": "ok",
+      "service": "API Gateway",
+      "detail": "Trả về mã xác nhận lịch hẹn kèm liên kết ký phiếu cam kết y khoa điện tử trước khi đến (Màn A2)."
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Chống Trùng Lịch Thực Dụng Không Cần Cụm Redis Phức Tạp (NT18)",
+      "items": [
+        "Với quy mô 2 chi nhánh, 7 nhân sự (~45 lịch/ngày), khóa dòng PostgreSQL và ràng buộc TSTZRANGE đảm bảo 0% trùng lịch trong < 90ms.",
+        "Loại bỏ chi phí vận hành và rủi ro lệch trạng thái (split-brain) của việc duy trì thêm hệ thống khóa phân tán Redis ở Giai đoạn 1."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Hàng Đợi Outbox Bất Đồng Bộ Giữ Tốc Độ Phản Hồi Tức Thì (NT11)",
+      "items": [
+        "Các lệnh gọi Twilio SMS và Xero API được ghi vào bảng Outbox nội bộ của PostgreSQL (48ms) thay vì chặn luồng HTTP của khách hàng.",
+        "Tiến trình chạy nền tự động gửi tin nhắn và đồng bộ bút toán kế toán kèm cơ chế thử lại theo ngưỡng Retry-After."
+      ]
+    }
+  ]
+}

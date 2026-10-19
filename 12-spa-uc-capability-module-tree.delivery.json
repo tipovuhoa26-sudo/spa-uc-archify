@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "0fdc3a2d-9bcd-4a07-9120-35eb42cde53a",
+  "status": "current",
+  "command": "deliver",
+  "type": "tree",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/12-spa-uc-capability-module-tree.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/12-spa-uc-capability-module-tree.html",
+  "specification": {
+    "sha256": "0ac8f075560a9087d760aac532c1a9250496735a0243e4509bcd4294f61c83e3",
+    "bytes": 5325
+  },
+  "artifact": {
+    "sha256": "d3ca3e2f93413cea90873f7ab3e88784b6a9a4189fadc7ffd7e9972058a3b06e",
+    "bytes": 832150
+  }
+}

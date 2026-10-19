@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "bdb105af-9b3b-4bcf-84af-662819afde0e",
+  "status": "current",
+  "command": "deliver",
+  "type": "sequence",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/08-spa-uc-service-checkout-sequence.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/08-spa-uc-service-checkout-sequence.html",
+  "specification": {
+    "sha256": "9bf7ec1d9ef55173af5c3ffae55e7b76745e6090e7a66400f74ae0995a679df0",
+    "bytes": 5947
+  },
+  "artifact": {
+    "sha256": "02ae38419be3f59a6f31c71443d887ab0a931f9d2feab8ca13fcd4634458c3dc",
+    "bytes": 816246
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "explainer",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/03-spa-uc-prototype-as-built-handover.archify.md",
+    "sha256": "e6e05e04ac8d1b4537b1b86cdbe019cf6598926f1939436083f346e3586b22b0",
+    "bytes": 11983
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/03-spa-uc-prototype-as-built-handover-explainer.html",
+    "sha256": "5dd8ba02b03ef800e758a7b0f91696ad88bd45da11be6455237799e4405dc606",
+    "bytes": 934452
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/03-spa-uc-prototype-as-built-handover-explainer.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/03-spa-uc-prototype-as-built-handover-explainer.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/03-spa-uc-prototype-as-built-handover-explainer.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 6017,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

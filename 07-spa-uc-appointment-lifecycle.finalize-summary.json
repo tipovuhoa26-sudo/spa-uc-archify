@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "lifecycle",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/07-spa-uc-appointment-lifecycle.json",
+    "sha256": "d6e5a89232b99a465d6c896f969af6a5e53cb6a06c2db6eab005e1b55b3e1989",
+    "bytes": 6040
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/07-spa-uc-appointment-lifecycle.html",
+    "sha256": "f98e4d7bbe21ca54814805d77d2fb75a1e168df27475ec709ac2b4a8251ef115",
+    "bytes": 826870
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/07-spa-uc-appointment-lifecycle.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/07-spa-uc-appointment-lifecycle.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/07-spa-uc-appointment-lifecycle.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1468,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

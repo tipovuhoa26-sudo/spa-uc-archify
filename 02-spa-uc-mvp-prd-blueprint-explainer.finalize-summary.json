@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "explainer",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/02-spa-uc-mvp-prd-blueprint.archify.md",
+    "sha256": "5e9ea67f5ac4b4e7cc3ed7eeda93645f544829174a1daa4a8c8ba6dd5742142a",
+    "bytes": 17180
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/02-spa-uc-mvp-prd-blueprint-explainer.html",
+    "sha256": "c693c053d6db6175bb9c2806d81b9c5437dfc9dc28a3628fec8847dc296111e7",
+    "bytes": 1424347
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/02-spa-uc-mvp-prd-blueprint-explainer.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/02-spa-uc-mvp-prd-blueprint-explainer.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/02-spa-uc-mvp-prd-blueprint-explainer.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 6425,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

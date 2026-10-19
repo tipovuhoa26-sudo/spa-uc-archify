@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "The Heaven Lounge (Spa Úc) — Kiến trúc Modular Monolith Đích",
+    "output": "spa-uc-archify/04-spa-uc-target-system-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "end-to-end-overview",
+        "label": "1. Toàn cảnh Hệ thống",
+        "focus": [
+          "customer-web",
+          "reception-pos",
+          "therapist-pwa",
+          "rbac-gateway",
+          "booking-engine",
+          "clinical-consent",
+          "pos-payroll-engine",
+          "postgres-core",
+          "consent-vault",
+          "sync-outbox",
+          "sms-gateway",
+          "eftpos-terminal",
+          "au-payroll-xero"
+        ],
+        "note": "Kiến trúc Modular Monolith cho 2 chi nhánh Brunswick (3056) và North Melbourne (3051) với một System of Record duy nhất (NT11)."
+      },
+      {
+        "id": "booking-dispatch-path",
+        "label": "2. Đặt lịch & Nghỉ đột xuất",
+        "focus": [
+          "customer-web",
+          "reception-pos",
+          "rbac-gateway",
+          "booking-engine",
+          "postgres-core",
+          "sms-gateway"
+        ],
+        "note": "Thực thi 5 điều kiện Eligibility, tự chèn 30-45p tàu điện (NT2) và khóa khách chọn đích danh (BKG-007)."
+      },
+      {
+        "id": "clinical-privacy-boundary",
+        "label": "3. Bảo mật Bệnh án (SEC-008)",
+        "focus": [
+          "reception-pos",
+          "therapist-pwa",
+          "rbac-gateway",
+          "clinical-consent",
+          "consent-vault"
+        ],
+        "note": "Lễ tân chỉ thấy cờ cảnh báo vận hành; Kỹ thuật viên phụ trách ca và Quản lý mới xem được ghi chú SOAP và hồ sơ Consent."
+      },
+      {
+        "id": "checkout-payroll-sync",
+        "label": "4. Thu ngân, GST & Lương Úc",
+        "focus": [
+          "reception-pos",
+          "rbac-gateway",
+          "pos-payroll-engine",
+          "postgres-core",
+          "sync-outbox",
+          "eftpos-terminal",
+          "au-payroll-xero"
+        ],
+        "note": "Giao dịch nguyên tử 6 bước, giá tiền mặt/thẻ, sổ nợ trả trước theo sự kiện, bút toán Xero hằng ngày và Payroll Snapshot."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [44, 118],
+    "cols": 5,
+    "gapX": 78,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 70
+  },
+  "components": [
+    {
+      "id": "customer-web",
+      "type": "frontend",
+      "label": "Cổng Khách hàng",
+      "sublabel": "Màn A1-A3 · VI/EN",
+      "tag": "PORTAL A",
+      "size": [148, 62],
+      "col": 0,
+      "row": 0
+    },
+    {
+      "id": "reception-pos",
+      "type": "frontend",
+      "label": "Cổng Lễ tân & Admin",
+      "sublabel": "Màn B1-B5 & D1-D6",
+      "tag": "PORTAL B/D",
+      "size": [148, 62],
+      "col": 0,
+      "row": 1
+    },
+    {
+      "id": "therapist-pwa",
+      "type": "frontend",
+      "label": "Cổng Kỹ thuật viên",
+      "sublabel": "Màn C1-C3 · VI/EN/TH",
+      "tag": "PORTAL C",
+      "size": [148, 62],
+      "col": 0,
+      "row": 2
+    },
+    {
+      "id": "booking-engine",
+      "type": "backend",
+      "label": "Động cơ Đặt lịch",
+      "sublabel": "5 Quy tắc + 45p Tàu",
+      "tag": "NT1/NT2",
+      "size": [148, 62],
+      "col": 1,
+      "row": 0
+    },
+    {
+      "id": "rbac-gateway",
+      "type": "security",
+      "label": "Cổng Bảo mật RBAC",
+      "sublabel": "Chi nhánh + SEC-008",
+      "tag": "NT14",
+      "size": [148, 62],
+      "col": 1,
+      "row": 1
+    },
+    {
+      "id": "pos-payroll-engine",
+      "type": "backend",
+      "label": "Thu ngân & Lương",
+      "sublabel": "Sổ 6 Bước & Snapshot",
+      "tag": "NT6-NT10",
+      "size": [148, 62],
+      "col": 1,
+      "row": 2
+    },
+    {
+      "id": "postgres-core",
+      "type": "database",
+      "label": "PostgreSQL DB",
+      "sublabel": "Sổ Bất biến & TSTZRANGE",
+      "tag": "NT8/NT18",
+      "size": [148, 62],
+      "col": 2,
+      "row": 0
+    },
+    {
+      "id": "clinical-consent",
+      "type": "backend",
+      "label": "Cổng Consent & SOAP",
+      "sublabel": "Chặn Ca TRT-002",
+      "tag": "SEC-008",
+      "size": [148, 62],
+      "col": 2,
+      "row": 1
+    },
+    {
+      "id": "sync-outbox",
+      "type": "messagebus",
+      "label": "Hàng đợi Outbox",
+      "sublabel": "Đồng bộ Retry-After",
+      "tag": "NT11",
+      "size": [148, 62],
+      "col": 2,
+      "row": 2
+    },
+    {
+      "id": "sms-gateway",
+      "type": "external",
+      "label": "Cổng SMS Twilio Úc",
+      "sublabel": "ACMA Sender ID + OTP",
+      "tag": "EXTERNAL",
+      "size": [148, 62],
+      "col": 3,
+      "row": 0
+    },
+    {
+      "id": "consent-vault",
+      "type": "database",
+      "label": "Kho Bệnh án 7 Năm",
+      "sublabel": "Mã hóa APP/HPP",
+      "tag": "PRIVACY",
+      "size": [148, 62],
+      "col": 3,
+      "row": 1
+    },
+    {
+      "id": "au-payroll-xero",
+      "type": "external",
+      "label": "EH & Kế toán Xero",
+      "sublabel": "MA000005, STP2 & BAS",
+      "tag": "EXTERNAL",
+      "size": [148, 62],
+      "col": 3,
+      "row": 2
+    },
+    {
+      "id": "eftpos-terminal",
+      "type": "external",
+      "label": "Máy Thẻ EFTPOS",
+      "sublabel": "Quẹt Thẻ Lũy đẳng",
+      "tag": "EXTERNAL",
+      "size": [148, 62],
+      "col": 4,
+      "row": 2
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Lõi Mini-ERP Spa Úc (AWS Sydney · ap-southeast-2)",
+      "wraps": [
+        "booking-engine",
+        "rbac-gateway",
+        "pos-payroll-engine",
+        "postgres-core",
+        "clinical-consent",
+        "sync-outbox"
+      ],
+      "pad": 20
+    }
+  ],
+  "connections": [
+    {
+      "id": "e-cus-bkg",
+      "from": "customer-web",
+      "to": "booking-engine",
+      "label": "Giữ chỗ Online",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-rec-rbac",
+      "from": "reception-pos",
+      "to": "rbac-gateway",
+      "label": "Phạm vi Nhánh",
+      "variant": "security"
+    },
+    {
+      "id": "e-ktv-rbac",
+      "from": "therapist-pwa",
+      "to": "pos-payroll-engine",
+      "label": "Ví & Xin nghỉ",
+      "variant": "default"
+    },
+    {
+      "id": "e-rbac-bkg",
+      "from": "rbac-gateway",
+      "to": "booking-engine",
+      "label": "Điều phối & Ca",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-rbac-clin",
+      "from": "rbac-gateway",
+      "to": "clinical-consent",
+      "label": "Che Bệnh án",
+      "variant": "security"
+    },
+    {
+      "id": "e-rbac-pos",
+      "from": "rbac-gateway",
+      "to": "pos-payroll-engine",
+      "label": "POS & Chốt ca",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-bkg-db",
+      "from": "booking-engine",
+      "to": "postgres-core",
+      "label": "Khóa TSTZRANGE",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-clin-db",
+      "from": "clinical-consent",
+      "to": "postgres-core",
+      "label": "Cờ Consent",
+      "variant": "default"
+    },
+    {
+      "id": "e-clin-vault",
+      "from": "clinical-consent",
+      "to": "consent-vault",
+      "label": "Mã hóa AES-256",
+      "variant": "security"
+    },
+    {
+      "id": "e-pos-outbox",
+      "from": "pos-payroll-engine",
+      "to": "sync-outbox",
+      "label": "Sổ 6 Bước",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-db-sms",
+      "from": "postgres-core",
+      "to": "sms-gateway",
+      "label": "SMS Hợp lệ",
+      "variant": "dashed"
+    },
+    {
+      "id": "e-outbox-xero",
+      "from": "sync-outbox",
+      "to": "au-payroll-xero",
+      "label": "Lương & Sổ Cái",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-xero-eftpos",
+      "from": "au-payroll-xero",
+      "to": "eftpos-terminal",
+      "label": "Đối soát Thẻ",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "4 Cổng Vai trò (17 Màn hình MVP)",
+      "items": [
+        "Cổng Khách hàng (A1-A3): Chọn chi nhánh trước, chọn KTV đích danh hoặc tự động, ký Consent điện tử.",
+        "Cổng Lễ tân & Chủ Spa (B1-B5, D1-D6): Lịch đa nhánh, hàng đợi Need Attention, thu ngân tách dòng, khóa lương 2 tuần.",
+        "Cổng Kỹ thuật viên (C1-C3): Hỗ trợ đa ngữ VI/EN/TH, đồng hồ 3 chạm tại giường, thẻ SOAP, ví hoa hồng, che PII."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Phân quyền Máy chủ & Bảo mật Bệnh án (SEC-008)",
+      "items": [
+        "Quyền hạn = Vai trò + Phạm vi (Toàn chuỗi / Chi nhánh / Cá nhân / Ca được giao) kiểm tra tại mọi API (NT14).",
+        "Lễ tân chỉ nhận cờ cảnh báo vận hành; ghi chú bệnh án SOAP đòi hỏi quyền KTV phụ trách ca hoặc Quản lý.",
+        "Nhật ký AuditLog bất biến ghi lại mọi thao tác sửa lịch, đổi người sau xác nhận, hoàn tiền và khóa kỳ lương."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Lõi Kiểm tra Lịch, Sổ nợ Trả trước & Hoa hồng",
+      "items": [
+        "Động cơ kiểm tra 5 điều kiện + tự chèn khối đi tàu điện 30-45p có lương giữa Brunswick và North Melbourne (NT1, NT2).",
+        "Giao dịch nguyên tử 6 bước khi hoàn tất dịch vụ: tách tiền thu, doanh thu, nợ trả trước, GST 2 chế độ và tip (NT6-NT8).",
+        "Chia hoa hồng combo nhiều KTV (tổng = 100%) và đóng băng vào Payroll Input Snapshot mỗi 2 tuần (NT9, NT10)."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Ranh giới Phần mềm Pháp lý Chuẩn Úc",
+      "items": [
+        "Employment Hero / Deputy / Xero Payroll tính phụ cấp MA000005, Super 12% (Payday Super) và nộp STP Phase 2.",
+        "Xero / MYOB nhận bút toán tổng hợp ngày sau chốt ca theo từng chi nhánh và bút toán hoàn tiền riêng cho kỳ BAS.",
+        "Twilio AU / MessageMedia gửi SMS với ACMA Sender ID sau khi đối chiếu sổ đồng ý nhận tin (Spam Act 2003)."
+      ]
+    }
+  ]
+}

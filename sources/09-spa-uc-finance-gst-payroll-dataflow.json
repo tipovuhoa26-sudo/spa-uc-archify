@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "The Heaven Lounge — Luồng Dữ Liệu Tài Chính, Công Nợ Trả Trước, GST & Bảng Lương",
+    "output": "spa-uc-archify/09-spa-uc-finance-gst-payroll-dataflow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "gst-and-accounting-flow",
+        "label": "1. GST Kép & Bút Toán Xero Ngày",
+        "focus": [
+          "pos-checkout",
+          "gst-classifier",
+          "tx-ledger",
+          "xero-bas"
+        ],
+        "note": "Tách biệt GST của Monetary Voucher (khi dùng) với Service Package (khi bán) và đẩy bút toán tổng hợp theo chi nhánh sang Xero mỗi ngày."
+      },
+      {
+        "id": "prepaid-liability-flow",
+        "label": "2. Công Nợ Trả Trước & Đối Soát Liên Chi Nhánh",
+        "focus": [
+          "prepaid-sale",
+          "prepaid-engine",
+          "liability-store",
+          "branch-settlement"
+        ],
+        "note": "Truy xuất số dư voucher/gói hoàn toàn từ chuỗi sự kiện bất biến (NT7) và đối soát tự động Chi nhánh bán (A) với Chi nhánh phục vụ (B)."
+      },
+      {
+        "id": "payroll-snapshot-flow",
+        "label": "3. Hoa Hồng & Payroll Input Snapshot",
+        "focus": [
+          "bedside-roster",
+          "comm-privacy-gate",
+          "payroll-snapshot",
+          "au-payroll"
+        ],
+        "note": "Gộp giờ công, 30–45 phút di chuyển có lương, hoa hồng chia 100% và tiền tip giữ hộ thành bản chụp khóa sổ 2 tuần/lần."
+      }
+    ]
+  },
+  "stages": [
+    {
+      "label": "01 · Thu Ngân POS, Gói & Giờ Công"
+    },
+    {
+      "label": "02 · Quy Tắc Thuế, Công Nợ & Hoa Hồng"
+    },
+    {
+      "label": "03 · Sổ Cái Append-Only & Snapshot"
+    },
+    {
+      "label": "04 · Kế Toán Xero & Payroll Úc"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "prepaid-sale",
+      "type": "frontend",
+      "label": "Bán Gói / Thẻ",
+      "sublabel": "Nơi Bán vs Làm",
+      "tag": "NT5",
+      "stage": 0,
+      "row": 0
+    },
+    {
+      "id": "pos-checkout",
+      "type": "frontend",
+      "label": "Thu Ngân POS",
+      "sublabel": "Giá Cash vs Card",
+      "tag": "PAY-001",
+      "stage": 0,
+      "row": 1
+    },
+    {
+      "id": "bedside-roster",
+      "type": "frontend",
+      "label": "Ca Trực & Ca Làm",
+      "sublabel": "Giờ Công & Tram",
+      "tag": "NT2",
+      "stage": 0,
+      "row": 2
+    },
+    {
+      "id": "prepaid-engine",
+      "type": "backend",
+      "label": "Xử Lý Trả Trước",
+      "sublabel": "Phát Hành & Trừ",
+      "tag": "NT7",
+      "stage": 1,
+      "row": 0
+    },
+    {
+      "id": "gst-classifier",
+      "type": "backend",
+      "label": "Xử Lý GST Kép",
+      "sublabel": "Voucher vs Gói",
+      "tag": "NT6",
+      "stage": 1,
+      "row": 1
+    },
+    {
+      "id": "comm-privacy-gate",
+      "type": "security",
+      "label": "Hoa Hồng & Quyền",
+      "sublabel": "Chia 100% & Ẩn",
+      "tag": "NT9",
+      "stage": 1,
+      "row": 2
+    },
+    {
+      "id": "liability-store",
+      "type": "database",
+      "label": "CSDL Công Nợ",
+      "sublabel": "Số Dư Sự Kiện",
+      "tag": "AASB 15",
+      "stage": 2,
+      "row": 0
+    },
+    {
+      "id": "tx-ledger",
+      "type": "database",
+      "label": "Sổ Cái Bất Biến",
+      "sublabel": "Chỉ Ghi Thêm",
+      "tag": "NT8",
+      "stage": 2,
+      "row": 1
+    },
+    {
+      "id": "payroll-snapshot",
+      "type": "database",
+      "label": "Payroll Snapshot",
+      "sublabel": "Khóa Sổ 2 Tuần",
+      "tag": "COM-006",
+      "stage": 2,
+      "row": 2
+    },
+    {
+      "id": "branch-settlement",
+      "type": "cloud",
+      "label": "Bù Trừ Nội Bộ",
+      "sublabel": "Brunswick vs N.M.",
+      "tag": "CT03",
+      "stage": 3,
+      "row": 0
+    },
+    {
+      "id": "xero-bas",
+      "type": "external",
+      "label": "Xero / MYOB GL",
+      "sublabel": "Bút Toán Ngày",
+      "tag": "NT12",
+      "stage": 3,
+      "row": 1
+    },
+    {
+      "id": "au-payroll",
+      "type": "external",
+      "label": "Employment Hero",
+      "sublabel": "MA000005 & STP2",
+      "tag": "NT10",
+      "stage": 3,
+      "row": 2
+    }
+  ],
+  "flows": [
+    {
+      "id": "df-1",
+      "from": "pos-checkout",
+      "to": "gst-classifier",
+      "label": "Tách Nguồn Thu",
+      "classification": "AUD",
+      "variant": "emphasis"
+    },
+    {
+      "id": "df-2",
+      "from": "gst-classifier",
+      "to": "tx-ledger",
+      "label": "Doanh Thu + GST",
+      "classification": "G1/1A/1B",
+      "variant": "emphasis"
+    },
+    {
+      "id": "df-3",
+      "from": "tx-ledger",
+      "to": "xero-bas",
+      "label": "Bút Toán Ngày",
+      "classification": "Daily",
+      "variant": "emphasis"
+    },
+    {
+      "id": "df-4",
+      "from": "prepaid-sale",
+      "to": "prepaid-engine",
+      "label": "Bán / Khấu Trừ",
+      "classification": "36m ACL",
+      "variant": "default"
+    },
+    {
+      "id": "df-5",
+      "from": "prepaid-engine",
+      "to": "liability-store",
+      "label": "Sự Kiện Trả Trước",
+      "classification": "Append",
+      "variant": "default"
+    },
+    {
+      "id": "df-6",
+      "from": "liability-store",
+      "to": "branch-settlement",
+      "label": "Bán vs Phục Vụ",
+      "classification": "Inter-Branch",
+      "variant": "dashed"
+    },
+    {
+      "id": "df-7",
+      "from": "bedside-roster",
+      "to": "comm-privacy-gate",
+      "label": "Ca Làm + Tram",
+      "classification": "Masked PII",
+      "variant": "security"
+    },
+    {
+      "id": "df-8",
+      "from": "comm-privacy-gate",
+      "to": "payroll-snapshot",
+      "label": "Hoa Hồng + Tip",
+      "classification": "Locked",
+      "variant": "security"
+    },
+    {
+      "id": "df-9",
+      "from": "payroll-snapshot",
+      "to": "au-payroll",
+      "label": "Xuất Snapshot",
+      "classification": "2 Tuần/Lần",
+      "variant": "emphasis"
+    },
+    {
+      "id": "df-10",
+      "from": "prepaid-engine",
+      "to": "gst-classifier",
+      "label": "Chế Độ GST Gói",
+      "classification": "ATO Rule",
+      "variant": "dashed"
+    },
+    {
+      "id": "df-11",
+      "from": "gst-classifier",
+      "to": "comm-privacy-gate",
+      "label": "Giá Trị Tịnh DV",
+      "classification": "COM-001",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Bộ Xử Lý GST Kép Theo Chuẩn ATO (GSTR 2003/5 & NT6)",
+      "items": [
+        "Trường hợp 1 - Monetary Voucher: KHÔNG thu GST lúc bán; chỉ tính 10% GST tại thời điểm quy đổi sang dịch vụ chịu thuế.",
+        "Trường hợp 2 - Specific-Service Package: Ghi nhận GST ngay khi phát hành; lúc khách dùng buổi lẻ không tính trùng GST lần hai.",
+        "Báo cáo BAS hiển thị G1 (Tổng doanh thu), 1A (GST đầu ra), 1B (GST đầu vào) dưới dạng ước tính vận hành để kế toán/BAS Agent duyệt nộp."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Sổ Cái Trả Trước Event-Sourced & Đối Soát Liên Chi Nhánh (NT5 / NT7)",
+      "items": [
+        "Số dư được suy diễn 100% từ chuỗi sự kiện Issued, Redeemed, Refunded, Expired, Transferred, Adjusted (cấm sửa tay cột balance).",
+        "Khi gói bán tại Brunswick được sử dụng tại North Melbourne, sổ cái ghi nhận đồng thời cả 2 chi nhánh để hạch toán công nợ nội bộ."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Payroll Input Snapshot Bất Biến Chu Kỳ 2 Tuần (NT9 / NT10)",
+      "items": [
+        "Kết xuất Giờ công thường, Giờ di chuyển liên chi nhánh có lương (MA000005 cl. 20.9), Hoa hồng đa KTV (tổng = 100%) và Tiền tip giữ hộ.",
+        "Phần mềm payroll chuyên dụng của Úc chịu trách nhiệm tính phụ cấp Award, 12% Payday Super (01/07/2026) và báo cáo STP Phase 2."
+      ]
+    }
+  ]
+}

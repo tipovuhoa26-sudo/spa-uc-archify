@@ -1,0 +1,210 @@
+{
+  "schema_version": 3,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "The Heaven Lounge — Máy Trạng thái Vòng đời Lịch hẹn & Thực hiện Dịch vụ",
+    "output": "spa-uc-archify/07-spa-uc-appointment-lifecycle.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "happy-service-lifecycle",
+        "label": "1. Vòng đời Phục vụ Chuẩn",
+        "focus": [
+          "pending-confirm",
+          "confirmed",
+          "checked-in",
+          "in-service",
+          "completed"
+        ],
+        "note": "Tiến trình chuẩn từ khi tiếp nhận yêu cầu, xác nhận giữ chỗ, ký Consent khi check-in, phục vụ đến thu ngân nguyên tử."
+      },
+      {
+        "id": "leave-reassignment-loop",
+        "label": "2. Vòng lặp Nghỉ Đột xuất & Chờ Khách Xác nhận",
+        "focus": [
+          "confirmed",
+          "need-attention",
+          "waiting-guest",
+          "cancelled"
+        ],
+        "note": "Khi KTV báo nghỉ đột xuất, lịch Confirmed chuyển sang Need Attention và bắt buộc chờ khách quyết định nếu đã chọn đích danh KTV."
+      }
+    ]
+  },
+  "mainPath": [
+    "pending-confirm",
+    "confirmed",
+    "checked-in",
+    "in-service",
+    "completed"
+  ],
+  "states": [
+    {
+      "id": "pending-confirm",
+      "type": "start",
+      "label": "Chờ Xác nhận",
+      "sublabel": "Cổng Tiếp nhận BKG-001",
+      "tag": "BKG-001",
+      "step": "01"
+    },
+    {
+      "id": "confirmed",
+      "type": "active",
+      "label": "Đã Xác nhận",
+      "sublabel": "Khóa Slot & Giờ Tàu",
+      "tag": "NT1/NT2",
+      "step": "02"
+    },
+    {
+      "id": "checked-in",
+      "type": "decision",
+      "label": "Đã Check-in",
+      "sublabel": "Cổng Consent TRT-002",
+      "tag": "TRT-002",
+      "step": "03"
+    },
+    {
+      "id": "in-service",
+      "type": "active",
+      "label": "Đang Phục vụ",
+      "sublabel": "Đếm giờ W2 & SOAP",
+      "tag": "TRT-003",
+      "step": "04"
+    },
+    {
+      "id": "completed",
+      "type": "success",
+      "label": "Hoàn tất",
+      "sublabel": "Sổ 6 Bước & Hoa hồng",
+      "tag": "COM-001",
+      "step": "05"
+    },
+    {
+      "id": "need-attention",
+      "type": "decision",
+      "label": "Need Attention",
+      "sublabel": "Hàng đợi KTV Nghỉ B2",
+      "tag": "BKG-008"
+    },
+    {
+      "id": "waiting-guest",
+      "type": "external",
+      "label": "Chờ Khách Chọn",
+      "sublabel": "Khóa KTV Đích danh",
+      "tag": "BKG-007"
+    },
+    {
+      "id": "cancelled",
+      "type": "neutral",
+      "label": "Đã Hủy",
+      "sublabel": "Xét Quy tắc Đặt cọc",
+      "tag": "BKG-010"
+    },
+    {
+      "id": "no-show",
+      "type": "failure",
+      "label": "Khách Vắng (No-Show)",
+      "sublabel": "Ghi Audit & Phí Phạt",
+      "tag": "BKG-010"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "tr-2",
+      "from": "pending-confirm",
+      "to": "confirmed",
+      "label": "Duyệt lịch",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tr-3",
+      "from": "confirmed",
+      "to": "checked-in",
+      "label": "Khách đến",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tr-4",
+      "from": "checked-in",
+      "to": "in-service",
+      "label": "Đã ký Consent",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tr-5",
+      "from": "in-service",
+      "to": "completed",
+      "label": "Thu ngân",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tr-leave",
+      "from": "confirmed",
+      "to": "need-attention",
+      "label": "KTV Nghỉ",
+      "variant": "security"
+    },
+    {
+      "id": "tr-auto-swap",
+      "from": "need-attention",
+      "to": "confirmed",
+      "label": "Tự động Đổi",
+      "variant": "default"
+    },
+    {
+      "id": "tr-ask-guest",
+      "from": "need-attention",
+      "to": "waiting-guest",
+      "label": "Chọn Đích danh",
+      "variant": "security"
+    },
+    {
+      "id": "tr-guest-ok",
+      "from": "waiting-guest",
+      "to": "confirmed",
+      "label": "Khách Đồng ý",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tr-cancel",
+      "from": "pending-confirm",
+      "to": "cancelled",
+      "label": "Hủy lịch",
+      "variant": "dashed"
+    },
+    {
+      "id": "tr-noshow",
+      "from": "checked-in",
+      "to": "no-show",
+      "label": "Khách Vắng",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Cổng Chặn Pháp lý trước khi Bắt đầu Ca (TRT-002)",
+      "items": [
+        "Chặn cứng bước chuyển từ Đã Check-in sang Đang Phục vụ đối với Laser/IPL, Phun xăm (>= 18 tuổi) và Xâm lấn nếu khách chưa ký Consent điện tử.",
+        "Kỹ thuật viên phụ trách ca bắt buộc phải có chứng chỉ hành nghề còn hạn (HLTINF005 / An toàn bức xạ) tại thời điểm phục vụ."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Xử lý Nghỉ Đột xuất & Chờ Khách Quyết định (BKG-007 / BKG-008)",
+      "items": [
+        "Khi KTV được giao báo nghỉ đột xuất, các lịch Đã Xác nhận chuyển sang Need Attention (tuyệt đối không bị xóa).",
+        "Lịch gán tự động có thể chuyển ngay cho đồng nghiệp đủ điều kiện; lịch chọn đích danh phải chuyển sang Chờ Khách Chọn."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Trạng thái Hoàn tất Kích hoạt 6 Sự kiện Tài chính & Lương (COM-001)",
+      "items": [
+        "1. Khóa trạng thái Hoàn tất. 2. Ghi nhận dòng dịch vụ và KTV thực tế thực hiện.",
+        "3. Ghi nhận doanh thu hoặc trừ buổi gói trả trước. 4. Tính thuế GST theo loại voucher.",
+        "5. Chia hoa hồng nhiều KTV (tổng = 100%). 6. Ghi nhận tiền thu, tip giữ hộ và gửi lời mời đánh giá 1-5 sao."
+      ]
+    }
+  ]
+}

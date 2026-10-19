@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "The Heaven Lounge (Spa Úc) — Kiến trúc 3 File HTML Prototype Hiện trạng",
+    "output": "spa-uc-archify/05-spa-uc-asbuilt-vs-mvp-delta.html",
+    "quality_profile": "showcase"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [44, 118],
+    "cols": 3,
+    "gapX": 78,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 70
+  },
+  "components": [
+    {
+      "id": "customer-web",
+      "type": "frontend",
+      "label": "File HTML Khách hàng",
+      "sublabel": "Thuy_Spa_Khach_Hang.html",
+      "tag": "OFFLINE",
+      "size": [148, 62],
+      "col": 0,
+      "row": 0
+    },
+    {
+      "id": "reception-pos",
+      "type": "frontend",
+      "label": "File HTML Admin/POS",
+      "sublabel": "Thuy_Spa_Chay_Thu.html",
+      "tag": "OFFLINE",
+      "size": [148, 62],
+      "col": 0,
+      "row": 1
+    },
+    {
+      "id": "therapist-pwa",
+      "type": "frontend",
+      "label": "File HTML Kỹ thuật viên",
+      "sublabel": "Thuy_Spa_Ky_Thuat_Vien.html",
+      "tag": "OFFLINE",
+      "size": [148, 62],
+      "col": 0,
+      "row": 2
+    },
+    {
+      "id": "ls-customer",
+      "type": "database",
+      "label": "localStorage Khách",
+      "sublabel": "customer-trial-v1",
+      "tag": "CÔ LẬP",
+      "size": [148, 62],
+      "col": 1,
+      "row": 0
+    },
+    {
+      "id": "ls-admin",
+      "type": "database",
+      "label": "localStorage Admin",
+      "sublabel": "offline-trial-v1",
+      "tag": "CÔ LẬP",
+      "size": [148, 62],
+      "col": 1,
+      "row": 1
+    },
+    {
+      "id": "ls-technician",
+      "type": "database",
+      "label": "localStorage KTV",
+      "sublabel": "technician-trial-v1",
+      "tag": "CÔ LẬP",
+      "size": [148, 62],
+      "col": 1,
+      "row": 2
+    }
+  ],
+  "connections": [
+    {
+      "id": "e-cus-ls",
+      "from": "customer-web",
+      "to": "ls-customer",
+      "label": "JSON Nội bộ",
+      "variant": "dashed"
+    },
+    {
+      "id": "e-adm-ls",
+      "from": "reception-pos",
+      "to": "ls-admin",
+      "label": "JSON Nội bộ",
+      "variant": "dashed"
+    },
+    {
+      "id": "e-ktv-ls",
+      "from": "therapist-pwa",
+      "to": "ls-technician",
+      "label": "JSON Nội bộ",
+      "variant": "dashed"
+    }
+  ]
+}

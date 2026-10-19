@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "diagram_type": "timeline",
+  "meta": {
+    "title": "The Heaven Lounge — Dòng Thời Gian Xử Lý Nghỉ Đột Xuất Liên Chi Nhánh & SLA Sự Cố 1–2 Sao",
+    "output": "spa-uc-archify/13-spa-uc-incident-sla-timeline.html",
+    "quality_profile": "showcase",
+    "evidence": "illustrative",
+    "timezone": "Australia/Melbourne",
+    "views": [
+      {
+        "id": "morning-leave-and-transit",
+        "label": "1. Xử Lý Nghỉ Sáng & Đệm Tram 45 Phút",
+        "focus": [
+          "evt-sick-leave",
+          "evt-need-attention",
+          "evt-guest-consent",
+          "evt-tram-transit"
+        ],
+        "note": "Mô phỏng KTV báo nghỉ ốm đột xuất lúc 08:30, xin ý kiến khách đã chọn Selected Therapist và khóa đệm 45 phút đi tram có lương."
+      },
+      {
+        "id": "afternoon-incident-sla",
+        "label": "2. SLA Sự Cố Đánh Giá 1–2 Sao Buổi Chiều",
+        "focus": [
+          "evt-checkout-survey",
+          "evt-low-rating-alert",
+          "evt-1h-investigation",
+          "evt-guest-resolution"
+        ],
+        "note": "Mô phỏng đánh giá 2 sao kích hoạt cảnh báo tức thì, SLA 1 giờ quản lý điều tra nội bộ, tặng voucher đền bù và đóng hồ sơ trong ngày."
+      }
+    ]
+  },
+  "layout": {
+    "width": 980,
+    "breaks": "auto"
+  },
+  "lanes": [
+    {
+      "id": "lane-workforce",
+      "label": "Ca Trực & Di Chuyển Liên Chi Nhánh"
+    },
+    {
+      "id": "lane-reception",
+      "label": "Lễ Tân & Hàng Đợi Need Attention (B2)"
+    },
+    {
+      "id": "lane-incident",
+      "label": "SLA Sự Cố 1–2 Sao (D6)"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-sick-leave",
+      "at": "2026-10-19T08:30:00+11:00",
+      "title": "KTV Báo Nghỉ Ốm Đột Xuất",
+      "detail": "KTV gửi đơn nghỉ ốm khẩn cấp trên PWA (màn C4) cho ca sáng tại chi nhánh Brunswick.",
+      "lane": "lane-workforce",
+      "kind": "alert"
+    },
+    {
+      "id": "evt-need-attention",
+      "at": "2026-10-19T08:35:00+11:00",
+      "title": "Đẩy 3 Lịch Vào Hàng Đợi B2",
+      "detail": "Hệ thống chuyển 3 ca hẹn sang Need Attention (tuyệt đối không tự xóa lịch) và xếp hạng KTV thay thế đủ chứng chỉ.",
+      "lane": "lane-reception",
+      "kind": "change"
+    },
+    {
+      "id": "evt-guest-consent",
+      "at": "2026-10-19T09:05:00+11:00",
+      "title": "Khách Đồng Ý Đổi KTV",
+      "detail": "Khách hàng chọn Selected Therapist (BKG-007) xác nhận đồng ý đổi sang KTV thay thế qua liên kết SMS.",
+      "lane": "lane-reception",
+      "kind": "action"
+    },
+    {
+      "id": "evt-tram-transit",
+      "at": "2026-10-19T12:15:00+11:00",
+      "title": "Khóa 45 Phút Đi Tram Có Lương",
+      "detail": "KTV thay thế di chuyển từ Brunswick sang North Melbourne; hệ thống khóa lịch và gắn nhãn Paid Travel Time.",
+      "lane": "lane-workforce",
+      "kind": "default"
+    },
+    {
+      "id": "evt-checkout-survey",
+      "at": "2026-10-19T14:30:00+11:00",
+      "title": "Tất Toán 6 Bước & Gửi SMS",
+      "detail": "Hoàn tất liệu trình; chốt giao dịch nguyên tử và gửi liên kết đánh giá 1–5 sao không chặn lọc (REV-001).",
+      "lane": "lane-reception",
+      "kind": "change"
+    },
+    {
+      "id": "evt-low-rating-alert",
+      "at": "2026-10-19T15:00:00+11:00",
+      "title": "Bật Cảnh Báo Đánh Giá 2 Sao",
+      "detail": "Khách gửi phản hồi 2 sao; hệ thống tự động mở phiếu sự cố ưu tiên cao cho Chủ spa và Quản lý (REV-002).",
+      "lane": "lane-incident",
+      "kind": "alert"
+    },
+    {
+      "id": "evt-1h-investigation",
+      "at": "2026-10-19T15:45:00+11:00",
+      "title": "Điều Tra Nội Bộ Trong SLA 1 Giờ",
+      "detail": "Quản lý chi nhánh kiểm tra ghi chú SOAP và trao đổi với KTV phụ trách trong vòng 60 phút theo SLA (REV-003).",
+      "lane": "lane-incident",
+      "kind": "action"
+    },
+    {
+      "id": "evt-guest-resolution",
+      "at": "2026-10-19T16:40:00+11:00",
+      "title": "Liên Hệ Khách & Đóng Sự Cố",
+      "detail": "Quản lý gọi điện xin lỗi khách ngay trong ngày, cấp voucher đền bù và ghi nhận nguyên nhân gốc để đóng phiếu (REV-004).",
+      "lane": "lane-incident",
+      "kind": "recovery"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "Quy Tắc SLA Sự Cố Đánh Giá Thấp 1–2 Sao (REV-001..004)",
+      "items": [
+        "REV-001: Mọi ca hoàn tất đều nhận khảo sát 1–5 sao công bằng (cấm lọc riêng khách 5 sao mới mời review công khai theo luật ACCC).",
+        "REV-002 & REV-003: Bất kỳ đánh giá 1–2 sao nào cũng tự động mở Incident Ticket với SLA điều tra nội bộ 1 giờ và liên hệ khách trong ngày.",
+        "REV-004: Chỉ Quản lý chi nhánh hoặc Chủ spa mới được đóng phiếu sau khi ghi rõ nguyên nhân gốc và phương án đền bù."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Điều Phối Nghỉ Đột Xuất Buổi Sáng & Khóa Giờ Tram Có Lương (BKG-007 / NT2)",
+      "items": [
+        "Đơn nghỉ lúc 08:30 lập tức đưa các lịch bị ảnh hưởng vào màn B2 (Need Attention) kèm danh sách KTV đủ chứng chỉ thay thế.",
+        "Lịch di chuyển liên chi nhánh lúc 12:15 tự động chèn đệm tram 45 phút chặn khách đặt trùng và tính giờ công theo Award MA000005 cl. 20.9."
+      ]
+    }
+  ]
+}

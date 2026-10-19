@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "diagram_type": "class",
+  "meta": {
+    "title": "The Heaven Lounge — Mô Hình Lớp Kiểm Tra Điều Kiện, Khung Giờ & Hoa Hồng",
+    "output": "spa-uc-archify/11-spa-uc-eligibility-commission-class.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "eligibility-slot-contract",
+        "label": "1. Giao Diện Slot & Kiểm Tra 5 Quy Tắc",
+        "focus": [
+          "SlotValidator",
+          "EligibilityEngine",
+          "TherapistProfile",
+          "ResourceSlotRule"
+        ],
+        "note": "Hiện thực hóa NFR-009 để Giai đoạn 2 cắm thêm kiểm tra phòng/giường/máy (ResourceSlotRule) vào SlotValidator mà không sửa API đặt lịch."
+      },
+      {
+        "id": "commission-payroll-model",
+        "label": "2. Hoa Hồng Có Phiên Bản & Bản Ghi Bảng Lương",
+        "focus": [
+          "TherapistProfile",
+          "CommissionEngine",
+          "PayrollSnapshot"
+        ],
+        "note": "Bắt buộc tổng tỷ lệ chia hoa hồng = 100% trên dịch vụ Completed và đóng băng bản ghi PayrollSnapshot chu kỳ 2 tuần."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [56, 118],
+    "gapX": 96,
+    "gapY": 84,
+    "typeW": 250,
+    "typeMaxW": 270
+  },
+  "types": [
+    {
+      "id": "SlotValidator",
+      "label": "SlotValidator",
+      "kind": "interface",
+      "sublabel": "Hợp Đồng Mở Rộng NFR-009",
+      "col": 0,
+      "row": 0,
+      "methods": [
+        { "name": "canAssign", "parameters": "req: SlotReq", "returns": "GateResult", "visibility": "public", "abstract": true },
+        { "name": "travelMins", "parameters": "fromBr: UUID, toBr: UUID", "returns": "int", "visibility": "public", "abstract": true }
+      ]
+    },
+    {
+      "id": "EligibilityEngine",
+      "label": "EligibilityEngine",
+      "kind": "class",
+      "sublabel": "5 Quy Tắc + 30-45p Tram (NT1/NT2)",
+      "col": 1,
+      "row": 0,
+      "attributes": [
+        { "name": "defaultTravelMins", "type": "int", "visibility": "private" },
+        { "name": "enforceCertGate", "type": "bool", "visibility": "private" }
+      ],
+      "methods": [
+        { "name": "checkFiveRules", "parameters": "staffId: UUID, svcId: UUID", "returns": "bool", "visibility": "public" },
+        { "name": "rankReplacements", "parameters": "leaveEvent: LeaveEvt", "returns": "UUID[]", "visibility": "public" }
+      ]
+    },
+    {
+      "id": "TherapistProfile",
+      "label": "TherapistProfile",
+      "kind": "class",
+      "sublabel": "Một Định Danh Xuyên Chi Nhánh",
+      "col": 2,
+      "row": 0,
+      "attributes": [
+        { "name": "staffId", "type": "UUID", "visibility": "public" },
+        { "name": "primaryBranchId", "type": "UUID", "visibility": "public" },
+        { "name": "awardLevel", "type": "AwardCode", "visibility": "public" },
+        { "name": "visaCapHours", "type": "Decimal", "visibility": "protected" }
+      ],
+      "methods": [
+        { "name": "hasValidCert", "parameters": "svcId: UUID, at: Date", "returns": "bool", "visibility": "public" }
+      ]
+    },
+    {
+      "id": "ResourceSlotRule",
+      "label": "ResourceSlotRule",
+      "kind": "class",
+      "sublabel": "Khóa Phòng & Máy Giai Đoạn 2",
+      "col": 0,
+      "row": 1,
+      "attributes": [
+        { "name": "roomId", "type": "UUID", "visibility": "private" },
+        { "name": "deviceSku", "type": "string", "visibility": "private" }
+      ],
+      "methods": [
+        { "name": "canAssign", "parameters": "req: SlotReq", "returns": "GateResult", "visibility": "public" },
+        { "name": "reservePrepBuffer", "parameters": "mins: int", "returns": "void", "visibility": "public" }
+      ]
+    },
+    {
+      "id": "CommissionEngine",
+      "label": "CommissionEngine",
+      "kind": "class",
+      "sublabel": "Chia 100% Combo Theo Phiên Bản",
+      "col": 1,
+      "row": 1,
+      "attributes": [
+        { "name": "ruleVersion", "type": "string", "visibility": "private" },
+        { "name": "priceBasis", "type": "PriceBasis", "visibility": "private" }
+      ],
+      "methods": [
+        { "name": "splitCombo", "parameters": "line: SvcLine", "returns": "CommShare[]", "visibility": "public" },
+        { "name": "postRefundAdj", "parameters": "refundId: UUID", "returns": "AdjEntry", "visibility": "public" }
+      ]
+    },
+    {
+      "id": "PayrollSnapshot",
+      "label": "PayrollSnapshot",
+      "kind": "record",
+      "sublabel": "Bản Ghi Khóa Sổ Lương 2 Tuần",
+      "col": 2,
+      "row": 1,
+      "attributes": [
+        { "name": "snapshotId", "type": "UUID", "visibility": "public" },
+        { "name": "workedHours", "type": "Decimal", "visibility": "public" },
+        { "name": "paidTravelHours", "type": "Decimal", "visibility": "public" },
+        { "name": "commissionAud", "type": "Money", "visibility": "public" },
+        { "name": "spaHeldTipsAud", "type": "Money", "visibility": "public" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "c-rel-1",
+      "from": "EligibilityEngine",
+      "to": "SlotValidator",
+      "kind": "realization",
+      "label": "thực thi"
+    },
+    {
+      "id": "c-rel-2",
+      "from": "ResourceSlotRule",
+      "to": "SlotValidator",
+      "kind": "realization",
+      "label": "mở rộng GĐ2"
+    },
+    {
+      "id": "c-rel-3",
+      "from": "EligibilityEngine",
+      "to": "TherapistProfile",
+      "kind": "association",
+      "label": "kiểm định"
+    },
+    {
+      "id": "c-rel-4",
+      "from": "CommissionEngine",
+      "to": "EligibilityEngine",
+      "kind": "dependency",
+      "label": "ca hoàn tất"
+    },
+    {
+      "id": "c-rel-5",
+      "from": "PayrollSnapshot",
+      "to": "TherapistProfile",
+      "kind": "aggregation",
+      "label": "tổng hợp"
+    },
+    {
+      "id": "c-rel-6",
+      "from": "CommissionEngine",
+      "to": "PayrollSnapshot",
+      "kind": "composition",
+      "label": "đóng băng"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Hợp Đồng Slot Sẵn Sàng Cho Tài Nguyên Giai Đoạn 2 (NFR-009)",
+      "items": [
+        "Giao diện SlotValidator tách biệt luồng đặt lịch khỏi các quy tắc kiểm tra năng lực cụ thể.",
+        "MVP Giai đoạn 1 kiểm tra điều kiện KTV và thời gian di chuyển liên chi nhánh qua EligibilityEngine; Giai đoạn 2 cắm thêm ResourceSlotRule (phòng, bồn gội, máy laser) mà không phá vỡ API."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Chia Hoa Hồng Có Phiên Bản & Bút Toán Hoàn Tiền (COM-001..007)",
+      "items": [
+        "Phương thức CommissionEngine.splitCombo ép buộc tổng tỷ lệ phân bổ sum(allocation_pct) == 100% giữa mọi KTV tham gia ca Completed.",
+        "Khi hoàn tiền sau ngày chốt lương, postRefundAdj tạo bút toán điều chỉnh âm vào kỳ đang mở thay vì sửa lùi bản chụp đã khóa."
+      ]
+    }
+  ]
+}
