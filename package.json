@@ -1,0 +1,10 @@
+{
+  "name": "spa-uc-archify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Heaven Lounge (Spa Úc) — Toàn bộ 7 luồng vận hành & kiến trúc liên kết trên 1 trang duy nhất (100% Tiếng Việt)",
+  "scripts": {
+    "build": "echo 'Static HTML bundle ready for Vercel'",
+    "start": "npx serve ."
+  }
+}

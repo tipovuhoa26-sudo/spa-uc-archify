@@ -1,0 +1,8 @@
+.git
+.gitignore
+*.delivery.json
+*.receipt.json
+*.finalize.json
+*.finalize-summary.json
+*.browser-check.json
+sources/

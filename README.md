@@ -1,9 +1,25 @@
 # The Heaven Lounge (Spa Úc) — Toàn Bộ 7 Luồng Vận Hành & Kiến Trúc Liên Kết Trên 1 Trang Duy Nhất
 
-> **1 Trang Tương Tác Duy Nhất (`index.html`) · 100% Tiếng Việt (`0` chữ tiếng Trung) · 7 Luồng Vận Hành Liên Kết Khép Kín · 11 Sơ Đồ Archify Tương Tác · 17 Màn Hình MVP · 8 Bảng CSDL**
+> **1 Trang Tương Tác Duy Nhất (`index.html`) · Sẵn Sàng Đẩy Lên Vercel (`vercel.json`) · 100% Tiếng Việt (`0` chữ tiếng Trung) · 7 Luồng Liên Kết Khép Kín · 11 Sơ Đồ Archify Tương Tác · 17 Màn Hình MVP · 8 Bảng CSDL**
 >
 > **Cơ sở áp dụng:** **Brunswick (`3056`)** & **North Melbourne (`3051`)** — Melbourne, Victoria, Australia  
 > **Chuẩn pháp lý Úc:** Fair Work `[MA000005]` (Hair and Beauty Industry Award) · `ATO GST` (`GSTR 2003/5` & `GSTR 2012/1`) · `Privacy Act 1988 (APPs)` · `ACL` · `STP Phase 2` & `12% Payday Super`
+
+---
+
+## 🚀 Đẩy Lên Vercel Trong 10 Giây (Đã Cấu Hình Sẵn `vercel.json` + `index.html`)
+
+Thư mục này đã được chuẩn hóa cấu trúc **Static Root (`index.html` + `vercel.json` + `package.json` + `.vercelignore`)** để đẩy thẳng lên **Vercel** mà **không cần cấu hình tay bất kỳ thông số nào**:
+
+### Cách 1: Bấm 1-Click Deploy hoặc Import từ GitHub trên Web Vercel (Khuyên dùng)
+1. Bấm nút dưới đây (hoặc mở [**https://vercel.com/new**](https://vercel.com/new)):  
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftipovuhoa26-sudo%2Fspa-uc-archify&project-name=spa-uc-archify&repository-name=spa-uc-archify)
+2. Chọn kho mã nguồn **`tipovuhoa26-sudo/spa-uc-archify`** và bấm nút **Deploy** (Vercel tự nhận `vercel.json` và dùng `index.html` làm trang chủ `/`).
+
+### Cách 2: Đẩy trực tiếp từ Terminal máy Mac bằng 1 lệnh
+```bash
+cd /Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify && npx vercel --prod
+```
 
 ---
 
@@ -11,7 +27,7 @@
 
 | Trang Hợp Nhất Duy Nhất | Nội Dung Tích Hợp Trên 1 Trang | Mở Trực Tiếp Trên Trình Duyệt | Mã Nguồn HTML |
 | :--- | :--- | :--- | :--- |
-| **Toàn Bộ 7 Luồng Vận Hành & Kiến Trúc Liên Kết (`index.html`)** | Hợp nhất **cả 7 luồng vận hành liên kết khép kín (`Luồng 1 -> Luồng 7 -> Luồng 1`)**, **bảng Móc Xích Chuyển Giao (`Hard Gates`)**, và **toàn bộ 11 sơ đồ tương tác Archify** trong **1 trang duy nhất** có nút **▶ Duyệt từng bước**, **Mở sơ đồ tương tác toàn màn hình**, **Sáng / Tối** và **Xuất ảnh / PDF** hoàn toàn bằng tiếng Việt. | [**👉 BẤM ĐỂ MỞ TRANG HỢP NHẤT DUY NHẤT (`index.html`)**](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/index.html) | [`index.html`](./index.html) · [`spa-uc-toan-bo-luong-van-hanh-lien-ket.html`](./spa-uc-toan-bo-luong-van-hanh-lien-ket.html) |
+| **Toàn Bộ 7 Luồng Vận Hành & Kiến Trúc Liên Kết (`index.html`)** | Hợp nhất **cả 7 luồng vận hành liên kết khép kín (`Luồng 1 -> Luồng 7 -> Luồng 1`)**, **bảng Móc Xích Chuyển Giao (`Hard Gates`)**, và **toàn bộ 11 sơ đồ tương tác Archify** trong **1 trang duy nhất** có nút **▶ Duyệt từng bước**, **Mở sơ đồ tương tác toàn màn hình**, **Sáng / Tối** và **Xuất ảnh / PDF** hoàn toàn bằng tiếng Việt. | [**👉 BẤM ĐỂ MỞ TRANG HỢP NHẤT DUY NHẤT (`index.html`)**](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/index.html) | [`index.html`](./index.html) · [`vercel.json`](./vercel.json) |
 
 ![Trang Hợp Nhất Duy Nhất — The Heaven Lounge (Spa Úc)](./previews/index.png)
 
@@ -77,8 +93,9 @@ Tại **The Heaven Lounge**, 7 luồng nghiệp vụ **không rời rạc** mà 
 
 ---
 
-## 📁 Cấu Trúc Thư Mục
+## 📁 Cấu Trúc Thư Mục Chuẩn Vercel
 
-- [`index.html`](./index.html) / [`spa-uc-toan-bo-luong-van-hanh-lien-ket.html`](./spa-uc-toan-bo-luong-van-hanh-lien-ket.html) — **Trang tương tác hợp nhất duy nhất** tích hợp toàn bộ 7 luồng vận hành liên kết và 11 sơ đồ Archify (100% tiếng Việt, `0` lỗi, `0` cảnh báo).
+- [`index.html`](./index.html) / [`spa-uc-toan-bo-luong-van-hanh-lien-ket.html`](./spa-uc-toan-bo-luong-van-hanh-lien-ket.html) — **Trang chủ tương tác hợp nhất duy nhất (`/`)** tích hợp toàn bộ 7 luồng vận hành liên kết và 11 sơ đồ Archify (100% tiếng Việt, `0` lỗi, `0` cảnh báo).
+- [`vercel.json`](./vercel.json) & [`package.json`](./package.json) — Cấu hình định tuyến (`rewrites`), `cleanUrls` và bộ nhớ đệm (`Cache-Control`) để triển khai Zero-Config trên Vercel.
 - [`sources/spa-uc-toan-bo-luong-van-hanh-lien-ket.archify.md`](./sources/spa-uc-toan-bo-luong-van-hanh-lien-ket.archify.md) — Mã nguồn Archify Explainer của trang hợp nhất kèm các sơ đồ JSON (`sources/*.json`).
 - [`previews/`](./previews/) — Ảnh chụp trực quan độ phân giải cao của trang hợp nhất và 6 mục liên kết.
