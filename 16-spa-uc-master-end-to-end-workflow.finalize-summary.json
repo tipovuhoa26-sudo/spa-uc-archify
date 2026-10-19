@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/16-spa-uc-master-end-to-end-workflow.json",
+    "sha256": "9d51846c929348f00b795249eb380482cbb84a2b0615ba5642f8d1e2e5b1c832",
+    "bytes": 8034
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/16-spa-uc-master-end-to-end-workflow.html",
+    "sha256": "7cd46bfc3ccd0e0d3e9e82eadcd5d0d0e0a32ee1e03e9737ccf7efe923e0a1ce",
+    "bytes": 831176
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/16-spa-uc-master-end-to-end-workflow.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/16-spa-uc-master-end-to-end-workflow.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/16-spa-uc-master-end-to-end-workflow.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1595,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "explainer",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/15-spa-uc-7-luong-van-hanh-toan-dien.archify.md",
+    "sha256": "1e5f76733485b52ab905bbbb6b48b6fd7f873d708cfdbf63fe30e02c116391bf",
+    "bytes": 9704
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.html",
+    "sha256": "500c8a406e41c525ab2c283d293994fcd467a3a41938fcd8c425856257eb4f05",
+    "bytes": 1287982
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5624,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,15 +1,40 @@
-# The Heaven Lounge (Spa Úc) — Bộ Tài Liệu & 15 Luồng Kiến Trúc Tương Tác (Archify v3.2.0)
+# The Heaven Lounge (Spa Úc) — Cẩm Nang Trực Quan 7 Luồng Vận Hành & 17 Hồ Sơ Kiến Trúc (Archify v3.2.0)
 
-> **Xem Trực Tiếp Tương Tác (Bấm 1 chạm mở ngay trên trình duyệt — HTTP 200 tức thì):**
-> - **[MỞ CỔNG TỔNG QUAN TƯƠNG TÁC (INDEX / EXPLAINER 00) ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html)**
-> - Mọi hình ảnh sơ đồ bên dưới đều được **hiển thị trực tiếp ngay trên trang GitHub này** — bạn có thể **cuộn xem ngay bên dưới** hoặc **bấm vào bất kỳ hình ảnh / tiêu đề nào** để mở trang HTML tương tác (chuyển chế độ Sáng/Tối, lọc từng luồng Focus View `1 / 2 / 3`, phóng to/thu nhỏ và xuất ảnh SVG/PNG).
+> **BẤM ĐỂ MỞ TRỰC TIẾP TRÊN TRÌNH DUYỆT (LIVE INTERACTIVE VIEWER — HTTP 200 TỨC THÌ):**
+> 1. **[MỞ CẨM NANG TƯƠNG TÁC 7 LUỒNG VẬN HÀNH TỪ A ĐẾN Z (`Explainer 15`) ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.html)**
+> 2. **[MỞ BẢN ĐỒ TỔNG THỂ 7 LUỒNG KHÉP KÍN TRÊN 1 MÀN HÌNH (`Master Workflow 16`) ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/16-spa-uc-master-end-to-end-workflow.html)**
+> 3. **[MỞ TỔNG QUAN CHIẾN LƯỢC BUILD VS BUY & 19 NGUYÊN TẮC (`Explainer 00`) ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html)**
 
 ---
 
-## Danh Mục Nhanh 15 Luồng & Hồ Sơ Kiến Trúc (100% Tiếng Việt)
+## I. Bức Tranh Toàn Cảnh: Toàn Bộ 7 Luồng Vận Hành Của Spa Hoạt Động Ra Sao?
+
+Hãy hình dung **1 ngày vận hành thực tế** tại 2 chi nhánh **Brunswick (`550 Sydney Rd, VIC 3056`)** và **North Melbourne (`342 Victoria St, VIC 3051`)** với đội ngũ 6–7 Kỹ thuật viên (`Việt / Anh / Thái`). Toàn bộ hoạt động của spa chạy theo **1 đường ống khép kín gồm 7 luồng nối tiếp nhau** (chia làm 3 chặng: **Trước khi khách đến → Trong khi khách ở Spa → Khi thanh toán & Quản trị**):
+
+[![16 Master End-to-End Workflow](./previews/16-spa-uc-master-end-to-end-workflow.png)](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/16-spa-uc-master-end-to-end-workflow.html)
+
+[![15 Master 7-Workflow Explainer](./previews/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.png)](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.html)
+
+### Bảng Tóm Tắt 7 Luồng Theo Vai Trò & Màn Hình (Ai Làm Gì, Ở Đâu, Hệ Thống Chặn Gì?)
+
+| Luồng | Chặng | Ai Thao Tác? (Màn Hình) | Chuyện Gì Diễn Ra Trong Thực Tế? | Chốt Chặn Tự Động Của Hệ Thống | Sơ Đồ Chi Tiết |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Luồng 1** | Trước giờ mở cửa | Chủ Spa (`D1`), Lễ tân (`B1`), KTV (`C1`) | **Xếp ca & Điều động liên chi nhánh:** Mỗi KTV chỉ có **1 hồ sơ duy nhất** (`STF-001`) gắn kèm hạn chứng chỉ (`HLTINF005/Laser`) và trần giờ Visa. Khi KTV đổi chi nhánh trong ngày (`Brunswick <-> North Melbourne`), hệ thống tự chèn **30–45 phút đi tram**. | Khóa không cho khách đặt trùng giờ đi tram + tự động cộng vào **Giờ di chuyển có lương (`Paid Travel Time` — `MA000005 cl. 20.9`)**. | [Sơ đồ 06 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html) |
+| **Luồng 2** | Khi khách đặt chỗ | Khách (`A1–A2`) hoặc Lễ tân (`B1`) | **Đặt lịch Online / Walk-in:** Khách chọn Chi nhánh trước → Chọn Dịch vụ (hiển thị **Bảng giá kép Tiền mặt / Thẻ** `PAY-001`) → Chọn chế độ **`Selected Therapist`** (đích danh KTV yêu thích) hoặc **`Auto-Assigned`** (để Spa tự xếp). | **Cổng 5 điều kiện (`SKL-003`):** Kỹ năng mở + Đã đào tạo + Chứng chỉ còn hạn + Có ca trực + Khách `>= 18 tuổi` (nếu phun xăm) + Khóa `TSTZRANGE` (`0%` trùng lịch). | [Sơ đồ 06 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html) · [Sơ đồ 14 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/14-spa-uc-booking-availability-waterfall.html) |
+| **Luồng 3** | Khi có biến cố nhân sự | KTV (`C4`) → Lễ tân / Quản lý (`B2`) | **Cấp cứu lịch khi KTV nghỉ ốm đột xuất:** KTV báo nghỉ trên điện thoại (`C4`). Các lịch hẹn bị ảnh hưởng lập tức nhảy vào hàng đợi đỏ **`Need Attention` (`Màn B2`)** kèm danh sách KTV đủ chuẩn thay thế. | **Cấm xóa lịch khách!** Nếu khách đặt `Auto-Assigned` → Lễ tân đổi KTV 1 chạm. Nếu khách đặt **`Selected Therapist`** → **Cấm đổi ngầm**, bắt buộc gửi SMS xin ý kiến khách (`BKG-007`). | [Sơ đồ 06 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html) · [Sơ đồ 13 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/13-spa-uc-incident-sla-timeline.html) |
+| **Luồng 4** | Khi khách tới quầy | Lễ tân (`B3, B4`) & Khách ký iPad | **Check-in & Ký cam kết y khoa (`Consent`):** Lễ tân đón khách tại `Màn B3`. Với dịch vụ xâm lấn/Laser/phun xăm mà khách chưa ký online (`A2`), Lễ tân đưa iPad (`Màn B4`) cho khách ký tại quầy. | **Bảo mật `SEC-008`:** Lễ tân chỉ thấy cờ an toàn (dị ứng, thai kỳ), **không thấy bệnh án `SOAP`**. **Chốt `TRT-002`:** Chưa ký `Consent` thì khóa cứng nút bắt đầu làm! | [Sơ đồ 07 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/07-spa-uc-appointment-lifecycle.html) · [Sơ đồ 08 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/08-spa-uc-service-checkout-sequence.html) |
+| **Luồng 5** | Trong phòng điều trị | KTV trên PWA VI/EN/TH (`C1, C2`) | **Phục vụ tại giường (`Bedside Care`):** KTV mở `Màn C2` (nền tối dịu mắt, hỗ trợ Tiếng Việt / Anh / Thái), bấm đếm giờ **3 chạm**, chọn nhanh thẻ vùng cơ thể/lực bấm (`SOAP`) và xác nhận vật tư tiêu hao (`BOM`). | **Ẩn 100% SĐT/Email khách** trên máy KTV (`0412 *** 345`) + Tự động trừ tồn kho vật tư chi nhánh (`Màn D5`) ngay khi hoàn tất tại giường. | [Sơ đồ 08 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/08-spa-uc-service-checkout-sequence.html) · [Sơ đồ 12 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/12-spa-uc-capability-module-tree.html) |
+| **Luồng 6** | Khi khách ra quầy trả tiền | Lễ tân POS (`B5`) → Ví KTV (`C3`) | **Thu ngân tách bill & Giao dịch nguyên tử 6 bước:** Khách có thể trả gộp (Tiền mặt + Thẻ EFTPOS + Trừ Voucher/Gói + Tip). Hệ thống tự động đối soát nếu **Gói mua ở Brunswick nhưng sang North Melbourne dùng**. | **6 Bước nguyên tử (`NT6–NT9`):** Tách bạch (1) Tiền thu, (2) Doanh thu, (3) Nợ gói liên chi nhánh, (4) **GST kép chuẩn ATO** (Voucher tiền tính thuế khi dùng vs Gói DV tính thuế khi bán), (5) **Hoa hồng chia đúng 100%**, (6) Tip giữ hộ. | [Sơ đồ 08 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/08-spa-uc-service-checkout-sequence.html) · [Sơ đồ 09 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/09-spa-uc-finance-gst-payroll-dataflow.html) |
+| **Luồng 7** | Sau ca, cuối ngày & mỗi 2 tuần | Quản lý (`D6`), Chủ Spa (`D3, D4`), Xero & Payroll | **Chăm sóc hậu mãi, SLA 1–2 sao, Kết ca & Chốt lương:** Gửi SMS khảo sát 1–5 sao công bằng; kiểm đếm két tiền cuối ca (`Cash-Up`); đẩy bút toán Xero ngày; và mỗi 2 tuần khóa **`Payroll Input Snapshot`**. | **SLA 1 Giờ (`REV-003`):** Khách chấm 1–2 sao tự động mở phiếu sự cố bắt buộc điều tra trong `1 giờ` & gọi khách trong ngày. **Khóa sổ lương (`COM-006`):** Xuất sang `Employment Hero` tính `MA000005`, `12% Payday Super` & `STP Phase 2`. | [Sơ đồ 09 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/09-spa-uc-finance-gst-payroll-dataflow.html) · [Sơ đồ 13 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/13-spa-uc-incident-sla-timeline.html) |
+
+---
+
+## II. Danh Mục Đầy Đủ 17 Hồ Sơ & Sơ Đồ Tương Tác (100% Tiếng Việt)
 
 | Mã | Loại Luồng | Mở Bản Tương Tác (Live HTML Viewer) | Xem Ngay Trên Trang Này | Nguồn Đặc Tả | Kiểm Định Archify |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| **`15`** | `Master Explainer` | **[Cẩm Nang Trực Quan 7 Luồng Vận Hành Từ A Đến Z ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/15-spa-uc-7-luong-van-hanh-toan-dien-explainer.html)** | [Xem ảnh ở trên ↑](#i-buc-tranh-toan-canh-toan-bo-7-luong-van-hanh-cua-spa-hoat-dong-ra-sao) | [`15-...archify.md`](./sources/15-spa-uc-7-luong-van-hanh-toan-dien.archify.md) | `Showcase Pass (0 lỗi)` |
+| **`16`** | `Master Workflow` | **[Bản Đồ Tổng Thể 7 Luồng Khép Kín Trên 1 Sơ Đồ ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/16-spa-uc-master-end-to-end-workflow.html)** | [Xem ảnh ở trên ↑](#i-buc-tranh-toan-canh-toan-bo-7-luong-van-hanh-cua-spa-hoat-dong-ra-sao) | [`16-...json`](./sources/16-spa-uc-master-end-to-end-workflow.json) | `Showcase Pass (0 lỗi)` |
 | **`00`** | `Explainer` | **[Mở Tổng Quan Kiến Trúc & Lộ Trình R0–R6 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html)** | [Xem ảnh preview ↓](#00-tong-quan-kien-truc--19-nguyen-tac-nt1nt19) | [`00-...archify.md`](./sources/00-spa-uc-tong-quan-kien-truc-tieng-viet.archify.md) | `Showcase Pass (0 lỗi)` |
 | **`01`** | `Explainer` | **[Mở Executive White Paper v4.0 ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/01-spa-uc-executive-whitepaper-explainer.html)** | [Xem ảnh preview ↓](#01-bao-cao-dieu-hanh--executive-white-paper-v40) | [`01-...archify.md`](./sources/01-spa-uc-executive-whitepaper.archify.md) | `Showcase Pass (0 lỗi)` |
 | **`02`** | `Explainer` | **[Mở Đặc Tả MVP PRD & 17 Màn Hình ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/02-spa-uc-mvp-prd-blueprint-explainer.html)** | [Xem ảnh preview ↓](#02-dac-ta-san-pham--ban-ve-ky-thuat-mvp-prd-v40) | [`02-...archify.md`](./sources/02-spa-uc-mvp-prd-blueprint.archify.md) | `Showcase Pass (0 lỗi)` |
@@ -28,11 +53,11 @@
 
 ---
 
-## Phần I. Bốn Trang Explainer (One-Page Explorable HTML)
+## III. Chi Tiết Từng Trang Explainer & Sơ Đồ Chuyên Sâu (Bấm Vào Ảnh Để Tương Tác)
 
 ### 00. Tổng Quan Kiến Trúc & 19 Nguyên Tắc (`NT1–NT19`)
 - **Mở trang tương tác:** **[00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html)**
-- **Điểm chính:** Tóm tắt quyết định dùng thử 14 ngày (`Q4`), 4 khoảng trống cốt lõi của phần mềm đóng gói (`G1, G2, G4, G5`), kiến trúc 17 màn hình MVP và danh mục toàn bộ 14 hồ sơ kỹ thuật.
+- **Điểm chính:** Tóm tắt quyết định dùng thử 14 ngày (`Q4`), 4 khoảng trống cốt lõi của phần mềm đóng gói (`G1, G2, G4, G5`), kiến trúc 17 màn hình MVP và danh mục toàn bộ hồ sơ kỹ thuật.
 
 [![00 Explainer Preview](./previews/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.png)](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/00-spa-uc-tong-quan-kien-truc-tieng-viet-explainer.html)
 
@@ -62,8 +87,6 @@
 
 ---
 
-## Phần II. Mười Một Sơ Đồ Luồng Kỹ Thuật (Bấm Vào Ảnh Để Tương Tác)
-
 ### 04. Kiến Trúc Hệ Thống Đích — Modular Monolith (`architecture`)
 - **Mở sơ đồ tương tác (4 Focus Views):** **[04-spa-uc-target-system-architecture.html ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/04-spa-uc-target-system-architecture.html)**
 - **Điểm chính:** 4 cổng giao diện (`Portal A/B/C/D`), cổng bảo mật RBAC (`SEC-008`), lõi xử lý đặt lịch + thu ngân + sổ cái PostgreSQL tại AWS Sydney (`ap-southeast-2`), kho bệnh án mã hóa 7 năm và kết nối Xero / Employment Hero / EFTPOS / Twilio AU.
@@ -81,7 +104,7 @@
 ---
 
 ### 06. Luồng Đặt Lịch, Chèn Đệm Tram & Nghỉ Đột Xuất (`workflow`)
-- **Mở sơ đồ tương tác (3 Focus Views):** **[06-spa-uc-booking-dispatch-workflow.html ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html)**
+- **Mở sơ đồ tương tác (2 Focus Views):** **[06-spa-uc-booking-dispatch-workflow.html ↗](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html)**
 - **Điểm chính:** Kiểm tra 5 điều kiện (`SKL-003`), tự động chèn `30–45 phút` đi tram liên chi nhánh (`NT2`), khóa `TSTZRANGE` (`NT18`) và phân nhánh xử lý nghỉ đột xuất theo `Selected Therapist` (`BKG-007`) vs `Auto-Assigned` (`BKG-008`).
 
 [![06 Booking & Dispatch Workflow](./previews/06-spa-uc-booking-dispatch-workflow.png)](https://htmlpreview.github.io/?https://github.com/tipovuhoa26-sudo/spa-uc-archify/blob/main/06-spa-uc-booking-dispatch-workflow.html)

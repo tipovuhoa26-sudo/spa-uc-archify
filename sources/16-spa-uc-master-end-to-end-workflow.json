@@ -1,0 +1,275 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "The Heaven Lounge — Bản Đồ Tổng Thể 7 Luồng Vận Hành Khép Kín Từ A Đến Z",
+    "output": "spa-uc-archify/16-spa-uc-master-end-to-end-workflow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "stage-1-booking-and-leave",
+        "label": "1. Xếp Ca, Đặt Lịch & Nghỉ Đột Xuất",
+        "focus": [
+          "w1-roster",
+          "w2-booking",
+          "w2-gate",
+          "w3-leave",
+          "w3-customer"
+        ],
+        "note": "Một hồ sơ KTV duy nhất, tự chèn 30–45p đi tram có lương, kiểm tra 5 điều kiện và cứu lịch tại hàng đợi Need Attention."
+      },
+      {
+        "id": "stage-2-checkin-and-bedside",
+        "label": "2. Check-In, Ký Consent & Tại Giường",
+        "focus": [
+          "w2-gate",
+          "w4-5-care",
+          "w6-checkout"
+        ],
+        "note": "Ẩn bệnh án khỏi Lễ tân (SEC-008), chặn vào phòng nếu thiếu chữ ký Consent (TRT-002), đếm giờ 3 chạm, ghi SOAP và trừ kho BOM."
+      },
+      {
+        "id": "stage-3-checkout-sla-payroll",
+        "label": "3. Thu Ngân 6 Bước, SLA 1h & Chốt Lương",
+        "focus": [
+          "w6-checkout",
+          "w7-sla",
+          "w7-payroll"
+        ],
+        "note": "Thu ngân tách bill giá kép, tách GST kép & công nợ liên chi nhánh, xử lý đánh giá 1–2 sao trong 1h và khóa sổ lương 2 tuần."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "lane-front",
+      "label": "Khách Hàng, Lễ Tân & Chủ Spa (A, B, D)",
+      "variant": "normal"
+    },
+    {
+      "id": "lane-core",
+      "label": "Cổng 5 Điều Kiện, Tại Giường & Sổ Cái 6 Bước",
+      "variant": "normal"
+    },
+    {
+      "id": "lane-exception",
+      "label": "Xử Lý Nghỉ Đột Xuất & SLA Sự Cố 1–2 Sao",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "p-before",
+      "label": "1. Trước Giờ Phục Vụ (Luồng 1–3)",
+      "fromCol": 0,
+      "toCol": 1,
+      "variant": "default"
+    },
+    {
+      "id": "p-during",
+      "label": "2. Kiểm Tra, Consent & Tại Giường (Luồng 2, 4, 5)",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "p-after",
+      "label": "3. Tất Toán, Hậu Mãi & Lương (Luồng 6–7)",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "security"
+    }
+  ],
+  "mainPath": [
+    "w1-roster",
+    "w2-booking",
+    "w2-gate",
+    "w4-5-care",
+    "w6-checkout",
+    "w7-payroll"
+  ],
+  "nodes": [
+    {
+      "id": "w1-roster",
+      "lane": "lane-front",
+      "col": 0,
+      "type": "frontend",
+      "label": "1. Xếp Ca & Tram",
+      "sublabel": "1 Hồ Sơ + 45p Tàu",
+      "tag": "LUỒNG 1"
+    },
+    {
+      "id": "w2-booking",
+      "lane": "lane-front",
+      "col": 1,
+      "type": "frontend",
+      "label": "2. Khách Đặt Lịch",
+      "sublabel": "Giá Kép & Chọn KTV",
+      "tag": "LUỒNG 2"
+    },
+    {
+      "id": "w2-gate",
+      "lane": "lane-core",
+      "col": 2,
+      "type": "backend",
+      "label": "Cổng 5 Điều Kiện",
+      "sublabel": "Cert + Khóa TSTZRANGE",
+      "tag": "SKL-003"
+    },
+    {
+      "id": "w4-5-care",
+      "lane": "lane-core",
+      "col": 3,
+      "type": "backend",
+      "label": "4–5. Consent & Ca Làm",
+      "sublabel": "Ký TRT-002 · SOAP/BOM",
+      "tag": "LUỒNG 4-5"
+    },
+    {
+      "id": "w6-checkout",
+      "lane": "lane-core",
+      "col": 4,
+      "type": "database",
+      "label": "6. Tất Toán 6 Bước",
+      "sublabel": "GST Kép & Hoa Hồng 100%",
+      "tag": "LUỒNG 6"
+    },
+    {
+      "id": "w7-payroll",
+      "lane": "lane-front",
+      "col": 5,
+      "type": "external",
+      "label": "7. Xero & Lương Úc",
+      "sublabel": "Bút Toán & Snapshot 2W",
+      "tag": "LUỒNG 7"
+    },
+    {
+      "id": "w3-leave",
+      "lane": "lane-exception",
+      "col": 2,
+      "type": "security",
+      "label": "3. Nghỉ Đột Xuất",
+      "sublabel": "Đẩy Hàng Đợi B2",
+      "tag": "LUỒNG 3"
+    },
+    {
+      "id": "w3-customer",
+      "lane": "lane-exception",
+      "col": 3,
+      "type": "external",
+      "label": "Hỏi Ý Kiến Khách",
+      "sublabel": "Nếu Chọn Đích Danh",
+      "tag": "BKG-007"
+    },
+    {
+      "id": "w7-sla",
+      "lane": "lane-exception",
+      "col": 4,
+      "type": "cloud",
+      "label": "Đổi KTV & SLA 1h",
+      "sublabel": "Cập Nhật & Chăm Sóc",
+      "tag": "REV-003"
+    }
+  ],
+  "edges": [
+    {
+      "id": "m-1",
+      "from": "w1-roster",
+      "to": "w2-booking",
+      "label": "Mở Ca",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "m-2",
+      "from": "w2-booking",
+      "to": "w2-gate",
+      "label": "Tìm Giờ",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "m-3",
+      "from": "w2-gate",
+      "to": "w4-5-care",
+      "label": "Đủ Chuẩn",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "m-4",
+      "from": "w4-5-care",
+      "to": "w6-checkout",
+      "label": "Xong Ca",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "m-5",
+      "from": "w6-checkout",
+      "to": "w7-payroll",
+      "label": "Khóa Sổ",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "ex-1",
+      "from": "w2-gate",
+      "to": "w3-leave",
+      "label": "KTV Báo Ốm",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "ex-2",
+      "from": "w3-leave",
+      "to": "w3-customer",
+      "label": "Lọc Người Thay",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "ex-3",
+      "from": "w3-customer",
+      "to": "w7-sla",
+      "label": "Khách Đồng Ý",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "ex-4",
+      "from": "w7-sla",
+      "to": "w6-checkout",
+      "label": "Ghi Audit",
+      "variant": "emphasis",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Chặng 1 (Luồng 1–3) — Trước Khi Khách Đến: Xếp Ca, Đặt Lịch & Cấp Cứu Nghỉ Đột Xuất",
+      "items": [
+        "Luồng 1 (Xếp ca): Mỗi KTV chỉ có 1 hồ sơ xuyên 2 chi nhánh; đổi chi nhánh trong ngày tự động chèn 30–45 phút đi tram có lương.",
+        "Luồng 2 (Đặt lịch): Kiểm tra 5 điều kiện (kỹ năng, đào tạo, chứng chỉ còn hạn, ca trực, tuổi >= 18) và khóa TSTZRANGE chống trùng.",
+        "Luồng 3 (Nghỉ đột xuất): Đẩy lịch vào Need Attention (Màn B2); nếu khách chọn đích danh KTV thì bắt buộc gửi SMS xin ý kiến khách."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Chặng 2 (Luồng 4–5) — Trong Khi Khách Ở Spa: Check-In, Chốt Chặn Consent & Phục Vụ Tại Giường",
+      "items": [
+        "Luồng 4 (Check-in & Consent): Lễ tân chỉ thấy cờ an toàn, không thấy bệnh án (SEC-008); chưa ký Consent thì khóa cứng nút bắt đầu làm (TRT-002).",
+        "Luồng 5 (Tại giường): KTV dùng PWA nền tối đa ngữ (VI/EN/TH), ẩn SĐT khách, bấm đếm giờ 3 chạm, chọn thẻ SOAP nhanh và trừ vật tư BOM."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Chặng 3 (Luồng 6–7) — Khi Thanh Toán & Quản Trị: Giao Dịch 6 Bước, SLA 1 Giờ & Khóa Lương 2 Tuần",
+      "items": [
+        "Luồng 6 (Thu ngân POS): Tách bill Tiền mặt/Thẻ/Gói; ghi 6 bước nguyên tử (Tiền thu, Doanh thu, Nợ gói liên chi nhánh, GST kép, Hoa hồng 100%, Tip).",
+        "Luồng 7 (Hậu mãi & Khóa sổ): Đánh giá 1–2 sao kích hoạt SLA điều tra trong 1 giờ; cuối ca đẩy bút toán Xero ngày và mỗi 2 tuần khóa Payroll Snapshot."
+      ]
+    }
+  ]
+}
