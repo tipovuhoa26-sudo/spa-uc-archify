@@ -2,13 +2,13 @@
   "schema_version": 3,
   "diagram_type": "lifecycle",
   "meta": {
-    "title": "The Heaven Lounge — Máy Trạng thái Vòng đời Lịch hẹn & Thực hiện Dịch vụ",
+    "title": "The Heaven Lounge — Máy Trạng Thái Vòng Đời Lịch Hẹn (Duyệt 2 Bước, 4 Consent & Nghỉ Đột Xuất)",
     "output": "spa-uc-archify/07-spa-uc-appointment-lifecycle.html",
     "quality_profile": "showcase",
     "views": [
       {
         "id": "happy-service-lifecycle",
-        "label": "1. Vòng đời Phục vụ Chuẩn",
+        "label": "1. 6 Kênh -> Duyệt 2 Bước -> 4 Consent",
         "focus": [
           "pending-confirm",
           "confirmed",
@@ -16,18 +16,18 @@
           "in-service",
           "completed"
         ],
-        "note": "Tiến trình chuẩn từ khi tiếp nhận yêu cầu, xác nhận giữ chỗ, ký Consent khi check-in, phục vụ đến thu ngân nguyên tử."
+        "note": "Từ yêu cầu đặt lịch (FB/IG/Web/SĐT/Quầy), KTV được chọn xác nhận trước rồi Lễ tân chốt cuối (BKG-004), kiểm 4 Consent đến thu ngân."
       },
       {
         "id": "leave-reassignment-loop",
-        "label": "2. Vòng lặp Nghỉ Đột xuất & Chờ Khách Xác nhận",
+        "label": "2. KTV Từ Chối / Nghỉ & Chờ Khách Chọn",
         "focus": [
           "confirmed",
           "need-attention",
           "waiting-guest",
           "cancelled"
         ],
-        "note": "Khi KTV báo nghỉ đột xuất, lịch Confirmed chuyển sang Need Attention và bắt buộc chờ khách quyết định nếu đã chọn đích danh KTV."
+        "note": "Khi KTV được chọn từ chối hoặc báo nghỉ đột xuất, lịch chuyển sang Need Attention / Chờ Khách Chọn và cấm tự ý đổi ngầm (BKG-007)."
       }
     ]
   },
@@ -42,70 +42,70 @@
     {
       "id": "pending-confirm",
       "type": "start",
-      "label": "Chờ Xác nhận",
-      "sublabel": "Cổng Tiếp nhận BKG-001",
-      "tag": "BKG-001",
+      "label": "Chờ Duyệt 2 Bước",
+      "sublabel": "FB/IG -> KTV & Lễ Tân",
+      "tag": "BKG-002/004",
       "step": "01"
     },
     {
       "id": "confirmed",
       "type": "active",
-      "label": "Đã Xác nhận",
-      "sublabel": "Khóa Slot & Giờ Tàu",
-      "tag": "NT1/NT2",
+      "label": "Đã Xác Nhận",
+      "sublabel": "SMS & Link Tự Đổi",
+      "tag": "BKG-004/013",
       "step": "02"
     },
     {
       "id": "checked-in",
       "type": "decision",
       "label": "Đã Check-in",
-      "sublabel": "Cổng Consent TRT-002",
+      "sublabel": "4 Chế Độ Consent",
       "tag": "TRT-002",
       "step": "03"
     },
     {
       "id": "in-service",
       "type": "active",
-      "label": "Đang Phục vụ",
-      "sublabel": "Đếm giờ W2 & SOAP",
-      "tag": "TRT-003",
+      "label": "Đang Phục Vụ",
+      "sublabel": "Ghi Ca & Ảnh Tùy Chọn",
+      "tag": "TRT-001/005",
       "step": "04"
     },
     {
       "id": "completed",
       "type": "success",
-      "label": "Hoàn tất",
-      "sublabel": "Sổ 6 Bước & Hoa hồng",
-      "tag": "COM-001",
+      "label": "Hoàn Tất",
+      "sublabel": "Thu Ngân & 1–5★",
+      "tag": "COM-003",
       "step": "05"
     },
     {
       "id": "need-attention",
       "type": "decision",
       "label": "Need Attention",
-      "sublabel": "Hàng đợi KTV Nghỉ B2",
+      "sublabel": "Hàng Đợi KTV Nghỉ B2",
       "tag": "BKG-008"
     },
     {
       "id": "waiting-guest",
       "type": "external",
       "label": "Chờ Khách Chọn",
-      "sublabel": "Khóa KTV Đích danh",
+      "sublabel": "SMS Hỏi Ý Kiến Khách",
       "tag": "BKG-007"
     },
     {
       "id": "cancelled",
       "type": "neutral",
       "label": "Đã Hủy",
-      "sublabel": "Xét Quy tắc Đặt cọc",
-      "tag": "BKG-010"
+      "sublabel": "Link Tự Hủy / Lễ Tân Hủy",
+      "tag": "BKG-013/014"
     },
     {
       "id": "no-show",
       "type": "failure",
       "label": "Khách Vắng (No-Show)",
-      "sublabel": "Ghi Audit & Phí Phạt",
-      "tag": "BKG-010"
+      "sublabel": "Lưu Lịch Sử Rủi Ro Đặt Cọc",
+      "tag": "BKG-015"
     }
   ],
   "transitions": [
@@ -113,7 +113,7 @@
       "id": "tr-2",
       "from": "pending-confirm",
       "to": "confirmed",
-      "label": "Duyệt lịch",
+      "label": "Duyệt 2 bước",
       "variant": "emphasis"
     },
     {
@@ -183,27 +183,26 @@
   "cards": [
     {
       "dot": "emerald",
-      "title": "Cổng Chặn Pháp lý trước khi Bắt đầu Ca (TRT-002)",
+      "title": "Quy Trình Duyệt 2 Bước & 4 Chế Độ Consent Theo Dịch Vụ (BKG-002, BKG-004, TRT-002)",
       "items": [
-        "Chặn cứng bước chuyển từ Đã Check-in sang Đang Phục vụ đối với Laser/IPL, Phun xăm (>= 18 tuổi) và Xâm lấn nếu khách chưa ký Consent điện tử.",
-        "Kỹ thuật viên phụ trách ca bắt buộc phải có chứng chỉ hành nghề còn hạn (HLTINF005 / An toàn bức xạ) tại thời điểm phục vụ."
+        "Duyệt 2 bước: Booking Request -> Pending Staff Confirmation (nếu khách chọn đích danh KTV trong 7 ngày) -> Pending Reception Confirmation -> Confirmed (Lễ tân luôn là người chốt cuối).",
+        "4 chế độ Consent theo dịch vụ (TRT-002): Not Required / Acknowledgement / Health Questionnaire / Signed Consent; dịch vụ bắt buộc Consent sẽ bị khóa nút vào ca cho đến khi hoàn tất (TRT-003)."
       ]
     },
     {
       "dot": "rose",
-      "title": "Xử lý Nghỉ Đột xuất & Chờ Khách Quyết định (BKG-007 / BKG-008)",
+      "title": "Xử Lý KTV Từ Chối / Nghỉ Đột Xuất & Link Khách Tự Đổi / Hủy Lịch (BKG-007, BKG-013)",
       "items": [
-        "Khi KTV được giao báo nghỉ đột xuất, các lịch Đã Xác nhận chuyển sang Need Attention (tuyệt đối không bị xóa).",
-        "Lịch gán tự động có thể chuyển ngay cho đồng nghiệp đủ điều kiện; lịch chọn đích danh phải chuyển sang Chờ Khách Chọn."
+        "Khi KTV được chọn từ chối hoặc báo nghỉ đột xuất, lịch chuyển sang Need Attention / Chờ Khách Chọn (Waiting for Customer Decision) kèm gợi ý KTV >=4 sao.",
+        "Khách có thể bấm Link tự đổi/hủy lịch (Self Reschedule/Cancel Link BKG-013) trong khung thời gian cấu hình trước khi Check-in/In-Service."
       ]
     },
     {
       "dot": "cyan",
-      "title": "Trạng thái Hoàn tất Kích hoạt 6 Sự kiện Tài chính & Lương (COM-001)",
+      "title": "Trạng Thái Hoàn Tất Kích Hoạt Hoa Hồng, Trừ Kho & Khảo Sát 1–5 Sao (COM-003, INV-003, REV-001)",
       "items": [
-        "1. Khóa trạng thái Hoàn tất. 2. Ghi nhận dòng dịch vụ và KTV thực tế thực hiện.",
-        "3. Ghi nhận doanh thu hoặc trừ buổi gói trả trước. 4. Tính thuế GST theo loại voucher.",
-        "5. Chia hoa hồng nhiều KTV (tổng = 100%). 6. Ghi nhận tiền thu, tip giữ hộ và gửi lời mời đánh giá 1-5 sao."
+        "Trạng thái Completed kích hoạt tính hoa hồng dịch vụ chia 100% cho các KTV thực hiện (COM-003, COM-004) và trừ vật tư tiêu hao dự kiến của chi nhánh (INV-003).",
+        "Gửi link đánh giá 1–5 sao (khách được sửa lại trong 15 phút nếu bấm nhầm REV-002); đánh giá 1–2 sao tự động giữ ẩn và báo động Quản lý chi nhánh xử lý trong SLA 1 giờ (REV-003, REV-004)."
       ]
     }
   ]

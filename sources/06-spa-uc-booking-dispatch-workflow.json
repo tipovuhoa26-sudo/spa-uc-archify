@@ -2,13 +2,13 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "The Heaven Lounge — Luồng Đặt lịch Đa kênh, Chèn Giờ Tàu điện & Xử lý Nghỉ Đột xuất",
+    "title": "The Heaven Lounge — Luồng Đặt Lịch 6 Kênh (FB/IG/Web), Duyệt 2 Bước, Chèn Tàu Điện & Nghỉ Đột Xuất",
     "output": "spa-uc-archify/06-spa-uc-booking-dispatch-workflow.html",
     "quality_profile": "showcase",
     "views": [
       {
         "id": "happy-booking-path",
-        "label": "1. Luồng Đặt lịch Chính & Khóa Giờ Tàu điện",
+        "label": "1. 6 Kênh (FB/IG/Web) & Duyệt 2 Bước",
         "focus": [
           "select-branch",
           "pick-mode",
@@ -17,11 +17,11 @@
           "lock-slot",
           "consent-checkin"
         ],
-        "note": "Luồng chuẩn từ bước chọn chi nhánh, kiểm tra 5 điều kiện, tự chèn 30-45p tàu điện đến ký Consent khi check-in."
+        "note": "Nhận từ FB Messenger, IG DM, Google/Web, SĐT, Walk-in; bắt UTM, kiểm 5 điều kiện, chèn 30-45p tàu điện & duyệt 2 bước (KTV -> Lễ tân)."
       },
       {
         "id": "sudden-leave-triage",
-        "label": "2. KTV Nghỉ Đột xuất & Khóa Khách Chọn Đích danh",
+        "label": "2. KTV Từ Chối / Nghỉ & Chờ Khách Chọn",
         "focus": [
           "check-elig",
           "leave-alert",
@@ -29,45 +29,45 @@
           "reassign-ktv",
           "lock-slot"
         ],
-        "note": "Khi KTV báo nghỉ đột xuất, lịch hẹn chuyển vào Need Attention (B2) và bắt buộc hỏi ý kiến khách nếu đã chọn đích danh KTV."
+        "note": "Khi KTV được chọn từ chối hoặc báo nghỉ đột xuất, lịch chuyển vào Need Attention / Chờ Khách Chọn và cấm tự ý đổi ngầm (BKG-007)."
       }
     ]
   },
   "lanes": [
     {
       "id": "lane-guest",
-      "label": "Khách & Cổng Đặt lịch (A1-A2)",
+      "label": "6 Cổng Đầu Vào Đặt Lịch & Check-in (BKG-001)",
       "variant": "normal"
     },
     {
       "id": "lane-engine",
-      "label": "Động cơ Kiểm tra & Khóa Slot",
+      "label": "Cổng 5 Điều Kiện, Tàu Điện & Duyệt 2 Bước (BKG-004)",
       "variant": "normal"
     },
     {
       "id": "lane-triage",
-      "label": "Hàng đợi Nghỉ đột xuất (B2)",
+      "label": "Hàng Đợi Need Attention & Chờ Khách Chọn (BKG-007)",
       "variant": "exception"
     }
   ],
   "phases": [
     {
       "id": "phase-intake",
-      "label": "1. Chọn Chi nhánh & Chế độ KTV",
+      "label": "1. Tiếp Nhận 6 Kênh (FB/IG/Web) & Chọn KTV",
       "fromCol": 0,
       "toCol": 1,
       "variant": "default"
     },
     {
       "id": "phase-elig",
-      "label": "2. Kiểm tra 5 Điều kiện & Giờ Tàu",
+      "label": "2. Kiểm Tra 5 Điều Kiện & Khóa Tàu Điện",
       "fromCol": 2,
       "toCol": 3,
       "variant": "emphasis"
     },
     {
       "id": "phase-confirm",
-      "label": "3. Khóa Slot & Cổng Check-in",
+      "label": "3. Duyệt 2 Bước (KTV -> Lễ Tân) & Consent",
       "fromCol": 4,
       "toCol": 5,
       "variant": "security"
@@ -87,8 +87,8 @@
       "lane": "lane-guest",
       "col": 0,
       "type": "frontend",
-      "label": "Chọn Chi nhánh",
-      "sublabel": "Brunswick / N. Melb",
+      "label": "6 Kênh Đầu Vào",
+      "sublabel": "FB · IG · Web · SĐT · Quầy",
       "tag": "BKG-001"
     },
     {
@@ -96,35 +96,35 @@
       "lane": "lane-guest",
       "col": 1,
       "type": "frontend",
-      "label": "Chế độ Chọn KTV",
-      "sublabel": "Đích danh / Tự động",
-      "tag": "BKG-006"
+      "label": "Chọn KTV & UTM",
+      "sublabel": "Đích Danh (7d) / Tự Động",
+      "tag": "BKG-003"
     },
     {
       "id": "check-elig",
       "lane": "lane-engine",
       "col": 2,
       "type": "backend",
-      "label": "Kiểm tra 5 Điều kiện",
-      "sublabel": "Kỹ năng + Cert + Ca",
-      "tag": "SKL-003"
+      "label": "Kiểm Tra 5 Điều Kiện",
+      "sublabel": "Kỹ Năng + Video + Cert",
+      "tag": "SKL-004"
     },
     {
       "id": "travel-block",
       "lane": "lane-engine",
       "col": 3,
       "type": "backend",
-      "label": "Chèn 30-45p Tàu điện",
-      "sublabel": "Giờ Đi lại Có lương",
-      "tag": "NT2"
+      "label": "Chèn 30-45p Tàu Điện",
+      "sublabel": "Khóa Đi Lại + Prep Buffer",
+      "tag": "BKG-010"
     },
     {
       "id": "lock-slot",
       "lane": "lane-engine",
       "col": 4,
       "type": "database",
-      "label": "Xác nhận Lịch hẹn",
-      "sublabel": "Khóa TSTZRANGE",
+      "label": "Duyệt 2 Bước & Khóa",
+      "sublabel": "KTV -> Lễ Tân Chốt Cuối",
       "tag": "BKG-004"
     },
     {
@@ -132,17 +132,17 @@
       "lane": "lane-guest",
       "col": 5,
       "type": "security",
-      "label": "Check-in & Consent",
-      "sublabel": "Ký Cam kết TRT-002",
-      "tag": "TRT-002"
+      "label": "SMS/Email & Consent",
+      "sublabel": "Link Tự Đổi & 4 Chế Độ",
+      "tag": "BKG-013/TRT-002"
     },
     {
       "id": "leave-alert",
       "lane": "lane-triage",
       "col": 2,
       "type": "security",
-      "label": "Báo Nghỉ Đột xuất",
-      "sublabel": "Hàng đợi Need Attention",
+      "label": "KTV Từ Chối / Nghỉ",
+      "sublabel": "Hàng Đợi Need Attention",
       "tag": "BKG-008"
     },
     {
@@ -150,8 +150,8 @@
       "lane": "lane-triage",
       "col": 3,
       "type": "external",
-      "label": "Cổng Khóa Đích danh",
-      "sublabel": "Hỏi Ý kiến Khách",
+      "label": "Cổng Khóa Đích Danh",
+      "sublabel": "Chờ Khách Quyết Định",
       "tag": "BKG-007"
     },
     {
@@ -159,9 +159,9 @@
       "lane": "lane-triage",
       "col": 4,
       "type": "backend",
-      "label": "Gán KTV Thay thế",
-      "sublabel": "Ghi Audit + SMS",
-      "tag": "SEC-004"
+      "label": "Gán KTV Thay Thế",
+      "sublabel": "Ưu Tiên >=4★ + Audit",
+      "tag": "BKG-009"
     }
   ],
   "edges": [
@@ -169,7 +169,7 @@
       "id": "w-1",
       "from": "select-branch",
       "to": "pick-mode",
-      "label": "Chọn Dịch vụ",
+      "label": "Bắt Nguồn UTM",
       "variant": "emphasis",
       "role": "main"
     },
@@ -177,7 +177,7 @@
       "id": "w-2",
       "from": "pick-mode",
       "to": "check-elig",
-      "label": "Tìm Khung giờ",
+      "label": "Tìm Khung Giờ",
       "variant": "emphasis",
       "role": "main"
     },
@@ -185,7 +185,7 @@
       "id": "w-3",
       "from": "check-elig",
       "to": "travel-block",
-      "label": "Đủ Điều kiện",
+      "label": "Đủ 5 Điều Kiện",
       "variant": "emphasis",
       "role": "main"
     },
@@ -193,7 +193,7 @@
       "id": "w-4",
       "from": "travel-block",
       "to": "lock-slot",
-      "label": "Đã Chèn Đệm",
+      "label": "KTV & Lễ Tân Duyệt",
       "variant": "emphasis",
       "role": "main"
     },
@@ -201,7 +201,7 @@
       "id": "w-5",
       "from": "lock-slot",
       "to": "consent-checkin",
-      "label": "Gửi SMS Xác nhận",
+      "label": "SMS/Email + Link Đổi",
       "variant": "emphasis",
       "role": "main"
     },
@@ -209,7 +209,7 @@
       "id": "w-ex1",
       "from": "check-elig",
       "to": "leave-alert",
-      "label": "KTV Báo Ốm",
+      "label": "Từ Chối / Báo Ốm",
       "variant": "security",
       "role": "error"
     },
@@ -217,7 +217,7 @@
       "id": "w-ex2",
       "from": "leave-alert",
       "to": "check-selected",
-      "label": "Lọc Người Thay",
+      "label": "Lọc KTV Thay Thế",
       "variant": "security",
       "role": "branch"
     },
@@ -225,7 +225,7 @@
       "id": "w-ex3",
       "from": "check-selected",
       "to": "reassign-ktv",
-      "label": "Khách Đồng ý",
+      "label": "Khách Đồng Ý",
       "variant": "default",
       "role": "branch"
     },
@@ -233,7 +233,7 @@
       "id": "w-ex4",
       "from": "reassign-ktv",
       "to": "lock-slot",
-      "label": "Cập nhật Lịch",
+      "label": "Lễ Tân Chốt Lại",
       "variant": "emphasis",
       "role": "return"
     }
@@ -241,27 +241,26 @@
   "cards": [
     {
       "dot": "cyan",
-      "title": "Công thức Kiểm tra 5 Điều kiện (SKL-003)",
+      "title": "6 Kênh Đầu Vào Đặt Lịch & Quy Trình Duyệt 2 Bước (BKG-001, BKG-003, BKG-004)",
       "items": [
-        "1. Có gắn kỹ năng dịch vụ + 2. Đã hoàn thành đào tạo nội bộ.",
-        "3. Chứng chỉ hành nghề bắt buộc còn hiệu lực (HLTINF005, An toàn Laser, Phun xăm).",
-        "4. Có ca làm việc tại chi nhánh + 5. Không trùng lịch hẹn hoặc khối đi tàu điện."
+        "Hợp nhất 6 kênh đầu vào: Facebook Messenger, Instagram DM, Google Maps/Search, Website Guest Booking (không ép tạo tài khoản CRM-002), Hotline/SĐT và Khách Walk-in tại quầy (tự bắt UTM/Referrer MKT-001).",
+        "Nếu khách chọn đích danh KTV (Selected Therapist, tối đa trước 7 ngày BKG-003): KTV nhận thông báo xác nhận trước (Pending Staff Confirmation), sau đó Lễ tân luôn là người chốt xác nhận cuối cùng (Pending Reception Confirmation -> Confirmed BKG-004)."
       ]
     },
     {
       "dot": "emerald",
-      "title": "Khối Đệm Tàu điện Liên chi nhánh 30-45 Phút (NT2 / BKG-003)",
+      "title": "Kiểm Tra 5 Điều Kiện, Khóa Tàu Điện & Phân Bổ Công Bằng (SKL-004, BKG-005, BKG-010)",
       "items": [
-        "Tự động chèn khối đi lại 30-45 phút khi KTV di chuyển giữa Brunswick (550 Sydney Rd) và North Melbourne (342 Victoria St).",
-        "Khóa khung giờ trên cả web và quầy lễ tân, đồng thời xuất sang bảng lương là Giờ công đi lại theo Award MA000005 khoản 20.9."
+        "Kiểm tra 5 điều kiện: Đủ cấp độ kỹ năng (Beginner..Expert), đã hoàn thành khóa học video bắt buộc (Required for Service TRN-005), Visa/Chứng chỉ còn hạn (CMP-003), có ca trực đã duyệt và không trùng giờ đi lại.",
+        "Nếu khách không chọn KTV, hệ thống phân bổ công bằng theo tải công việc và tránh tăng ca (BKG-005); tự chèn khối đi lại liên chi nhánh + prep buffer (BKG-010)."
       ]
     },
     {
       "dot": "rose",
-      "title": "Xử lý Nghỉ Đột xuất & Khóa Khách Chọn Đích danh (BKG-007 / BKG-008)",
+      "title": "Xử Lý KTV Từ Chối / Nghỉ Đột Xuất & Đầu Ra SMS/Email Vận Hành (BKG-007, BKG-009, BKG-013)",
       "items": [
-        "Đơn nghỉ phép được duyệt hoặc báo ốm đột xuất tuyệt đối không bao giờ tự xóa lịch hẹn của khách.",
-        "Nếu khách đã chọn đích danh KTV (Selected Therapist), hệ thống cấm tự ý đổi ngầm mà phải chờ khách xác nhận."
+        "Khi KTV được chọn từ chối hoặc báo nghỉ đột xuất, hệ thống cấm đổi ngầm mà chuyển sang Waiting for Customer Decision (BKG-007); gợi ý KTV thay thế ưu tiên người từng phục vụ khách đạt >=4 sao (BKG-009).",
+        "Đầu ra vận hành gửi SMS/Email xác nhận, nhắc lịch và Link khách tự đổi/hủy lịch trước giờ check-in theo khung chính sách cấu hình (BKG-013, BKG-014)."
       ]
     }
   ]

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "aae99d43-06c2-45cd-a871-6aef3f476a9f",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/09-spa-uc-finance-gst-payroll-dataflow.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/09-spa-uc-finance-gst-payroll-dataflow.html",
+  "specification": {
+    "sha256": "a3c77b0b4bfea48319e4a10fb45f5a62626e81b3593ae202d6825d9ccc77d916",
+    "bytes": 9069
+  },
+  "artifact": {
+    "sha256": "a3ec97fb2ed47c54e4882ad419ceee59f2e5267cdd1d6161d4c298494e528112",
+    "bytes": 831714
+  }
+}

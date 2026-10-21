@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "d5d4d45f-e39e-437e-9056-a503de4c6c67",
+  "status": "current",
+  "command": "deliver",
+  "type": "explainer",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/spa-uc-toan-bo-luong-van-hanh-lien-ket.archify.md",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/index.html",
+  "specification": {
+    "sha256": "31c02f1ff0833a3bb824622a0ae8b9883788a787f6a640827c42d85993f88bf8",
+    "bytes": 42177
+  },
+  "artifact": {
+    "sha256": "c07528ef1789ca4f516b0801d4580ff184bb5ebe3f17ca9ceb7e23b59ed09793",
+    "bytes": 5975928
+  },
+  "explainer": {
+    "preparedSha256": "4ef4d8dbd027aaee13c2b470549f00c64ac9668bcdeb798dd393a0478f35178c",
+    "dependencies": [
+      {
+        "kind": "diagram-spec",
+        "id": "df-omnichannel-io",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/17-spa-uc-omnichannel-io-dataflow.json",
+        "relativePath": "17-spa-uc-omnichannel-io-dataflow.json",
+        "sha256": "50f27b3cf476fa94c21ff275cca25aec6952952df322f40bda084124bbc4ac79",
+        "bytes": 10080
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "wf-master-chain",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/16-spa-uc-master-end-to-end-workflow.json",
+        "relativePath": "16-spa-uc-master-end-to-end-workflow.json",
+        "sha256": "89cafaf14ae444a46ec012b16c041b5d35cb1e90881b1d8446c87b696b4389a5",
+        "bytes": 8657
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "wf-booking-dispatch",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/06-spa-uc-booking-dispatch-workflow.json",
+        "relativePath": "06-spa-uc-booking-dispatch-workflow.json",
+        "sha256": "3655f9f5ac7cf94f3940f04f62bf760305e3154877ad0f1b30989648e45a475f",
+        "bytes": 8150
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "wf-latency",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/14-spa-uc-booking-availability-waterfall.json",
+        "relativePath": "14-spa-uc-booking-availability-waterfall.json",
+        "sha256": "1f8c3ecf232f02d7a0315d55059ebd097d60f335ed58d8a2b408ecb176231a17",
+        "bytes": 4864
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "lc-appointment",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/07-spa-uc-appointment-lifecycle.json",
+        "relativePath": "07-spa-uc-appointment-lifecycle.json",
+        "sha256": "5a8a032089a35cda8a1a379a7fc1fff9a70ae219688695d4843cb1565295d336",
+        "bytes": 6432
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "wf-checkin-bedside",
+        "inline": true,
+        "sha256": "e5513512493adb341cd305f7c62f906a60676de8d5ba44ecfec708747727eb04",
+        "bytes": 1090
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "seq-checkout",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/08-spa-uc-service-checkout-sequence.json",
+        "relativePath": "08-spa-uc-service-checkout-sequence.json",
+        "sha256": "9bf7ec1d9ef55173af5c3ffae55e7b76745e6090e7a66400f74ae0995a679df0",
+        "bytes": 5947
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "df-finance-gst",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/09-spa-uc-finance-gst-payroll-dataflow.json",
+        "relativePath": "09-spa-uc-finance-gst-payroll-dataflow.json",
+        "sha256": "a3c77b0b4bfea48319e4a10fb45f5a62626e81b3593ae202d6825d9ccc77d916",
+        "bytes": 9069
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "tl-incident-sla",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/13-spa-uc-incident-sla-timeline.json",
+        "relativePath": "13-spa-uc-incident-sla-timeline.json",
+        "sha256": "e66ccbdbf43374662b0d27abe44413f6619796f7b79b97eee969c648d3b57c43",
+        "bytes": 5684
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "cls-engines",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/11-spa-uc-eligibility-commission-class.json",
+        "relativePath": "11-spa-uc-eligibility-commission-class.json",
+        "sha256": "d4503e27147dafa8685ace027254dbd5a9a0ec21d3b9eca120cac81da314c8d2",
+        "bytes": 7018
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "erd-core-domain",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/10-spa-uc-core-domain-erd.json",
+        "relativePath": "10-spa-uc-core-domain-erd.json",
+        "sha256": "edc49d93aa17ad6e03f070999ac356ab07a5e88674205dc3ff52a5249f2c32e7",
+        "bytes": 8595
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "tr-17-screens",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/12-spa-uc-capability-module-tree.json",
+        "relativePath": "12-spa-uc-capability-module-tree.json",
+        "sha256": "0ac8f075560a9087d760aac532c1a9250496735a0243e4509bcd4294f61c83e3",
+        "bytes": 5325
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "arch-system",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/04-spa-uc-target-system-architecture.json",
+        "relativePath": "04-spa-uc-target-system-architecture.json",
+        "sha256": "c05e76457f072c4057c717b9fa2160c70eea84d3dc9865639ac84696bcd3f619",
+        "bytes": 12024
+      }
+    ]
+  }
+}

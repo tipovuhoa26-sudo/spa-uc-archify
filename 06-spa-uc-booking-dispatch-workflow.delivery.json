@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b670416a-0d3a-415f-93de-7b974ebdbef5",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/06-spa-uc-booking-dispatch-workflow.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/06-spa-uc-booking-dispatch-workflow.html",
+  "specification": {
+    "sha256": "3655f9f5ac7cf94f3940f04f62bf760305e3154877ad0f1b30989648e45a475f",
+    "bytes": 8150
+  },
+  "artifact": {
+    "sha256": "0acab23d141c9e029f4953757995c8f7be426fed1470a8820336be2c3f758a6c",
+    "bytes": 832517
+  }
+}

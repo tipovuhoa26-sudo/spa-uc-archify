@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "The Heaven Lounge — Toàn Cảnh 22 Cổng Đầu Vào (Inputs) & 20 Cổng Đầu Ra (Outputs) Đa Kênh",
+    "output": "spa-uc-archify/17-spa-uc-omnichannel-io-dataflow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "omnichannel-booking-mkt-io",
+        "label": "1. Đặt Lịch (FB/IG/Web/Excel) -> SMS & Mkt",
+        "focus": [
+          "in-social-web",
+          "gate-dedupe-confirm",
+          "core-booking-crm",
+          "out-sms-mkt-review"
+        ],
+        "note": "Nhận khách từ FB Messenger, IG DM, Google/Web, SĐT, Walk-in & Excel; duyệt 2 bước (KTV -> Lễ tân) và gửi SMS/Email chuẩn ACMA."
+      },
+      {
+        "id": "staff-clinical-compliance-io",
+        "label": "2. Nhân Sự, Video & 4 Consent -> 7 Báo Cáo",
+        "focus": [
+          "in-staff-clinical",
+          "gate-elig-privacy",
+          "core-vault-audit",
+          "out-alerts-reports"
+        ],
+        "note": "Đầu vào lịch rảnh KTV, Clock-in/out, Video đào tạo, Visa/Cert & 4 chế độ Consent; đầu ra cảnh báo SLA 1h và 7 báo cáo CSV/XLSX."
+      },
+      {
+        "id": "payment-expense-bas-payroll-io",
+        "label": "3. 6 Kênh Thu, Chi & Kho -> BAS & Lương Úc",
+        "focus": [
+          "in-pay-inv-legacy",
+          "gate-cash-stock",
+          "core-ledger-snap",
+          "out-bas-payroll"
+        ],
+        "note": "Thu qua EFTPOS/Cash/Bank/Online/ApplePay, nhập hóa đơn chi phí, kiểm kê kho & 1–5★; xuất ước tính BAS (G1/1A/1B) và Payroll Snapshot."
+      }
+    ]
+  },
+  "stages": [
+    {
+      "label": "01 · 22 Cổng Đầu Vào Đa Kênh"
+    },
+    {
+      "label": "02 · Cổng Duyệt 2 Bước & Kiểm Soát"
+    },
+    {
+      "label": "03 · Sổ Cái Trung Tâm & Kho Bảo Mật"
+    },
+    {
+      "label": "04 · 20 Cổng Đầu Ra & Xuất Báo Cáo"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "in-social-web",
+      "type": "frontend",
+      "label": "FB · IG · Web",
+      "sublabel": "Messenger, DM, SĐT",
+      "tag": "BKG-001/MKT-001",
+      "stage": 0,
+      "row": 0
+    },
+    {
+      "id": "in-staff-clinical",
+      "type": "frontend",
+      "label": "Nhân Sự & Video",
+      "sublabel": "Lịch, Visa, Consent",
+      "tag": "STF/TRN/CMP/TRT",
+      "stage": 0,
+      "row": 1
+    },
+    {
+      "id": "in-pay-inv-legacy",
+      "type": "frontend",
+      "label": "Thu · Chi · Kho",
+      "sublabel": "6 Kênh, Bill, Excel",
+      "tag": "PAYM/FIN/INV/DAT",
+      "stage": 0,
+      "row": 2
+    },
+    {
+      "id": "gate-dedupe-confirm",
+      "type": "backend",
+      "label": "Duyệt 2 Bước",
+      "sublabel": "KTV -> Lễ Tân Chốt",
+      "tag": "CRM-004/BKG-004",
+      "stage": 1,
+      "row": 0
+    },
+    {
+      "id": "gate-elig-privacy",
+      "type": "security",
+      "label": "5 ĐK & Bảo Mật",
+      "sublabel": "Chặn Ca & SEC-008",
+      "tag": "SKL-004/SEC-008",
+      "stage": 1,
+      "row": 1
+    },
+    {
+      "id": "gate-cash-stock",
+      "type": "backend",
+      "label": "Duyệt Chi & Kho",
+      "sublabel": "Ngưỡng Chi & 1-5★",
+      "tag": "FIN-003/REV-003",
+      "stage": 1,
+      "row": 2
+    },
+    {
+      "id": "core-booking-crm",
+      "type": "database",
+      "label": "Lịch & Sổ CRM",
+      "sublabel": "TSTZRANGE & ACMA",
+      "tag": "BKG-011/MKT-003",
+      "stage": 2,
+      "row": 0
+    },
+    {
+      "id": "core-vault-audit",
+      "type": "database",
+      "label": "Kho Bảo Mật Úc",
+      "sublabel": "Video, Bill & Luật",
+      "tag": "SEC-005/LEG-001",
+      "stage": 2,
+      "row": 1
+    },
+    {
+      "id": "core-ledger-snap",
+      "type": "database",
+      "label": "Sổ Cái & Lương",
+      "sublabel": "Thu/Chi, BAS, Lương",
+      "tag": "FIN-007/PR-003",
+      "stage": 2,
+      "row": 2
+    },
+    {
+      "id": "out-sms-mkt-review",
+      "type": "external",
+      "label": "SMS · Mkt · Sao",
+      "sublabel": "Nhắc Lịch & ACMA",
+      "tag": "MKT-002/004/007",
+      "stage": 3,
+      "row": 0
+    },
+    {
+      "id": "out-alerts-reports",
+      "type": "cloud",
+      "label": "SLA & 7 Báo Cáo",
+      "sublabel": "4 Vai Trò & 7 CSV",
+      "tag": "REV-004/NFR-007",
+      "stage": 3,
+      "row": 1
+    },
+    {
+      "id": "out-bas-payroll",
+      "type": "external",
+      "label": "Kế Toán & Lương",
+      "sublabel": "BAS G1/1A/1B & STP",
+      "tag": "FIN-010/PR-003",
+      "stage": 3,
+      "row": 2
+    }
+  ],
+  "flows": [
+    {
+      "id": "io-1",
+      "from": "in-social-web",
+      "to": "gate-dedupe-confirm",
+      "label": "Đặt Lịch & Bắt UTM",
+      "classification": "FB/IG/Web",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-2",
+      "from": "gate-dedupe-confirm",
+      "to": "core-booking-crm",
+      "label": "Lễ Tân Chốt Cuối",
+      "classification": "Confirmed",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-3",
+      "from": "core-booking-crm",
+      "to": "out-sms-mkt-review",
+      "label": "SMS Vận Hành & Mkt",
+      "classification": "ACMA Opt-in",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-4",
+      "from": "in-staff-clinical",
+      "to": "gate-elig-privacy",
+      "label": "Video, Visa & Consent",
+      "classification": "4 Chế Độ",
+      "variant": "security"
+    },
+    {
+      "id": "io-5",
+      "from": "gate-elig-privacy",
+      "to": "core-vault-audit",
+      "label": "Mã Hóa & Lưu Vết",
+      "classification": "AES-256",
+      "variant": "security"
+    },
+    {
+      "id": "io-6",
+      "from": "core-vault-audit",
+      "to": "out-alerts-reports",
+      "label": "Cảnh Báo & 7 CSV",
+      "classification": "SLA 1h",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-7",
+      "from": "in-pay-inv-legacy",
+      "to": "gate-cash-stock",
+      "label": "Thu, Chi, Kho & Excel",
+      "classification": "6 Kênh Thu",
+      "variant": "default"
+    },
+    {
+      "id": "io-8",
+      "from": "gate-cash-stock",
+      "to": "core-ledger-snap",
+      "label": "Ghi Sổ & Kiểm Kê",
+      "classification": "Append-Only",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-9",
+      "from": "core-ledger-snap",
+      "to": "out-bas-payroll",
+      "label": "Xuất BAS & Lương",
+      "classification": "CSV/XLSX",
+      "variant": "emphasis"
+    },
+    {
+      "id": "io-10",
+      "from": "in-pay-inv-legacy",
+      "to": "gate-dedupe-confirm",
+      "label": "Di Trú Excel/Sheets",
+      "classification": "12-24 Tháng",
+      "variant": "dashed"
+    },
+    {
+      "id": "io-11",
+      "from": "gate-elig-privacy",
+      "to": "core-booking-crm",
+      "label": "Mở Khóa Dịch Vụ",
+      "classification": "Eligible",
+      "variant": "default"
+    },
+    {
+      "id": "io-12",
+      "from": "core-ledger-snap",
+      "to": "out-alerts-reports",
+      "label": "Báo Cáo Dòng Tiền",
+      "classification": "NFR-007",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Nhóm 1–2 Đầu Vào: Đặt Lịch Đa Kênh (FB/IG/Web), Di Trú Excel & Nhân Sự (BKG-001, DAT-01, TRN-001)",
+      "items": [
+        "Đặt lịch & Nguồn khách: Facebook Messenger, Instagram DM, Google Maps/Search, Website Guest Booking (không ép tạo tài khoản), Link tự đổi/hủy lịch, Hotline/SĐT, Walk-in & Mã giới thiệu (tự bắt UTM/Referrer).",
+        "Di trú dữ liệu cũ (DAT-01/02): Nhập từ Excel/Google Sheets dùng chung 2 chi nhánh, sổ tay & lịch sử chat qua hàng đợi lọc trùng (Customer Dedupe Queue) để lấy Customer Master + 12–24 tháng lịch sử.",
+        "Nhân sự, Đào tạo & Chứng chỉ: KTV gửi lịch rảnh trước >=7 ngày, đơn xin nghỉ/đổi ca, chấm công Clock-in/out theo chi nhánh, Admin tải lên Video đào tạo 6 danh mục & hồ sơ Visa/Right-to-work/Chứng chỉ."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Nhóm 3–6 Đầu Vào: 4 Chế Độ Consent, 6 Kênh Thu Ngân, Chi Phí, Kho & Pháp Lý (TRT-002, PAYM-002, FIN-002)",
+      "items": [
+        "Lâm sàng 4 chế độ (TRT-002): Not Required / Acknowledgement / Health Questionnaire / Signed Consent (thông tin văn bản bắt buộc theo Victoria Health), ghi chú điều trị lưu vết & ảnh điều trị tùy chọn.",
+        "6 phương thức thu tiền (PAYM-002) & Chi phí (FIN-002): Card/EFTPOS, Cash, Bank Transfer, Online Payment, tham chiếu Apple Pay/Google Pay, Split Payment, Tip Spa thu hộ/trực tiếp, nhập hóa đơn chi phí kèm ảnh Receipt & sao kê ngân hàng.",
+        "Kho vật tư, Đánh giá & Luật Úc: Nhập kho, kiểm kê thực tế (Stocktake), chuyển kho Brunswick <-> North Melbourne, ghi hao hụt; khách chấm 1–5 sao (sửa trong 15p); nhập cập nhật pháp lý từ Fair Work/ATO/OAIC/ACMA/Vic Health."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Toàn Bộ 20 Cổng Đầu Ra: Tin Nhắn Vận Hành, Marketing ACMA, BAS G1/1A/1B, Lương & 7 Báo Cáo CSV/XLSX",
+      "items": [
+        "Đầu ra Khách hàng & Marketing (MKT-002..007): SMS/Email xác nhận, nhắc lịch, link tự đổi/hủy, hỏi ý kiến khi KTV đích danh từ chối; chiến dịch SMS/Email Marketing tự chặn khách Unsubscribe (ACMA 5 ngày); thẻ KTV công khai & mời review Google/FB công bằng.",
+        "Đầu ra Kế toán & Thuế BAS (FIN-007..010): Xuất CSV/XLSX chuẩn kế toán & Xero/MYOB gồm Cash In, Cash Out, Refunds, ảnh hóa đơn và bảng ước tính Simpler BAS (G1 Total Sales, 1A GST Sales, 1B GST Purchases, Estimated GST Payable).",
+        "Đầu ra Bảng lương Úc & 7 Báo cáo Quản trị (PR-003, NFR-007): Xuất Payroll Input Snapshot (Giờ công FT/PT/Casual, Giờ đi lại liên chi nhánh, Hoa hồng 100%, Thưởng Bonus, Tip giữ hộ, Điều chỉnh hoàn tiền) & 7 báo cáo CSV/XLSX."
+      ]
+    }
+  ]
+}

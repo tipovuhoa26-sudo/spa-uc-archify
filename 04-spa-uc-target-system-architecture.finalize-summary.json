@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/04-spa-uc-target-system-architecture.json",
+    "sha256": "c05e76457f072c4057c717b9fa2160c70eea84d3dc9865639ac84696bcd3f619",
+    "bytes": 12024
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/04-spa-uc-target-system-architecture.html",
+    "sha256": "1fff28e8f125a85e96c87b5dd173f5fb865ec20c3307fb6b29163f6b5a1c5f8d",
+    "bytes": 844499
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/04-spa-uc-target-system-architecture.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/04-spa-uc-target-system-architecture.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/04-spa-uc-target-system-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-21T06:58:06.821Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5751,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

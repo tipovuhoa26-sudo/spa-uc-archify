@@ -2,13 +2,13 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "The Heaven Lounge — Bản Đồ Tổng Thể 7 Luồng Vận Hành Khép Kín Từ A Đến Z",
+    "title": "The Heaven Lounge — Bản Đồ Tổng Thể 7 Luồng Vận Hành Khép Kín & Hệ Sinh Thái Đầu Vào / Đầu Ra",
     "output": "spa-uc-archify/16-spa-uc-master-end-to-end-workflow.html",
     "quality_profile": "showcase",
     "views": [
       {
         "id": "stage-1-booking-and-leave",
-        "label": "1. Xếp Ca, Đặt Lịch & Nghỉ Đột Xuất",
+        "label": "1. Nhân Sự, 6 Kênh (FB/IG) & Duyệt 2 Bước",
         "focus": [
           "w1-roster",
           "w2-booking",
@@ -16,65 +16,65 @@
           "w3-leave",
           "w3-customer"
         ],
-        "note": "Một hồ sơ KTV duy nhất, tự chèn 30–45p đi tram có lương, kiểm tra 5 điều kiện và cứu lịch tại hàng đợi Need Attention."
+        "note": "Lịch rảnh KTV, video đào tạo, visa/cert; đặt qua FB, IG, Google/Web, SĐT, Walk-in & di trú Excel; duyệt 2 bước (KTV -> Lễ tân BKG-004)."
       },
       {
         "id": "stage-2-checkin-and-bedside",
-        "label": "2. Check-In, Ký Consent & Tại Giường",
+        "label": "2. Check-In, 4 Consent, Ca Làm & Kho",
         "focus": [
           "w2-gate",
           "w4-5-care",
           "w6-checkout"
         ],
-        "note": "Ẩn bệnh án khỏi Lễ tân (SEC-008), chặn vào phòng nếu thiếu chữ ký Consent (TRT-002), đếm giờ 3 chạm, ghi SOAP và trừ kho BOM."
+        "note": "Ẩn bệnh án khỏi Lễ tân (SEC-008), thu 4 chế độ Consent (TRT-002), ghi điều trị lưu vết, ảnh tùy chọn & kiểm kê/chuyển kho 2 chi nhánh."
       },
       {
         "id": "stage-3-checkout-sla-payroll",
-        "label": "3. Thu Ngân 6 Bước, SLA 1h & Chốt Lương",
+        "label": "3. 6 Kênh Thu/Chi & 20 Cổng Đầu Ra",
         "focus": [
           "w6-checkout",
           "w7-sla",
           "w7-payroll"
         ],
-        "note": "Thu ngân tách bill giá kép, tách GST kép & công nợ liên chi nhánh, xử lý đánh giá 1–2 sao trong 1h và khóa sổ lương 2 tuần."
+        "note": "Thu 6 kênh (EFTPOS/Cash/ApplePay), nhập hóa đơn chi, xử lý SLA 1h & xuất 20 đầu ra (SMS, Mkt ACMA, BAS G1/1A/1B, Lương, 7 CSV/XLSX)."
       }
     ]
   },
   "lanes": [
     {
       "id": "lane-front",
-      "label": "Khách Hàng, Lễ Tân & Chủ Spa (A, B, D)",
+      "label": "22 Cổng Đầu Vào & 20 Cổng Đầu Ra Đa Kênh",
       "variant": "normal"
     },
     {
       "id": "lane-core",
-      "label": "Cổng 5 Điều Kiện, Tại Giường & Sổ Cái 6 Bước",
+      "label": "Duyệt 2 Bước, 4 Consent, Kho & Sổ Cái Thu/Chi",
       "variant": "normal"
     },
     {
       "id": "lane-exception",
-      "label": "Xử Lý Nghỉ Đột Xuất & SLA Sự Cố 1–2 Sao",
+      "label": "Cấp Cứu Nghỉ Đột Xuất & SLA Sự Cố 1–2 Sao",
       "variant": "exception"
     }
   ],
   "phases": [
     {
       "id": "p-before",
-      "label": "1. Trước Giờ Phục Vụ (Luồng 1–3)",
+      "label": "1. Đầu Vào Nhân Sự & 6 Kênh Đặt Lịch (Luồng 1–3)",
       "fromCol": 0,
       "toCol": 1,
       "variant": "default"
     },
     {
       "id": "p-during",
-      "label": "2. Kiểm Tra, Consent & Tại Giường (Luồng 2, 4, 5)",
+      "label": "2. Duyệt 2 Bước, 4 Consent & Ca Làm (Luồng 2, 4, 5)",
       "fromCol": 2,
       "toCol": 3,
       "variant": "emphasis"
     },
     {
       "id": "p-after",
-      "label": "3. Tất Toán, Hậu Mãi & Lương (Luồng 6–7)",
+      "label": "3. Thu/Chi & 20 Cổng Đầu Ra (Luồng 6–7)",
       "fromCol": 4,
       "toCol": 5,
       "variant": "security"
@@ -94,8 +94,8 @@
       "lane": "lane-front",
       "col": 0,
       "type": "frontend",
-      "label": "1. Xếp Ca & Tram",
-      "sublabel": "1 Hồ Sơ + 45p Tàu",
+      "label": "1. Đầu Vào Nhân Sự",
+      "sublabel": "Lịch Rảnh, Video, Visa & Tram",
       "tag": "LUỒNG 1"
     },
     {
@@ -103,8 +103,8 @@
       "lane": "lane-front",
       "col": 1,
       "type": "frontend",
-      "label": "2. Khách Đặt Lịch",
-      "sublabel": "Giá Kép & Chọn KTV",
+      "label": "2. Đặt Lịch FB/IG/Web",
+      "sublabel": "Messenger, DM, SĐT, Excel",
       "tag": "LUỒNG 2"
     },
     {
@@ -112,17 +112,17 @@
       "lane": "lane-core",
       "col": 2,
       "type": "backend",
-      "label": "Cổng 5 Điều Kiện",
-      "sublabel": "Cert + Khóa TSTZRANGE",
-      "tag": "SKL-003"
+      "label": "Duyệt 2 Bước & 5 ĐK",
+      "sublabel": "KTV -> Lễ Tân & TSTZRANGE",
+      "tag": "BKG-004"
     },
     {
       "id": "w4-5-care",
       "lane": "lane-core",
       "col": 3,
       "type": "backend",
-      "label": "4–5. Consent & Ca Làm",
-      "sublabel": "Ký TRT-002 · SOAP/BOM",
+      "label": "4–5. 4 Consent & Kho",
+      "sublabel": "TRT-002 · SOAP · Kiểm Kê",
       "tag": "LUỒNG 4-5"
     },
     {
@@ -130,8 +130,8 @@
       "lane": "lane-core",
       "col": 4,
       "type": "database",
-      "label": "6. Tất Toán 6 Bước",
-      "sublabel": "GST Kép & Hoa Hồng 100%",
+      "label": "6. 6 Kênh Thu & Chi",
+      "sublabel": "EFTPOS/ApplePay & Hóa Đơn",
       "tag": "LUỒNG 6"
     },
     {
@@ -139,8 +139,8 @@
       "lane": "lane-front",
       "col": 5,
       "type": "external",
-      "label": "7. Xero & Lương Úc",
-      "sublabel": "Bút Toán & Snapshot 2W",
+      "label": "7. 20 Cổng Đầu Ra",
+      "sublabel": "SMS/Mkt, BAS, Lương & 7 CSV",
       "tag": "LUỒNG 7"
     },
     {
@@ -148,8 +148,8 @@
       "lane": "lane-exception",
       "col": 2,
       "type": "security",
-      "label": "3. Nghỉ Đột Xuất",
-      "sublabel": "Đẩy Hàng Đợi B2",
+      "label": "3. Từ Chối / Nghỉ Ốm",
+      "sublabel": "Hàng Đợi Need Attention",
       "tag": "LUỒNG 3"
     },
     {
@@ -157,8 +157,8 @@
       "lane": "lane-exception",
       "col": 3,
       "type": "external",
-      "label": "Hỏi Ý Kiến Khách",
-      "sublabel": "Nếu Chọn Đích Danh",
+      "label": "SMS Xin Phép Khách",
+      "sublabel": "Nếu Chọn KTV Đích Danh",
       "tag": "BKG-007"
     },
     {
@@ -166,8 +166,8 @@
       "lane": "lane-exception",
       "col": 4,
       "type": "cloud",
-      "label": "Đổi KTV & SLA 1h",
-      "sublabel": "Cập Nhật & Chăm Sóc",
+      "label": "SLA 1h & Đền Bù",
+      "sublabel": "Review 1–2★ & Duyệt Hoàn",
       "tag": "REV-003"
     }
   ],
@@ -176,7 +176,7 @@
       "id": "m-1",
       "from": "w1-roster",
       "to": "w2-booking",
-      "label": "Mở Ca",
+      "label": "Mở Ca & Kỹ Năng",
       "variant": "emphasis",
       "role": "main"
     },
@@ -184,7 +184,7 @@
       "id": "m-2",
       "from": "w2-booking",
       "to": "w2-gate",
-      "label": "Tìm Giờ",
+      "label": "6 Kênh + UTM",
       "variant": "emphasis",
       "role": "main"
     },
@@ -192,7 +192,7 @@
       "id": "m-3",
       "from": "w2-gate",
       "to": "w4-5-care",
-      "label": "Đủ Chuẩn",
+      "label": "Lễ Tân Chốt",
       "variant": "emphasis",
       "role": "main"
     },
@@ -200,7 +200,7 @@
       "id": "m-4",
       "from": "w4-5-care",
       "to": "w6-checkout",
-      "label": "Xong Ca",
+      "label": "Xong Ca & Kho",
       "variant": "emphasis",
       "role": "main"
     },
@@ -208,7 +208,7 @@
       "id": "m-5",
       "from": "w6-checkout",
       "to": "w7-payroll",
-      "label": "Khóa Sổ",
+      "label": "Xuất 20 Đầu Ra",
       "variant": "emphasis",
       "role": "main"
     },
@@ -224,7 +224,7 @@
       "id": "ex-2",
       "from": "w3-leave",
       "to": "w3-customer",
-      "label": "Lọc Người Thay",
+      "label": "Gợi Ý >=4★",
       "variant": "security",
       "role": "branch"
     },
@@ -248,29 +248,28 @@
   "cards": [
     {
       "dot": "cyan",
-      "title": "Chặng 1 (Luồng 1–3) — Trước Khi Khách Đến: Xếp Ca, Đặt Lịch & Cấp Cứu Nghỉ Đột Xuất",
+      "title": "Chặng 1 (Luồng 1–3) — Đầu Vào Nhân Sự, 6 Kênh Đặt Lịch (FB/IG/Web), Di Trú Excel & Duyệt 2 Bước",
       "items": [
-        "Luồng 1 (Xếp ca): Mỗi KTV chỉ có 1 hồ sơ xuyên 2 chi nhánh; đổi chi nhánh trong ngày tự động chèn 30–45 phút đi tram có lương.",
-        "Luồng 2 (Đặt lịch): Kiểm tra 5 điều kiện (kỹ năng, đào tạo, chứng chỉ còn hạn, ca trực, tuổi >= 18) và khóa TSTZRANGE chống trùng.",
-        "Luồng 3 (Nghỉ đột xuất): Đẩy lịch vào Need Attention (Màn B2); nếu khách chọn đích danh KTV thì bắt buộc gửi SMS xin ý kiến khách."
+        "Luồng 1 (Đầu vào nhân sự & đào tạo): KTV gửi lịch rảnh trước >=7 ngày, chấm công Clock-in/out, học Video đào tạo bắt buộc, tải lên Visa/Chứng chỉ và tự chèn 30–45p đi tram liên chi nhánh.",
+        "Luồng 2 (6 Kênh đặt lịch & Duyệt 2 bước): Tiếp nhận từ Facebook Messenger, Instagram DM, Google/Website, SĐT, Walk-in & di trú Excel/Sheets; nếu chọn đích danh KTV thì KTV xác nhận trước rồi Lễ tân chốt cuối (BKG-004).",
+        "Luồng 3 (Từ chối / Nghỉ đột xuất): Đẩy lịch vào Need Attention; nếu khách chọn đích danh KTV thì gửi SMS/Email chờ khách quyết định (Waiting for Customer Decision BKG-007)."
       ]
     },
     {
       "dot": "emerald",
-      "title": "Chặng 2 (Luồng 4–5) — Trong Khi Khách Ở Spa: Check-In, Chốt Chặn Consent & Phục Vụ Tại Giường",
+      "title": "Chặng 2 (Luồng 4–5) — Check-In Bảo Mật, 4 Chế Độ Consent, Điều Trị & Kiểm Kê Kho 2 Chi Nhánh",
       "items": [
-        "Luồng 4 (Check-in & Consent): Lễ tân chỉ thấy cờ an toàn, không thấy bệnh án (SEC-008); chưa ký Consent thì khóa cứng nút bắt đầu làm (TRT-002).",
-        "Luồng 5 (Tại giường): KTV dùng PWA nền tối đa ngữ (VI/EN/TH), ẩn SĐT khách, bấm đếm giờ 3 chạm, chọn thẻ SOAP nhanh và trừ vật tư BOM."
+        "Luồng 4 (Check-in & 4 Chế độ Consent): Ẩn bệnh án khỏi Lễ tân (SEC-008); cấu hình 4 chế độ theo dịch vụ (Not Required / Acknowledgement / Health Questionnaire / Signed Consent TRT-002).",
+        "Luồng 5 (Điều trị & Kho vật tư): Ghi hồ sơ điều trị, sửa ghi chú lưu vết trước/sau (TRT-004), ảnh điều trị tùy chọn, trừ vật tư dự kiến, kiểm kê kho (Stocktake) và chuyển kho Brunswick <-> North Melbourne."
       ]
     },
     {
       "dot": "amber",
-      "title": "Chặng 3 (Luồng 6–7) — Khi Thanh Toán & Quản Trị: Giao Dịch 6 Bước, SLA 1 Giờ & Khóa Lương 2 Tuần",
+      "title": "Chặng 3 (Luồng 6–7) — 6 Kênh Thu Ngân, Chi Phí & 20 Cổng Đầu Ra (SMS, Mkt ACMA, BAS, Lương, 7 CSV)",
       "items": [
-        "Luồng 6 (Thu ngân POS): Tách bill Tiền mặt/Thẻ/Gói; ghi 6 bước nguyên tử (Tiền thu, Doanh thu, Nợ gói liên chi nhánh, GST kép, Hoa hồng 100%, Tip).",
-        "Luồng 7 (Hậu mãi & Khóa sổ): Đánh giá 1–2 sao kích hoạt SLA điều tra trong 1 giờ; cuối ca đẩy bút toán Xero ngày và mỗi 2 tuần khóa Payroll Snapshot."
+        "Luồng 6 (6 Kênh thu & Chi phí Cash Out): Thu qua Card/EFTPOS, Cash, Bank Transfer, Online, Apple/Google Pay, Split Payment, ghi Tip giữ hộ/trực tiếp; nhập chi phí kèm ảnh hóa đơn & duyệt theo ngưỡng (FIN-002/003).",
+        "Luồng 7 (20 Cổng đầu ra): Xuất SMS/Email vận hành, chiến dịch Marketing chuẩn ACMA, mời review Google/FB công bằng, cảnh báo SLA 1h, ước tính Simpler BAS (G1/1A/1B) + CSV Kế toán, Payroll Input Snapshot & 7 báo cáo CSV/XLSX."
       ]
     }
   ]
 }
-

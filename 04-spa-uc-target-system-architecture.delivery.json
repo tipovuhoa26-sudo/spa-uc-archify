@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "0f7a86dd-fa5f-4b9e-8d26-643435c6154a",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/04-spa-uc-target-system-architecture.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/04-spa-uc-target-system-architecture.html",
+  "specification": {
+    "sha256": "c05e76457f072c4057c717b9fa2160c70eea84d3dc9865639ac84696bcd3f619",
+    "bytes": 12024
+  },
+  "artifact": {
+    "sha256": "1fff28e8f125a85e96c87b5dd173f5fb865ec20c3307fb6b29163f6b5a1c5f8d",
+    "bytes": 844499
+  }
+}

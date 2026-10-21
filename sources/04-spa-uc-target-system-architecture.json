@@ -2,13 +2,13 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "The Heaven Lounge (Spa Úc) — Kiến trúc Modular Monolith Đích",
+    "title": "The Heaven Lounge (Spa Úc) — Kiến Trúc Modular Monolith & Các Cổng Tích Hợp Đầu Vào / Đầu Ra",
     "output": "spa-uc-archify/04-spa-uc-target-system-architecture.html",
     "quality_profile": "showcase",
     "views": [
       {
         "id": "end-to-end-overview",
-        "label": "1. Toàn cảnh Hệ thống",
+        "label": "1. Toàn Cảnh Cổng Đầu Vào, ERP & Đầu Ra",
         "focus": [
           "customer-web",
           "reception-pos",
@@ -24,11 +24,11 @@
           "eftpos-terminal",
           "au-payroll-xero"
         ],
-        "note": "Kiến trúc Modular Monolith cho 2 chi nhánh Brunswick (3056) và North Melbourne (3051) với một System of Record duy nhất (NT11)."
+        "note": "Kết nối 22 cổng đầu vào (FB, IG, Google, Web, SĐT, Excel, Video, Visa, 6 kênh thu, chi phí) với 20 cổng đầu ra (SMS, BAS, Lương, 7 CSV)."
       },
       {
         "id": "booking-dispatch-path",
-        "label": "2. Đặt lịch & Nghỉ đột xuất",
+        "label": "2. Đặt Lịch Đa Kênh (FB/IG/Web) & Duyệt 2 Bước",
         "focus": [
           "customer-web",
           "reception-pos",
@@ -37,11 +37,11 @@
           "postgres-core",
           "sms-gateway"
         ],
-        "note": "Thực thi 5 điều kiện Eligibility, tự chèn 30-45p tàu điện (NT2) và khóa khách chọn đích danh (BKG-007)."
+        "note": "Nhận lịch từ FB Messenger, IG DM, Google/Web, SĐT, Walk-in; bắt UTM, duyệt 2 bước (KTV -> Lễ tân BKG-004) & gửi link tự đổi/hủy lịch."
       },
       {
         "id": "clinical-privacy-boundary",
-        "label": "3. Bảo mật Bệnh án (SEC-008)",
+        "label": "3. Bảo Mật, Video Đào Tạo & Luật Úc",
         "focus": [
           "reception-pos",
           "therapist-pwa",
@@ -49,11 +49,11 @@
           "clinical-consent",
           "consent-vault"
         ],
-        "note": "Lễ tân chỉ thấy cờ cảnh báo vận hành; Kỹ thuật viên phụ trách ca và Quản lý mới xem được ghi chú SOAP và hồ sơ Consent."
+        "note": "Lễ tân chỉ thấy cờ vận hành (SEC-008); Kho bảo mật giữ Video đào tạo, Visa/Cert, 4 chế độ Consent, hóa đơn chi & thẻ Luật Úc (LEG-001)."
       },
       {
         "id": "checkout-payroll-sync",
-        "label": "4. Thu ngân, GST & Lương Úc",
+        "label": "4. 6 Cổng Thu, Chi Phí, BAS & Lương Úc",
         "focus": [
           "reception-pos",
           "rbac-gateway",
@@ -63,13 +63,16 @@
           "eftpos-terminal",
           "au-payroll-xero"
         ],
-        "note": "Giao dịch nguyên tử 6 bước, giá tiền mặt/thẻ, sổ nợ trả trước theo sự kiện, bút toán Xero hằng ngày và Payroll Snapshot."
+        "note": "Thu 6 phương thức (EFTPOS, Cash, Bank, Online, ApplePay), nhập hóa đơn chi, xuất BAS (G1/1A/1B), Payroll Snapshot & 7 báo cáo CSV/XLSX."
       }
     ]
   },
   "layout": {
     "mode": "grid",
-    "origin": [44, 118],
+    "origin": [
+      44,
+      118
+    ],
     "cols": 5,
     "gapX": 78,
     "gapY": 84,
@@ -80,60 +83,78 @@
     {
       "id": "customer-web",
       "type": "frontend",
-      "label": "Cổng Khách hàng",
-      "sublabel": "Màn A1-A3 · VI/EN",
-      "tag": "PORTAL A",
-      "size": [148, 62],
+      "label": "Đầu Vào Đa Kênh",
+      "sublabel": "FB · IG · Google · Web · SĐT",
+      "tag": "BKG-001/MKT-001",
+      "size": [
+        148,
+        62
+      ],
       "col": 0,
       "row": 0
     },
     {
       "id": "reception-pos",
       "type": "frontend",
-      "label": "Cổng Lễ tân & Admin",
-      "sublabel": "Màn B1-B5 & D1-D6",
+      "label": "Lễ Tân, Kho & Di Trú",
+      "sublabel": "Walk-in · Chi Phí · Excel",
       "tag": "PORTAL B/D",
-      "size": [148, 62],
+      "size": [
+        148,
+        62
+      ],
       "col": 0,
       "row": 1
     },
     {
       "id": "therapist-pwa",
       "type": "frontend",
-      "label": "Cổng Kỹ thuật viên",
-      "sublabel": "Màn C1-C3 · VI/EN/TH",
-      "tag": "PORTAL C",
-      "size": [148, 62],
+      "label": "KTV, Video & Visa",
+      "sublabel": "Lịch Rảnh · Đào Tạo · Cert",
+      "tag": "TRN/CMP/STF",
+      "size": [
+        148,
+        62
+      ],
       "col": 0,
       "row": 2
     },
     {
       "id": "booking-engine",
       "type": "backend",
-      "label": "Động cơ Đặt lịch",
-      "sublabel": "5 Quy tắc + 45p Tàu",
-      "tag": "NT1/NT2",
-      "size": [148, 62],
+      "label": "Động Cơ Đặt Lịch",
+      "sublabel": "Duyệt 2 Bước & 45p Tàu",
+      "tag": "BKG-004/010",
+      "size": [
+        148,
+        62
+      ],
       "col": 1,
       "row": 0
     },
     {
       "id": "rbac-gateway",
       "type": "security",
-      "label": "Cổng Bảo mật RBAC",
-      "sublabel": "Chi nhánh + SEC-008",
-      "tag": "NT14",
-      "size": [148, 62],
+      "label": "Cổng Bảo Mật RBAC",
+      "sublabel": "Chi Nhánh + SEC-008",
+      "tag": "SEC-002/008",
+      "size": [
+        148,
+        62
+      ],
       "col": 1,
       "row": 1
     },
     {
       "id": "pos-payroll-engine",
       "type": "backend",
-      "label": "Thu ngân & Lương",
-      "sublabel": "Sổ 6 Bước & Snapshot",
-      "tag": "NT6-NT10",
-      "size": [148, 62],
+      "label": "Thu/Chi, Kho & Lương",
+      "sublabel": "Cash In/Out & Snapshot",
+      "tag": "FIN/PR/INV",
+      "size": [
+        148,
+        62
+      ],
       "col": 1,
       "row": 2
     },
@@ -141,69 +162,90 @@
       "id": "postgres-core",
       "type": "database",
       "label": "PostgreSQL DB",
-      "sublabel": "Sổ Bất biến & TSTZRANGE",
-      "tag": "NT8/NT18",
-      "size": [148, 62],
+      "sublabel": "Sổ Bất Biến & TSTZRANGE",
+      "tag": "BKG-011/SEC-005",
+      "size": [
+        148,
+        62
+      ],
       "col": 2,
       "row": 0
     },
     {
       "id": "clinical-consent",
       "type": "backend",
-      "label": "Cổng Consent & SOAP",
-      "sublabel": "Chặn Ca TRT-002",
-      "tag": "SEC-008",
-      "size": [148, 62],
+      "label": "4 Consent & Đào Tạo",
+      "sublabel": "TRT-002 · TRN-005 · CMP",
+      "tag": "ELIGIBILITY",
+      "size": [
+        148,
+        62
+      ],
       "col": 2,
       "row": 1
     },
     {
       "id": "sync-outbox",
       "type": "messagebus",
-      "label": "Hàng đợi Outbox",
-      "sublabel": "Đồng bộ Retry-After",
-      "tag": "NT11",
-      "size": [148, 62],
+      "label": "Hàng Đợi Thông Báo",
+      "sublabel": "Cảnh Báo SLA & Xuất File",
+      "tag": "QUEUE/EXPORT",
+      "size": [
+        148,
+        62
+      ],
       "col": 2,
       "row": 2
     },
     {
       "id": "sms-gateway",
       "type": "external",
-      "label": "Cổng SMS Twilio Úc",
-      "sublabel": "ACMA Sender ID + OTP",
-      "tag": "EXTERNAL",
-      "size": [148, 62],
+      "label": "SMS/Email & Mkt ACMA",
+      "sublabel": "Nhắc Lịch · Chiến Dịch · Review",
+      "tag": "MKT-002/004",
+      "size": [
+        148,
+        62
+      ],
       "col": 3,
       "row": 0
     },
     {
       "id": "consent-vault",
       "type": "database",
-      "label": "Kho Bệnh án 7 Năm",
-      "sublabel": "Mã hóa APP/HPP",
-      "tag": "PRIVACY",
-      "size": [148, 62],
+      "label": "Kho Bảo Mật & Luật Úc",
+      "sublabel": "Video · Hóa Đơn · Legal Card",
+      "tag": "STORAGE/LEG-001",
+      "size": [
+        148,
+        62
+      ],
       "col": 3,
       "row": 1
     },
     {
       "id": "au-payroll-xero",
       "type": "external",
-      "label": "EH & Kế toán Xero",
-      "sublabel": "MA000005, STP2 & BAS",
-      "tag": "EXTERNAL",
-      "size": [148, 62],
+      "label": "BAS, Lương & 7 Báo Cáo",
+      "sublabel": "G1/1A/1B · Snapshot · CSV",
+      "tag": "FIN/PR/NFR-007",
+      "size": [
+        148,
+        62
+      ],
       "col": 3,
       "row": 2
     },
     {
       "id": "eftpos-terminal",
       "type": "external",
-      "label": "Máy Thẻ EFTPOS",
-      "sublabel": "Quẹt Thẻ Lũy đẳng",
-      "tag": "EXTERNAL",
-      "size": [148, 62],
+      "label": "6 Cổng Thanh Toán",
+      "sublabel": "EFTPOS · Cash · ApplePay",
+      "tag": "PAYM-002",
+      "size": [
+        148,
+        62
+      ],
       "col": 4,
       "row": 2
     }
@@ -228,42 +270,42 @@
       "id": "e-cus-bkg",
       "from": "customer-web",
       "to": "booking-engine",
-      "label": "Giữ chỗ Online",
+      "label": "FB/IG/Web + UTM",
       "variant": "emphasis"
     },
     {
       "id": "e-rec-rbac",
       "from": "reception-pos",
       "to": "rbac-gateway",
-      "label": "Phạm vi Nhánh",
+      "label": "Chốt Lịch & Nhập Chi",
       "variant": "security"
     },
     {
       "id": "e-ktv-rbac",
       "from": "therapist-pwa",
       "to": "pos-payroll-engine",
-      "label": "Ví & Xin nghỉ",
+      "label": "Lịch Rảnh & Clock-In",
       "variant": "default"
     },
     {
       "id": "e-rbac-bkg",
       "from": "rbac-gateway",
       "to": "booking-engine",
-      "label": "Điều phối & Ca",
+      "label": "Duyệt 2 Bước",
       "variant": "emphasis"
     },
     {
       "id": "e-rbac-clin",
       "from": "rbac-gateway",
       "to": "clinical-consent",
-      "label": "Che Bệnh án",
+      "label": "4 Consent & Khóa Học",
       "variant": "security"
     },
     {
       "id": "e-rbac-pos",
       "from": "rbac-gateway",
       "to": "pos-payroll-engine",
-      "label": "POS & Chốt ca",
+      "label": "Thu/Chi & Kiểm Kê",
       "variant": "emphasis"
     },
     {
@@ -277,80 +319,80 @@
       "id": "e-clin-db",
       "from": "clinical-consent",
       "to": "postgres-core",
-      "label": "Cờ Consent",
+      "label": "Cờ Hợp Lệ",
       "variant": "default"
     },
     {
       "id": "e-clin-vault",
       "from": "clinical-consent",
       "to": "consent-vault",
-      "label": "Mã hóa AES-256",
+      "label": "Lưu Video/Cert/Bill",
       "variant": "security"
     },
     {
       "id": "e-pos-outbox",
       "from": "pos-payroll-engine",
       "to": "sync-outbox",
-      "label": "Sổ 6 Bước",
+      "label": "Sổ Thu/Chi & Lương",
       "variant": "emphasis"
     },
     {
       "id": "e-db-sms",
       "from": "postgres-core",
       "to": "sms-gateway",
-      "label": "SMS Hợp lệ",
+      "label": "SMS Vận Hành & Mkt",
       "variant": "dashed"
     },
     {
       "id": "e-outbox-xero",
       "from": "sync-outbox",
       "to": "au-payroll-xero",
-      "label": "Lương & Sổ Cái",
+      "label": "Xuất BAS, Lương & 7 CSV",
       "variant": "emphasis"
     },
     {
       "id": "e-xero-eftpos",
       "from": "au-payroll-xero",
       "to": "eftpos-terminal",
-      "label": "Đối soát Thẻ",
+      "label": "Đối Soát 6 Kênh Thu",
       "variant": "default"
     }
   ],
   "cards": [
     {
       "dot": "cyan",
-      "title": "4 Cổng Vai trò (17 Màn hình MVP)",
+      "title": "Cổng Đầu Vào Đa Kênh: FB, IG, Google, Web, SĐT, Walk-in & Di Trú Excel (BKG-001, DAT-01)",
       "items": [
-        "Cổng Khách hàng (A1-A3): Chọn chi nhánh trước, chọn KTV đích danh hoặc tự động, ký Consent điện tử.",
-        "Cổng Lễ tân & Chủ Spa (B1-B5, D1-D6): Lịch đa nhánh, hàng đợi Need Attention, thu ngân tách dòng, khóa lương 2 tuần.",
-        "Cổng Kỹ thuật viên (C1-C3): Hỗ trợ đa ngữ VI/EN/TH, đồng hồ 3 chạm tại giường, thẻ SOAP, ví hoa hồng, che PII."
+        "Cổng Đặt lịch & Tiếp thị: Facebook Messenger, Instagram DM, Google Maps/Search, Website Guest Booking, Link tự đổi/hủy lịch, Hotline/SĐT, Walk-in & Mã giới thiệu (tự bắt UTM/Referrer).",
+        "Cổng Lễ tân, Kho & Di trú: Nhập dữ liệu cũ từ Excel/Google Sheets dùng chung 2 chi nhánh & sổ tay (lọc trùng CRM-004), nhập hóa đơn chi phí (Cash Out), kiểm kê kho (Stocktake) và chuyển kho A <-> B.",
+        "Cổng Nhân sự & Đào tạo: KTV gửi lịch rảnh trước >=7 ngày, chấm công Clock-in/out, học Video đào tạo 6 danh mục và tải lên hồ sơ Visa/Chứng chỉ."
       ]
     },
     {
       "dot": "rose",
-      "title": "Phân quyền Máy chủ & Bảo mật Bệnh án (SEC-008)",
+      "title": "Phân Quyền Máy Chủ, 4 Chế Độ Consent & Module Cập Nhật Pháp Lý Úc (SEC-008, TRT-002, LEG-001)",
       "items": [
-        "Quyền hạn = Vai trò + Phạm vi (Toàn chuỗi / Chi nhánh / Cá nhân / Ca được giao) kiểm tra tại mọi API (NT14).",
-        "Lễ tân chỉ nhận cờ cảnh báo vận hành; ghi chú bệnh án SOAP đòi hỏi quyền KTV phụ trách ca hoặc Quản lý.",
-        "Nhật ký AuditLog bất biến ghi lại mọi thao tác sửa lịch, đổi người sau xác nhận, hoàn tiền và khóa kỳ lương."
+        "Quyền hạn = Hành động (Create/Read/Update/Delete/Export/Approve) + Phạm vi (Organisation/Branch/Own/Assigned) kiểm tra tại mọi API (SEC-002).",
+        "Lễ tân chỉ nhận cờ cảnh báo vận hành; bệnh án điều trị, ảnh tùy chọn, hóa đơn chi phí, chứng chỉ và video đào tạo được lưu trong Protected Object Storage.",
+        "Module Legal Updates riêng biệt (LEG-001..004) theo dõi quy định từ Fair Work, ATO, OAIC, ACMA, Victoria Health kèm URL chính thức và trạng thái xác nhận."
       ]
     },
     {
       "dot": "emerald",
-      "title": "Lõi Kiểm tra Lịch, Sổ nợ Trả trước & Hoa hồng",
+      "title": "6 Kênh Thanh Toán, Chi Phí Cash Out & Kiểm Kê Kho Liên Chi Nhánh (PAYM-002, FIN-002, INV-004)",
       "items": [
-        "Động cơ kiểm tra 5 điều kiện + tự chèn khối đi tàu điện 30-45p có lương giữa Brunswick và North Melbourne (NT1, NT2).",
-        "Giao dịch nguyên tử 6 bước khi hoàn tất dịch vụ: tách tiền thu, doanh thu, nợ trả trước, GST 2 chế độ và tip (NT6-NT8).",
-        "Chia hoa hồng combo nhiều KTV (tổng = 100%) và đóng băng vào Payroll Input Snapshot mỗi 2 tuần (NT9, NT10)."
+        "Hỗ trợ 6 phương thức thu tiền (Card/EFTPOS, Cash, Bank Transfer, Online Payment, tham chiếu Apple Pay/Google Pay), Split Payment, cổng chờ BNPL/Afterpay (UNK-03) và tách riêng Tip Spa thu hộ/trực tiếp.",
+        "Ghi nhận Chi phí vận hành (Cash Out) kèm ảnh chụp hóa đơn (Receipt Attachment), tự động duyệt dưới ngưỡng và yêu cầu Quản lý/Admin duyệt khi vượt ngưỡng (FIN-003).",
+        "Quản lý tồn kho theo chi nhánh, trừ vật tư dự kiến khi hoàn tất ca, kiểm kê chênh lệch (Stocktake Variance) và chuyển kho Brunswick <-> North Melbourne."
       ]
     },
     {
       "dot": "amber",
-      "title": "Ranh giới Phần mềm Pháp lý Chuẩn Úc",
+      "title": "20 Cổng Đầu Ra: Tin Nhắn Vận Hành, Marketing ACMA, BAS G1/1A/1B, Lương & 7 Báo Cáo CSV/XLSX",
       "items": [
-        "Employment Hero / Deputy / Xero Payroll tính phụ cấp MA000005, Super 12% (Payday Super) và nộp STP Phase 2.",
-        "Xero / MYOB nhận bút toán tổng hợp ngày sau chốt ca theo từng chi nhánh và bút toán hoàn tiền riêng cho kỳ BAS.",
-        "Twilio AU / MessageMedia gửi SMS với ACMA Sender ID sau khi đối chiếu sổ đồng ý nhận tin (Spam Act 2003)."
+        "Tách bạch SMS/Email vận hành (Xác nhận, Nhắc lịch, Link tự đổi/hủy, Xin ý kiến khách khi KTV đích danh từ chối) với SMS/Email Marketing có sổ Opt-in/Unsubscribe chuẩn ACMA 5 ngày (MKT-002..004).",
+        "Xuất file CSV/XLSX chuẩn kế toán & Xero/MYOB kèm bảng ước tính Simpler BAS (G1 Total Sales, 1A GST Sales, 1B GST Purchases, Estimated GST Payable) cho Accountant/BAS Agent.",
+        "Xuất Payroll Input Snapshot (Giờ công FT/PT/Casual, Giờ đi lại, Hoa hồng 100%, Thưởng Bonus, Tip giữ hộ, Điều chỉnh hoàn tiền) và 7 báo cáo quản trị CSV/XLSX (NFR-007)."
       ]
     }
   ]

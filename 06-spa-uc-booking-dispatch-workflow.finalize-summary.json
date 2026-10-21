@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/06-spa-uc-booking-dispatch-workflow.json",
+    "sha256": "3655f9f5ac7cf94f3940f04f62bf760305e3154877ad0f1b30989648e45a475f",
+    "bytes": 8150
+  },
+  "artifact": {
+    "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/06-spa-uc-booking-dispatch-workflow.html",
+    "sha256": "0acab23d141c9e029f4953757995c8f7be426fed1470a8820336be2c3f758a6c",
+    "bytes": 832517
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/06-spa-uc-booking-dispatch-workflow.finalize.json",
+    "summaryReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/06-spa-uc-booking-dispatch-workflow.finalize-summary.json",
+    "browserCheckReceipt": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/06-spa-uc-booking-dispatch-workflow.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-21T06:58:06.821Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1580,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

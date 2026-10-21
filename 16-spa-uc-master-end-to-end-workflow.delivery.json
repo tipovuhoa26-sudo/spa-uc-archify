@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "65fa7474-d83b-4faf-b459-f8ed1988438e",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/16-spa-uc-master-end-to-end-workflow.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/16-spa-uc-master-end-to-end-workflow.html",
+  "specification": {
+    "sha256": "89cafaf14ae444a46ec012b16c041b5d35cb1e90881b1d8446c87b696b4389a5",
+    "bytes": 8657
+  },
+  "artifact": {
+    "sha256": "2d1840035339501ea7bf0c54f93a36f75858ec9b35ccd02e6678c24ced12fbcf",
+    "bytes": 833264
+  }
+}

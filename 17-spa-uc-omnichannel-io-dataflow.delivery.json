@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "82f45968-600c-4bf0-8530-3d34d6faab8e",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/17-spa-uc-omnichannel-io-dataflow.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/17-spa-uc-omnichannel-io-dataflow.html",
+  "specification": {
+    "sha256": "50f27b3cf476fa94c21ff275cca25aec6952952df322f40bda084124bbc4ac79",
+    "bytes": 10080
+  },
+  "artifact": {
+    "sha256": "8640e6c4ba70b6c023d4ed8489fe7133b0ba5c7b7c2e98916c471a53ce0bc643",
+    "bytes": 834306
+  }
+}
