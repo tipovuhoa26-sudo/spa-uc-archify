@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "receiptId": "a259e6fb-fee4-4a80-9ee6-4011bc79823c",
+  "receiptId": "56bb6d98-4b7b-495f-ad4f-8c236176d436",
   "status": "current",
   "command": "deliver",
   "type": "explainer",
   "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/spa-uc-toan-bo-luong-van-hanh-lien-ket.archify.md",
   "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/index.html",
   "specification": {
-    "sha256": "c7ff278633d6b1adb97de03c9105d6e17280b812465d1b4d23d366466fed3f60",
-    "bytes": 88215
+    "sha256": "e93dc668233db38d3a7f9e43564a7059bebcebdf8b7c456ac1088a489cab12c2",
+    "bytes": 90460
   },
   "artifact": {
-    "sha256": "3478de72ec09dd927d0a7e982cfd8bbfbac02fe5779adbfd9a7300bcec9f8ce1",
-    "bytes": 6690045
+    "sha256": "f4f9d41db12409629f6a4dee064220074c5b997647f63cd44b14ffa86ebadce9",
+    "bytes": 6700843
   },
   "explainer": {
-    "preparedSha256": "c26a416387fbcc15c637da5b0a92a503ba5f3c458f117ec808c2b6ad7daaeac7",
+    "preparedSha256": "3b3f3ca64b731d581beecb2f00d4bc582d8994234e9aa58d5f387da052aa1b54",
     "dependencies": [
       {
         "kind": "data",
