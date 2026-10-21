@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "8cf2effe-216e-4035-9042-20535ddf3788",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/05-base-asbuilt-architecture.json",
+  "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/05-spa-uc-asbuilt-vs-mvp-delta.html",
+  "specification": {
+    "sha256": "20ac0038f461f7fcea3f2df76796a8cecd73fd1c282ae7d43cbdc1c40a1f9069",
+    "bytes": 9598
+  },
+  "artifact": {
+    "sha256": "44ba6a6dc68c0e69798bd53489319ead0f307b8412b90e6d4ed9e6ae9ceef371",
+    "bytes": 838022
+  }
+}

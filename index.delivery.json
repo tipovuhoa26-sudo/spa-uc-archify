@@ -1,22 +1,44 @@
 {
   "schemaVersion": 1,
-  "receiptId": "d5d4d45f-e39e-437e-9056-a503de4c6c67",
+  "receiptId": "a259e6fb-fee4-4a80-9ee6-4011bc79823c",
   "status": "current",
   "command": "deliver",
   "type": "explainer",
   "input": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/spa-uc-toan-bo-luong-van-hanh-lien-ket.archify.md",
   "output": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/index.html",
   "specification": {
-    "sha256": "31c02f1ff0833a3bb824622a0ae8b9883788a787f6a640827c42d85993f88bf8",
-    "bytes": 42177
+    "sha256": "c7ff278633d6b1adb97de03c9105d6e17280b812465d1b4d23d366466fed3f60",
+    "bytes": 88215
   },
   "artifact": {
-    "sha256": "c07528ef1789ca4f516b0801d4580ff184bb5ebe3f17ca9ceb7e23b59ed09793",
-    "bytes": 5975928
+    "sha256": "3478de72ec09dd927d0a7e982cfd8bbfbac02fe5779adbfd9a7300bcec9f8ce1",
+    "bytes": 6690045
   },
   "explainer": {
-    "preparedSha256": "4ef4d8dbd027aaee13c2b470549f00c64ac9668bcdeb798dd393a0478f35178c",
+    "preparedSha256": "c26a416387fbcc15c637da5b0a92a503ba5f3c458f117ec808c2b6ad7daaeac7",
     "dependencies": [
+      {
+        "kind": "data",
+        "id": "chart-pricing-heaven",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/pricing-theheavenlounge.csv",
+        "sha256": "d0df3d6369bc517c88d817f5487b18fd71098588a175cc81f327be1c9bbe8978",
+        "bytes": 345
+      },
+      {
+        "kind": "data",
+        "id": "chart-tco-monthly",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/tco-monthly-aud.csv",
+        "sha256": "80ea5b1fc430885eff33ed99b287f7fd572338755e11558f0cc5e05fe0423308",
+        "bytes": 382
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "arch-asbuilt-delta",
+        "path": "/Users/hungnpv/Downloads/Sunext/Sunext-Agent-GG/spa-uc-archify/sources/05-base-asbuilt-architecture.json",
+        "relativePath": "05-base-asbuilt-architecture.json",
+        "sha256": "20ac0038f461f7fcea3f2df76796a8cecd73fd1c282ae7d43cbdc1c40a1f9069",
+        "bytes": 9598
+      },
       {
         "kind": "diagram-spec",
         "id": "df-omnichannel-io",

@@ -2,14 +2,55 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "The Heaven Lounge (Spa Úc) — Kiến trúc 3 File HTML Prototype Hiện trạng",
+    "title": "The Heaven Lounge (Spa Úc) — Đối Chiếu 3 File HTML Prototype As-Built (15/10/2026) Với Kiến Trúc Đích Mini-ERP",
     "output": "spa-uc-archify/05-spa-uc-asbuilt-vs-mvp-delta.html",
-    "quality_profile": "showcase"
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "v-asbuilt",
+        "label": "1. Hiện Trạng 3 File HTML Offline (15/10/2026)",
+        "focus": [
+          "customer-web",
+          "reception-pos",
+          "therapist-pwa",
+          "ls-customer",
+          "ls-admin",
+          "ls-technician"
+        ],
+        "note": "3 file HTML (398 KB) lưu trên 3 khóa localStorage cô lập: chưa tự đồng bộ lịch đặt, đơn nghỉ phép và sổ thu chi giữa 3 màn hình."
+      },
+      {
+        "id": "v-upgrade",
+        "label": "2. Nâng Cấp Lên Máy Chủ PostgreSQL Tập Trung",
+        "focus": [
+          "ls-customer",
+          "ls-admin",
+          "ls-technician",
+          "api-rbac-core",
+          "pg-ledger-db",
+          "outbox-worker"
+        ],
+        "note": "Hợp nhất 3 khóa localStorage vào 1 CSDL PostgreSQL tại Sydney có khóa chống trùng TSTZRANGE, RBAC máy chủ & Kho bảo mật."
+      },
+      {
+        "id": "v-target",
+        "label": "3. Kết Nối EFTPOS, SMS, BAS & Lương Úc",
+        "focus": [
+          "api-rbac-core",
+          "pg-ledger-db",
+          "outbox-worker",
+          "pos-sms-gate",
+          "xero-bas-gate",
+          "au-payroll-gate"
+        ],
+        "note": "Thay hộp thoại mô phỏng bằng cổng SMS/Email ACMA thật, đối soát 6 kênh thu, xuất Simpler BAS (G1/1A/1B) và Payroll Snapshot."
+      }
+    ]
   },
   "layout": {
     "mode": "grid",
     "origin": [44, 118],
-    "cols": 3,
+    "cols": 4,
     "gapX": 78,
     "gapY": 84,
     "cellW": 152,
@@ -19,9 +60,9 @@
     {
       "id": "customer-web",
       "type": "frontend",
-      "label": "File HTML Khách hàng",
-      "sublabel": "Thuy_Spa_Khach_Hang.html",
-      "tag": "OFFLINE",
+      "label": "HTML Khách Hàng",
+      "sublabel": "125 KB · 2.302 dòng",
+      "tag": "AS-BUILT 15/10",
       "size": [148, 62],
       "col": 0,
       "row": 0
@@ -29,9 +70,9 @@
     {
       "id": "reception-pos",
       "type": "frontend",
-      "label": "File HTML Admin/POS",
-      "sublabel": "Thuy_Spa_Chay_Thu.html",
-      "tag": "OFFLINE",
+      "label": "HTML Admin & POS",
+      "sublabel": "125 KB · 14 phân hệ",
+      "tag": "AS-BUILT 15/10",
       "size": [148, 62],
       "col": 0,
       "row": 1
@@ -39,9 +80,9 @@
     {
       "id": "therapist-pwa",
       "type": "frontend",
-      "label": "File HTML Kỹ thuật viên",
-      "sublabel": "Thuy_Spa_Ky_Thuat_Vien.html",
-      "tag": "OFFLINE",
+      "label": "HTML Kỹ Thuật Viên",
+      "sublabel": "148 KB · Lịch 7 tuần",
+      "tag": "AS-BUILT 15/10",
       "size": [148, 62],
       "col": 0,
       "row": 2
@@ -75,6 +116,78 @@
       "size": [148, 62],
       "col": 1,
       "row": 2
+    },
+    {
+      "id": "api-rbac-core",
+      "type": "backend",
+      "label": "API & RBAC Máy Chủ",
+      "sublabel": "Khóa lịch & Duyệt 2 bước",
+      "tag": "MVP CORE",
+      "size": [148, 62],
+      "col": 2,
+      "row": 0
+    },
+    {
+      "id": "pg-ledger-db",
+      "type": "database",
+      "label": "PostgreSQL + Vault",
+      "sublabel": "TSTZRANGE & Append-Only",
+      "tag": "SYDNEY AU",
+      "size": [148, 62],
+      "col": 2,
+      "row": 1
+    },
+    {
+      "id": "outbox-worker",
+      "type": "messagebus",
+      "label": "Hàng Đợi Đồng Bộ",
+      "sublabel": "SLA 1h · SMS · Xuất CSV",
+      "tag": "ASYNC",
+      "size": [148, 62],
+      "col": 2,
+      "row": 2
+    },
+    {
+      "id": "pos-sms-gate",
+      "type": "external",
+      "label": "EFTPOS & SMS Úc",
+      "sublabel": "Tyro/Square · Twilio",
+      "tag": "LIVE I/O",
+      "size": [148, 62],
+      "col": 3,
+      "row": 0
+    },
+    {
+      "id": "xero-bas-gate",
+      "type": "external",
+      "label": "Kế Toán & BAS Úc",
+      "sublabel": "Xero/MYOB · G1/1A/1B",
+      "tag": "FIN-010",
+      "size": [148, 62],
+      "col": 3,
+      "row": 1
+    },
+    {
+      "id": "au-payroll-gate",
+      "type": "external",
+      "label": "Phần Mềm Lương Úc",
+      "sublabel": "Award · Super 12% · STP2",
+      "tag": "PR-003",
+      "size": [148, 62],
+      "col": 3,
+      "row": 2
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Lõi Máy Chủ Mini-ERP Hợp Nhất (AWS Sydney)",
+      "wraps": [
+        "api-rbac-core",
+        "pg-ledger-db",
+        "outbox-worker"
+      ],
+      "pad": 20
     }
   ],
   "connections": [
@@ -82,22 +195,116 @@
       "id": "e-cus-ls",
       "from": "customer-web",
       "to": "ls-customer",
-      "label": "JSON Nội bộ",
+      "label": "JSON cục bộ",
       "variant": "dashed"
     },
     {
       "id": "e-adm-ls",
       "from": "reception-pos",
       "to": "ls-admin",
-      "label": "JSON Nội bộ",
+      "label": "JSON cục bộ",
       "variant": "dashed"
     },
     {
       "id": "e-ktv-ls",
       "from": "therapist-pwa",
       "to": "ls-technician",
-      "label": "JSON Nội bộ",
+      "label": "JSON cục bộ",
       "variant": "dashed"
+    },
+    {
+      "id": "e-ls-api-1",
+      "from": "ls-customer",
+      "to": "api-rbac-core",
+      "label": "nâng cấp API",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-ls-api-2",
+      "from": "ls-admin",
+      "to": "pg-ledger-db",
+      "label": "hợp nhất DB",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-ls-api-3",
+      "from": "ls-technician",
+      "to": "outbox-worker",
+      "label": "đồng bộ ca",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e-api-db",
+      "from": "api-rbac-core",
+      "to": "pg-ledger-db",
+      "label": "ghi nguyên tử",
+      "variant": "security"
+    },
+    {
+      "id": "e-db-out",
+      "from": "pg-ledger-db",
+      "to": "outbox-worker",
+      "label": "sự kiện nền",
+      "variant": "default"
+    },
+    {
+      "id": "e-api-pos",
+      "from": "api-rbac-core",
+      "to": "pos-sms-gate",
+      "label": "6 kênh thu & SMS",
+      "variant": "default"
+    },
+    {
+      "id": "e-db-xero",
+      "from": "pg-ledger-db",
+      "to": "xero-bas-gate",
+      "label": "BAS & Xero",
+      "variant": "default"
+    },
+    {
+      "id": "e-out-pay",
+      "from": "outbox-worker",
+      "to": "au-payroll-gate",
+      "label": "Payroll Snapshot",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Thuy_Spa_Khach_Hang.html (125.035 bytes · 2.302 dòng · SHA-256: 65d3f894...)",
+      "items": [
+        "Đặt lịch Guest Mode hoặc tài khoản mẫu Emily Watson tại 2 chi nhánh Brunswick (550 Sydney Rd) & North Melbourne (342 Victoria St).",
+        "4 dịch vụ mẫu có cờ requiresConsent, chọn KTV đích danh trong 7 ngày hoặc Spa tự xếp, phiếu Consent, chấm 1-5 sao (sửa trong 15p) và ví Gói 5+1 / Điểm thưởng.",
+        "Giới hạn As-Built: Dữ liệu lưu trong localStorage['thuy-spa-customer-trial-v1'], chưa tự đẩy lịch đặt sang màn hình Lễ tân và KTV."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Thuy_Spa_Ky_Thuat_Vien.html (147.700 bytes · 2.519 dòng · SHA-256: e2f44880...)",
+      "items": [
+        "Đăng ký lịch rảnh & xem ca 7 tuần (49 ngày: 28/09/2026 - 15/11/2026), nhận/từ chối lịch khách chọn đích danh và sửa ghi chú ca trong ngày.",
+        "Xin nghỉ đột xuất (urgent, tự quét lịch hẹn bị ảnh hưởng) vs nghỉ có kế hoạch (planned, chặn nếu cách ngày nghỉ <7 ngày).",
+        "Xem bảng lương tháng mẫu ($32 AUD/giờ, hoa hồng, thưởng, phạt, tip) và học 3 khóa video; lưu tại localStorage['thuy-spa-technician-trial-v1']."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Thuy_Spa_Chay_Thu.html (125.274 bytes · 1.910 dòng · SHA-256: 4541a506...)",
+      "items": [
+        "Cổng điều hành 14 phân hệ cho 4 vai trò (Admin/Quản lý/Lễ tân/KTV): Tổng quan, Lịch & Đổi ca, Khách hàng & Lọc trùng, Dịch vụ & Gói, Nhân sự & Chứng chỉ, Kho 2 chi nhánh.",
+        "Bao gồm Đào tạo nội bộ, Đánh giá & Sự cố 1-2 sao, Thu chi & Ước tính GST/BAS, Hoa hồng & Bảng lương, Tiếp thị & Nguồn khách, Pháp lý Úc, Phân quyền và Setup Wizard.",
+        "Giới hạn As-Built: Lưu tại localStorage['thuy-spa-offline-trial-v1']; các nút xuất CSV/Xero/MYOB đang hiển thị hộp thoại mô phỏng."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "12 Hạng Mục Nâng Cấp Lên Kiến Trúc Đích Mini-ERP (PostgreSQL + AWS Sydney)",
+      "items": [
+        "Hợp nhất 3 khóa localStorage vào 1 CSDL PostgreSQL tập trung (gắn org_id & branch_id), khóa chống trùng lịch bằng TSTZRANGE và kiểm quyền RBAC tại máy chủ.",
+        "Đồng bộ real-time mảng leaveRequests của KTV với state.leave của Admin và nối yêu cầu đặt lịch khách thẳng vào hàng đợi duyệt 2 bước (KTV -> Lễ tân).",
+        "Kết nối thật cổng SMS/Email chuẩn ACMA, đối soát 6 kênh thanh toán, xuất file CSV/XLSX thật cho Xero/MYOB (Simpler BAS G1/1A/1B) và Payroll Input Snapshot."
+      ]
     }
   ]
 }
